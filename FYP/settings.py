@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import mimetypes
+from social_core.backends import instagram
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -40,6 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Maia.apps.MaiaConfig',
+
+    # SSL
+    'sslserver',
+
+    # Social Login
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Social Login
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'FYP.urls'
@@ -66,6 +76,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Social Login
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -102,6 +116,42 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'social.backends.twitter.TwitterOAuth',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.instagram.InstagramOAuth2',
+
+
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SESSION_COOKIE_SAMESITE = None
+
+# Social Login Setting
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'questionaire'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '760189331511410'      # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '6d830789e6bfac6778502afd35893d6e'  # Facebook App Secret
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '834873067898-776t64ftlbtf1a8daoereog14urjvfad.apps.googleusercontent.com' # Google App ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nQwZPu7rFROW-rMJdI-T8MEL' # Google App Secret
+
+# SOCIAL_AUTH_TWITTER_KEY = 'update me'
+# SOCIAL_AUTH_TWITTER_SECRET = 'update me'
+
+# SOCIAL_AUTH_INSTAGRAM_KEY = '832808064151709'         # Instagram Client ID
+# SOCIAL_AUTH_INSTAGRAM_SECRET = 'd26fc35102f3004fdc8be7968802736b'  # Instagram Client SECRET
+# SOCIAL_AUTH_INSTAGRAM_AUTH_EXTRA_ARGUMENTS = {'scope': 'user_profile'}
+
+# End Social Login Setting
 
 
 # Internationalization

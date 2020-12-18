@@ -14,10 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from Maia import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.dashboard, name='dashboard')
+    path('dashboard/', views.dashboard, name="dashboard"),
+    path('', views.login, name='login'),
+    path("logout/", views.logout_account, name="logout"),
+    path('questionaire/', views.to_questionaire, name="questionaire"),
+    
+    # Social Login
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]
