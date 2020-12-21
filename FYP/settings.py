@@ -115,7 +115,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '127.0.0.1',
             'PORT': '3306',
-            'NAME': 'Maia',
+            'NAME': 'maia',
             'USER': 'bobbytee123',
             'PASSWORD': 'bobbytee123',
         }
