@@ -16,7 +16,21 @@
     <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
   </head>
   <body>
-    <!-- <a href="{% url 'logout' %}" class="btn btn-dark btn-lg">Log out luuuu</a> -->
+    <style>
+      #logoutbutton { 
+        width: 50px; 
+        height: 40px; 
+        padding: 7px 10px; 
+        border-radius: 25px; 
+        font-size: 10px; 
+        text-align: center; 
+      } 
+
+      a {
+        color: #428BCA;
+        text-decoration: none;
+      }
+    </style>
     <div class="wrapper">
       <div class="sidebar" data="blue" data-background-color="white" style="margin:0; border-radius: 0;">
         <!--
@@ -88,6 +102,13 @@
                 </a>
             </li>
 
+            <li class="nav-item" style="margin-top: 38vh;">
+              <a class="nav-link" href="#0" id="logOutButton">
+                  <i class="fas fa-sign-out-alt" style="font-size: 1rem; margin: 0;"></i>
+                  <p class="font-weight-bolder" style="font-size: 0.86rem;">Log Out</p>
+              </a>
+          </li>
+
             <!-- your sidebar here -->
           </ul>
         </div>
@@ -95,7 +116,7 @@
 
       
       <div class="main-panel">
-        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent" style="z-index: 998;">
           <div class="container-fluid">
             <div class="navbar-wrapper">
               <div class="navbar-toggle d-inline">
@@ -108,7 +129,11 @@
             </div>
           </div>
         </nav>
-        <div class="content" style="padding-top: 40px;">
+
+        <a href="{% url 'logout' %}" class="btn btn-warning pull-right" id="logoutbutton" style="margin-right: 2vh; z-index: 999;">
+          <i class="fas fa-sign-out-alt" style="font-size: 1rem; margin: 0; padding: 5px 5px 5px 5px;"></i>
+        </a>
+        <div class="content" style="padding-top: 40px; margin-top: 15px;">
           <div class="container-fluid">
             {% block content %}
 

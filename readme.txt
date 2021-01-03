@@ -1,11 +1,25 @@
+Set Up Local Host DNS:
+1) Press Window Key
+2) Search for Notepad and run it as admin
+3) Press the Windows key.
+4) Type Notepad in the search field.
+5) In the search results, right-click Notepad and select Run as administrator.
+6) From Notepad, open the following file:
+7) c:\Windows\System32\Drivers\etc\hosts
+8) Add in 127.0.0.2 pepehands.net
+9) Save your changes.
+10) Restart your pc
+
 Django:
-1) Download Google Cloud Proxy from "https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#windows-64-bit"
-2) Open cmd
-3) Go to the folder where you save the proxy using cmd
-4) Run "cloud_sql_proxy -instances=poetic-abacus-279809:asia-southeast1:pepehands123"
-5) run "venv\Scripts\activate" to activate virtual env
-6) run "python manage.py runsslserver --certificate cert.pem --key key.pem" to run ssl server
-7) go to "https//:localhost:8000" to access to the web
+1) Download Google Cloud SDK from https://cloud.google.com/sdk/docs/install
+2) Run "gcloud auth application-default login" after setup Google Cloud SDK
+3) Download Google Cloud Proxy from "https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#windows-64-bit"
+4) Open cmd
+5) Go to the folder where you save the proxy using cmd
+6) Run "cloud_sql_proxy -instances=poetic-abacus-279809:asia-southeast1:pepehands123=tcp:3306"
+7) run "venv\Scripts\activate" to activate virtual env
+8) run "python manage.py runsslserver --certificate cert.pem --key key.pem" to run ssl server
+9) go to "https//pepehands.net:8000" to access to the web
 
 
 Database:

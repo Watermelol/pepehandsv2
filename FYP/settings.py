@@ -28,7 +28,7 @@ SECRET_KEY = 'vq2eu+uifnl8395y^d(dm_x0tv0vzql-o@x@nn4#=9sg02k&1d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.2', 'pepehands.net', 'www.pepehands.net', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -169,10 +169,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nQwZPu7rFROW-rMJdI-T8MEL' # Google App Secre
 
 # SOCIAL_AUTH_TWITTER_KEY = 'update me'
 # SOCIAL_AUTH_TWITTER_SECRET = 'update me'
-
-# SOCIAL_AUTH_INSTAGRAM_KEY = '832808064151709'         # Instagram Client ID
-# SOCIAL_AUTH_INSTAGRAM_SECRET = 'd26fc35102f3004fdc8be7968802736b'  # Instagram Client SECRET
-# SOCIAL_AUTH_INSTAGRAM_AUTH_EXTRA_ARGUMENTS = {'scope': 'user_profile'}
 
 # End Social Login Setting
 
