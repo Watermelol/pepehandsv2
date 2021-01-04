@@ -2,7 +2,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Hello, world!</title>
+    <title>MAIA</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -61,7 +63,7 @@
         <div class="sidebar-wrapper">
           <ul class="nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#0">
+                <a class="nav-link" href="{% url 'dashboard' %}">
                     <i class="fas fa-tachometer-alt" style="font-size: 1rem; margin: 0;"></i>
                     <p class="font-weight-bolder" style="font-size: 0.86rem;">Dashboard</p>
                 </a>

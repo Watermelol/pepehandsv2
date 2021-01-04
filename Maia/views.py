@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import user_profile
+from .forms import UserProfile
 
 # Create your views here.
 def dashboard(request):
@@ -14,7 +17,7 @@ def dashboard(request):
         if (questionaire_answered == True):
             return render(request, 'dashboard.html')
         else:
-            return redirect('/questionaire')
+            return redirect('/questionaire/user-profile')
     
 
 def login(request):
@@ -28,5 +31,7 @@ def logout_account(request):
     logout(request)
     return render(request, 'login.html')
 
-def to_questionaire(request):
-    return render(request, 'questionaire.html')
+def to_questionaire_user_profile(request):
+    user_form = UserProfile()
+    context = {'user_form': user_form}
+    return render(request, 'questionaire_user_profile.html', context)

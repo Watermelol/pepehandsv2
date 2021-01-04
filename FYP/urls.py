@@ -23,7 +23,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="dashboard"),
     path('', views.login, name='login'),
     path("logout/", views.logout_account, name="logout"),
-    path('questionaire/', views.to_questionaire, name="questionaire"),
+    path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
     
     # Social Login
     path('social-auth/', include('social_django.urls', namespace="social")),

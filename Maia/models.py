@@ -7,6 +7,13 @@ from django.dispatch import receiver
 
 class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField('First Name', max_length=255, default='')
+    last_name = models.CharField('Last Name', max_length=255, default='')
+    email = models.EmailField(default='')
+    address_1 = models.CharField('Address 1', max_length=255, default='')
+    address_2 = models.CharField('Address 2', max_length=255, default='', blank=True, null=True)
+    zip_code = models.CharField("ZIP / Postal code", max_length=12, default='')
+    city = models.CharField("City", max_length=1024, default='')
     questionaire_answered = models.BooleanField(default=False)
 
     def __str__(self):

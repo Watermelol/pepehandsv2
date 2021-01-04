@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Maia.apps.MaiaConfig',
+    "crispy_forms",
 
     # SSL
     'sslserver',
@@ -86,6 +87,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'FYP.wsgi.application'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Database
