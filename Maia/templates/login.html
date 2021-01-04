@@ -35,29 +35,71 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="card-deck">
-                                <div class="card">
-                                    <i class="fa fa-google-plus align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
-                                    <div class="card-body align-self-center">  
-                                        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-lg btn-dark">Login Via Google+</a>  
+                            <section class="py-5">
+                                <div class="card-deck">
+                                    <div class="card">
+                                        <i class="fa fa-google-plus align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                                        <div class="card-body align-self-center">  
+                                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-lg btn-dark">Login Via Google+</a>  
+                                        </div>
                                     </div>
+    
+                                    <div class="card">
+                                        <i class="fab fa-facebook align-self-center pt-3 pb-3 fa-10x"></i>
+                                        <img class="card-img-top" src="holder.js/100x180/" alt="">
+                                        <div class="card-body align-self-center">
+                                            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-outline-info btn-lg">Login Via Facebook</a> 
+                                        </div>
+                                    </div>
+    
+                                    <!-- <div class="card">
+                                        <i class="fab fa-twitter align-self-center pt-3 pb-3 fa-10x"></i>
+                                        <div class="card-body align-self-center">
+                                            <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-outline-info btn-lg">Login Via Twitter</a>
+                                        </div>
+                                    </div> -->
                                 </div>
+                            </section>
 
-                                <div class="card">
-                                    <i class="fab fa-facebook align-self-center pt-3 pb-3 fa-10x"></i>
-                                    <img class="card-img-top" src="holder.js/100x180/" alt="">
-                                    <div class="card-body align-self-center">
-                                        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-outline-info btn-lg">Login Via Facebook</a> 
+                            <section id="boxes" class="py-5">
+                                <div class="container">
+                                  <div class="row">
+                                    
+                                    <div class="col-md-3">
+                                      <div class="card text-center bg-dark text-white mb-resp">
+                                        <div class="card-body">
+                                          <h3>Profile</h3>
+                                          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, deserunt.</p>
+                                        </div>
+                                      </div>
                                     </div>
-                                </div>
-
-                                <div class="card">
-                                    <i class="fab fa-twitter align-self-center pt-3 pb-3 fa-10x"></i>
-                                    <div class="card-body align-self-center">
-                                        <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-outline-info btn-lg">Login Via Twitter</a>
+                                    <div class="col-md-3">
+                                        <div class="card text-center border-primary mb-resp">
+                                          <div class="card-body">
+                                            <h3 class="text-info">Analyze</h3>
+                                            <p class="text-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, deserunt.</p>
+                                          </div>
+                                        </div>
                                     </div>
+                                    <div class="col-md-3">
+                                      <div class="card text-center bg-dark text-white">
+                                        <div class="card-body">
+                                          <h3>Recommand</h3>
+                                          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, deserunt.</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card text-center border-primary mb-resp">
+                                          <div class="card-body">
+                                            <h3 class="text-info">Report</h3>
+                                            <p class="text-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, deserunt.</p>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </div>
                                 </div>
-                            </div>
+                            </section>                            
                         </div>
                     </div>
                 </div>

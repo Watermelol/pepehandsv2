@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # Create your views here.
 def dashboard(request):
     return render(request, 'dashboard.html')
 
 def login(request):
-    return render(request, 'login.html')
+    if request.user.is_authenticated:
+        return redirect('/dashboard')
+    else:
+        return render(request, 'login.html')
 
 def logout_account(request):
     logout(request)
