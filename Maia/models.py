@@ -15,6 +15,7 @@ class user_profile(models.Model):
     zip_code = models.CharField("ZIP / Postal code", max_length=12, default='')
     city = models.CharField("City", max_length=1024, default='')
     questionaire_answered = models.BooleanField(default=False)
+    user_agreement = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

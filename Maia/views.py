@@ -10,16 +10,21 @@ from .forms import UserProfile
 # Create your views here.
 def dashboard(request):
     if request.user.is_authenticated:
-        # check if the user got answer the questionair before or not
         current_user = user_profile.objects.get(user_id=request.user.id)
         questionaire_answered = getattr(current_user, 'questionaire_answered')
-        # if user answer b4 then redirect him to dashboard else bring him to questionaire page
-        if (questionaire_answered == True):
-            return render(request, 'dashboard.html')
-        else:
-            return redirect('/questionaire/user-profile')
-    
+        user_agreement = getattr(current_user, 'user_agreement')
+        #Check if user agreeded the agreement ady or not
+        if (user_agreement != True):
+            return redirect('/end-user-agreement')
+        elif (user_agreement == True):
+            # check if the user got answer the questionair before or not
+            if (questionaire_answered != True):
+                return redirect('/questionaire/user-profile')
+            # if user answer b4 then redirect him to dashboard else bring him to questionaire page
+            else:
+                return render(request, 'dashboard.html')
 
+# Login Logout
 def login(request):
     # check if the user is log in ady or not
     if request.user.is_authenticated:
@@ -31,7 +36,21 @@ def logout_account(request):
     logout(request)
     return render(request, 'login.html')
 
+# End Login Logout
+
+
+#First Time Login
 def to_questionaire_user_profile(request):
     user_form = UserProfile()
     context = {'user_form': user_form}
     return render(request, 'questionaire_user_profile.html', context)
+
+def to_end_user_agreement(request):
+    return render(request, 'end_user_agreement.html')
+
+def user_agreed(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user.user_agreement = True
+    current_user.save()
+    return redirect('/questionaire/user-profile')
+
