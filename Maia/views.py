@@ -11,14 +11,16 @@ from .forms import UserProfile
 def dashboard(request):
     if request.user.is_authenticated:
         current_user = user_profile.objects.get(user_id=request.user.id)
-        questionaire_answered = getattr(current_user, 'questionaire_answered')
         user_agreement = getattr(current_user, 'user_agreement')
         #Check if user agreeded the agreement ady or not
         if (user_agreement != True):
             return redirect('/end-user-agreement')
         elif (user_agreement == True):
+            user_profile_updated = getattr(current_user, 'user_profile_updated')
+            financial_data_provided = getattr(current_user, 'financial_data_provided')
+            qualitative_data_provided = getattr(current_user, 'qualitative_data_provided')
             # check if the user got answer the questionair before or not
-            if (questionaire_answered != True):
+            if (user_profile_updated != True):
                 return redirect('/questionaire/user-profile')
             # if user answer b4 then redirect him to dashboard else bring him to questionaire page
             else:
