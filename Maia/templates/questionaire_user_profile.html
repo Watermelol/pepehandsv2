@@ -21,6 +21,12 @@
         <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
     </head>
     <body>
+        <style>
+            option { 
+                /* Whatever color  you want */
+                background-color: #525f7f;
+}
+        </style>
         <a href="{% url 'logout' %}" class="btn btn-warning pull-right" id="logoutbutton" style="margin-right: 2vh; margin-top: 2vh; z-index: 999;">
             <i class="fas fa-sign-out-alt" style="font-size: 1rem; margin: 0; padding: 5px 5px 5px 5px;"></i>
         </a>
@@ -36,7 +42,7 @@
                     <div class="card-deck" style="width: 35vw; margin:auto; margin-top:25vh;">
                         <div class="card">
                             <div class="card-body">
-                                <form>
+                                <form method="POST" action="{% url 'questionaire_user_profile' %}">
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -44,6 +50,12 @@
                                         </div>
                                         <div class="col-sm-6">
                                             {{ user_form.last_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{ user_form.company_name|as_crispy_field }}
+                                        </div>
+                                        <div class="col-sm-6">
+                                            {{ user_form.company_industry|as_crispy_field }}
                                         </div>
                                         <div class="col-12">
                                             {{ user_form.email|as_crispy_field }}

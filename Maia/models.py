@@ -5,11 +5,17 @@ from django.dispatch import receiver
 
 # Create your models here.
 
+class industries(models.Model):
+    industry_name = models.CharField('Industry Name', max_length=255)
+    def __str__(self):
+        return self.industry_name
+
 class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField('First Name', max_length=255, default='')
     last_name = models.CharField('Last Name', max_length=255, default='')
     company_name = models.CharField('Company Name', max_length=255, default='')
+    company_industry = models.ForeignKey(industries, on_delete=models.RESTRICT, default=1 ,verbose_name='Company Industry')
     email = models.EmailField(default='')
     address_1 = models.CharField('Address 1', max_length=255, default='')
     address_2 = models.CharField('Address 2', max_length=255, default='', blank=True, null=True)
@@ -28,3 +34,5 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         user_profile.objects.create(user=instance)
     instance.user_profile.save()
+
+

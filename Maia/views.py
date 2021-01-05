@@ -43,9 +43,26 @@ def logout_account(request):
 
 #First Time Login
 def to_questionaire_user_profile(request):
-    user_form = UserProfile()
-    context = {'user_form': user_form}
-    return render(request, 'questionaire_user_profile.html', context)
+    if (request.method != 'POST'):
+        user_form = UserProfile()
+        context = {'user_form': user_form}
+        return render(request, 'questionaire_user_profile.html', context)
+    else:
+        user_form = UserProfile(data=request.POST)
+        if user_form.is_valid():
+            current_user = user_profile.objects.get(user_id=request.user.id)
+            current_user.first_name = user_form.cleaned_data.get('first_name')
+            current_user.last_name = user_form.cleaned_data.get('last_name')
+            current_user.company_name = user_form.cleaned_data.get('company_name')
+            current_user.company_industry = user_form.cleaned_data.get('company_industry')
+            current_user.email = user_form.cleaned_data.get('email')
+            current_user.address_1 = user_form.cleaned_data.get('address_1')
+            current_user.address_2 = user_form.cleaned_data.get('address_2')
+            current_user.zip_code = user_form.cleaned_data.get('zip_code')
+            current_user.city = user_form.cleaned_data.get('city')
+            current_user.user_profile_updated = True
+            current_user.save()
+            return redirect('/dashboard')
 
 def to_end_user_agreement(request):
     return render(request, 'end_user_agreement.html')
