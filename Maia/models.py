@@ -35,4 +35,37 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         user_profile.objects.create(user=instance)
     instance.user_profile.save()
 
+class user_financial_data(models.Model):
+    quaters = [
+        ('Q1', 'Quater 1'),
+        ('Q2', 'Quater 2'),
+        ('Q3', 'Quater 3'),
+        ('Q4', 'Quater 4'),
+    ]
+
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    quater = models.CharField('Quater', max_length=3, choices=quaters, default=1)
+    revenue = models.FloatField('Revenue')
+    net_profit = models.FloatField('Net Profit')
+    expenses = models.FloatField('Expenses')
+    return_on_equity = models.FloatField('Return On Equity')
+    firm_value = models.FloatField('Firm Value')
+    debt = models.FloatField('Debt')
+    equity = models.FloatField('Equity')
+    return_on_asset = models.FloatField('Return On Asset')
+    return_on_investment = models.FloatField('Return On Investment')
+    networking_capital = models.FloatField('Networking Capital')
+    spending_on_research = models.FloatField('Spending On Research')
+    property_plant_equipment = models.FloatField('Property Plant Equipment')
+    cash_flow = models.FloatField('Cash Flow')
+    goodwill = models.FloatField('Goodwill')
+    total_assets = models.FloatField('Total Assets')
+    total_liabilities = models.FloatField('Total Liabilities')
+    current_ratio = models.FloatField('Current Ratio')
+    quick_ratio = models.FloatField('Quick Ratio')
+    cash_ratio = models.FloatField('Cash Ratio')
+
+    def __str__(self):
+        return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
+
 

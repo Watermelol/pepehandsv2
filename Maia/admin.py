@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import user_profile, industries
+from .models import user_profile, industries, user_financial_data
 
 # Register your models here.
 
@@ -24,3 +24,4 @@ admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(user_profile)
 admin.site.register(industries)
+admin.site.register(user_financial_data)
