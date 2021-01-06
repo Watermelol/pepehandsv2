@@ -1,0 +1,151 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Maia</title>
+        <link rel="icon" href="../static/assets/img/icons8-circled-m-50.png">
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <!--  Fonts and icons  -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+        <!-- Black Dashboard CSS -->
+        <link href="{%static 'assets/css/black-dashboard.css'%}" rel="stylesheet" />
+        <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
+    </head>
+    <body>
+        <style>
+            option { 
+                /* Whatever color  you want */
+                background-color: #525f7f;
+}
+        </style>
+        {% csrf_token %}
+        <a href="{% url 'logout' %}" class="btn btn-warning pull-right btn-sm" id="logoutbutton" style="margin-right: 2vh; z-index: 999;">
+            <i class="fas fa-sign-out-alt" style="font-size: 1rem; margin: 0; padding: 5px 5px 5px 5px;"></i>
+        </a>
+        <div class="container" style="margin-top: 3vh;">
+            <div class="row">
+                <div class="container col-md-5">
+                    <div style="margin-top: 20vh;">
+                        <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_lO12qW.json"  background="transparent"  speed="1"  style="height: 300px;"  loop  autoplay></lottie-player>
+                        <p style="font-size: 1.0rem; text-align: center;">
+                            Please Provide Us With Some Financial Data
+                            <br>So That We Can Help You Analyse On Your Company
+                            <br>Performance, Business Value, Productivity, And Risk
+                        </p>
+
+                    </div>
+                </div>
+                <div id=financial_data_forms class="container col-md-7">
+                    <div id="accordion" style="margin-top: 20vh;">
+                        <button @click="add_financial_data_record" class="btn btn-info btn-sm">Add Record</button>
+                        <button @click="submit_financial_data_record" class="btn btn-success btn-sm">Submit Record</button>
+                        <div v-for= "(data, index) in user_financial_data.data">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#collapse'+data.id" aria-expanded="true" aria-controls="collapseOne">Financial Data Record [$ data.id $]</button>
+                                </h5>
+                                </div>
+                                
+                                <div v-bind:id="'collapse' + data.id" :class="{'show' : data.id==1 ,'collapse':true}" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="quater">Quater</label>
+                                                <select name="quater" class="form-control" style="width: 100% !important;" v-model='data.quater'>
+                                                    <option value="Q1">Quater 1</option>
+                                                    <option value="Q2">Quater 2</option>
+                                                    <option value="Q3">Quater 3</option>
+                                                    <option value="Q4">Quater 4</option>
+                                                </select>
+
+                                                <label for="revenue">Revenue</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='data.revenue'>
+
+                                                <label for="net_profit">Net Profit</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='data.net_profit'>
+
+                                                <label for="expenses">Expenses</label>
+                                                <input type="number" onClick="this.select();" name="expenses" class="form-control" style="width: 100% !important;" v-model='data.expenses'>
+
+                                                <label for="return_on_equity">Return On Equity</label>
+                                                <input type="number" onClick="this.select();" name="return_on_equity" class="form-control" style="width: 100% !important;" v-model='data.return_on_equity'>
+
+                                                <label for="total_assests">Total Assets</label>
+                                                <input type="number" onClick="this.select();" name="total_assests" class="form-control" style="width: 100% !important;" v-model='data.total_assets'>
+
+                                                <label for="quick_ratio">Quick Ratio</label>
+                                                <input type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='data.quick_ratio'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="firm_value">Firm Value</label>
+                                                <input type="number" onClick="this.select();" name="firm_value" class="form-control" style="width: 100% !important;" v-model='data.firm_value'>
+
+                                                <label for="debt">Debt</label>
+                                                <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='data.debt'>
+
+                                                <label for="equity">Equity</label>
+                                                <input type="number" onClick="this.select();" name="equity" class="form-control" style="width: 100% !important;" v-model='data.equity'>
+
+                                                <label for="return_on_asset">Return On Asset</label>
+                                                <input type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='data.return_on_asset'>
+
+                                                <label for="return_on_investment">Return On Investment</label>
+                                                <input type="number" onClick="this.select();" name="return_on_investment" class="form-control" style="width: 100% !important;" v-model='data.return_on_investment'>
+
+                                                <label for="total_liabilities">Total Liabilities</label>
+                                                <input type="number" onClick="this.select();" name="total_liabilities" class="form-control" style="width: 100% !important;" v-model='data.total_liabilities'>
+
+                                                <label for="cash_ratio">Cash Ratio</label>
+                                                <input type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='data.cash_ratio'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="networking_capital">Networking Capital</label>
+                                                <input type="number" onClick="this.select();" name="networking_capital" class="form-control" style="width: 100% !important;" v-model='data.networking_capital'>
+
+                                                <label for="spending_on_research">Spending On Research</label>
+                                                <input type="number" onClick="this.select();" name="spending_on_research" class="form-control" style="width: 100% !important;" v-model='data.spending_on_research'>
+
+                                                <label for="property_plant_equipment">Property Plant Equipment</label>
+                                                <input type="number" onClick="this.select();" name="property_plant_equipment" class="form-control" style="width: 100% !important;" v-model='data.property_plant_equipment'>
+
+                                                <label for="cash_flow">Cash Flow</label>
+                                                <input type="number" onClick="this.select();" name="cash_flow" class="form-control" style="width: 100% !important;" v-model='data.cash_flow'>
+
+                                                <label for="goodwill">Goodwill</label>
+                                                <input type="number" onClick="this.select();" name="goodwill" class="form-control" style="width: 100% !important;" v-model='data.goodwill'>
+
+                                                <label for="current_ratio">Current Ratio</label>
+                                                <input type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;" v-model='data.current_ratio'>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <button v-if="data_size != 1" @click="remove_financial_data_record(index)" class="btn btn-danger btn-sm pull-right m-3">REMOVE</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static "/assets/js/controller/financial_data_controller.js" %}" type="text/javascript"></script>
+        <script src="{%static "/assets/js/core/jquery.min.js"%}" type="text/javascript"></script>
+        <script src="{%static "/assets/js/core/popper.min.js"%}" type="text/javascript"></script>
+        <script src="{%static "/assets/js/core/bootstrap.min.js"%}" type="text/javascript"></script>
+        <script src="{%static "/assets/js/plugins/perfect-scrollbar.jquery.min.js"%}"></script>
+        <script src="{%static "/assets/js/plugins/bootstrap-notify.js"%}"></script>
+        <script src="{%static "/assets/js/black-dashboard.js"%}"></script>
+        <script src="https://kit.fontawesome.com/f74f23e45d.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    </body>

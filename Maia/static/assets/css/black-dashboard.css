@@ -4075,17 +4075,17 @@ input[type="button"].btn-block {
   z-index: 4;
 }
 
-.input-group>.form-control:not(:last-child),
+/* .input-group>.form-control:not(:last-child),
 .input-group>.custom-select:not(:last-child) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-}
+} */
 
-.input-group>.form-control:not(:first-child),
+/* .input-group>.form-control:not(:first-child),
 .input-group>.custom-select:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-}
+} */
 
 .input-group>.custom-file {
   display: flex;
@@ -19033,13 +19033,13 @@ code {
   background-color: #E3E3E3;
 }
 
-.input-group .form-control:not(:first-child):not(:last-child),
+/* .input-group .form-control:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child) {
   border-radius: 0.4285rem;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left: 0 none;
-}
+} */
 
 .input-group .form-control:first-child,
 .input-group-btn:first-child>.dropdown-toggle,
@@ -19047,11 +19047,11 @@ code {
   border-right: 0 none;
 }
 
-.input-group .form-control:last-child,
+/* .input-group .form-control:last-child,
 .input-group-btn:last-child>.dropdown-toggle,
 .input-group-btn:first-child>.btn:not(:first-child) {
-  border-left: 0 none;
-}
+  border-left: 1px !important;
+} */
 
 .form-control[disabled],
 .form-control[readonly],

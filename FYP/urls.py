@@ -26,6 +26,7 @@ urlpatterns = [
     path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
     path('end-user-agreement/', views.to_end_user_agreement, name="end_user_agreement"),
     path('user-agreeded/', views.user_agreed, name="user_agreed"),
+    path('financial_data_questionaire/', views.financial_data_questionaire, name="financial_data_questionaire"),
     
     # Social Login
     path('social-auth/', include('social_django.urls', namespace="social")),

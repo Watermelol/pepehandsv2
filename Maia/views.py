@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import user_profile
 from .forms import UserProfile
+import json
 
 # Create your views here.
 def dashboard(request):
@@ -72,4 +73,12 @@ def user_agreed(request):
     current_user.user_agreement = True
     current_user.save()
     return redirect('/questionaire/user-profile')
+
+def financial_data_questionaire(request):
+    if (request.method == 'POST'):
+        jsn = json.loads(request.body)
+        jsn2 = json.dumps(jsn)
+        return JsonResponse(jsn2, safe=False)
+    else:
+        return render(request, 'financial_data_questionaire.html')
 

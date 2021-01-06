@@ -44,7 +44,8 @@ class user_financial_data(models.Model):
     ]
 
     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
-    quater = models.CharField('Quater', max_length=3, choices=quaters, default=1)
+    created_date_time = models.DateTimeField(auto_now_add=True)
+    quater = models.CharField('Quater', max_length=255)
     revenue = models.FloatField('Revenue')
     net_profit = models.FloatField('Net Profit')
     expenses = models.FloatField('Expenses')
