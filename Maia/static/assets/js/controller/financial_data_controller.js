@@ -84,7 +84,6 @@ const financial_data_questionaire_controller = Vue.createApp({
         },
 
         remove_financial_data_record (index) {
-            console.log(index)
             if (this.data_size > 1){
                 Swal.fire({
                     title: 'Are you sure?',

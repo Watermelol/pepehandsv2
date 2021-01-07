@@ -1,0 +1,46 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Maia</title>
+        <link rel="icon" href="../static/assets/img/icons8-circled-m-50.png">
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <!--  Fonts and icons  -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+        <!-- Black Dashboard CSS -->
+        <link href="{%static 'assets/css/black-dashboard.css'%}" rel="stylesheet" />
+        <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" id="after_payment_page">
+            {% csrf_token %}
+            <div class="row" style="margin-top: 20vh;">
+                <div class="col-12">
+                    <lottie-player src="https://assets10.lottiefiles.com/temp/lf20_yYJhpG.json"  background="transparent"  speed="1"  style="height: 300px;"    autoplay></lottie-player>
+                    <h1 align=center>Thank You For The Payment</h1>
+                    <p align=center class="text-muted">You Will Be Redirect Back To Dashboard in [$ seconds $] Second</p>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="{%static "/assets/js/controller/after_payment_controller.js" %}" type="text/javascript"></script>
+    <script src="{%static "/assets/js/core/jquery.min.js"%}" type="text/javascript"></script>
+    <script src="{%static "/assets/js/core/popper.min.js"%}" type="text/javascript"></script>
+    <script src="{%static "/assets/js/core/bootstrap.min.js"%}" type="text/javascript"></script>
+    <script src="{%static "/assets/js/plugins/perfect-scrollbar.jquery.min.js"%}"></script>
+    <script src="{%static "/assets/js/plugins/bootstrap-notify.js"%}"></script>
+    <script src="{%static "/assets/js/black-dashboard.js"%}"></script>
+    <script src="https://kit.fontawesome.com/f74f23e45d.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</html>

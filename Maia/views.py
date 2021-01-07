@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponseRedirect
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.conf import settings
 from .models import user_profile
 from .forms import UserProfile
+from djstripe.models import Charge
 import json
+import stripe
 
 # Create your views here.
 def dashboard(request):
@@ -23,6 +25,8 @@ def dashboard(request):
             # check if the user got answer the questionair before or not
             if (user_profile_updated != True):
                 return redirect('/questionaire/user-profile')
+            elif (financial_data_provided != True):
+                return redirect('/financial_data_questionaire')
             # if user answer b4 then redirect him to dashboard else bring him to questionaire page
             else:
                 return render(request, 'dashboard.html')
@@ -81,4 +85,47 @@ def financial_data_questionaire(request):
         return JsonResponse(jsn2, safe=False)
     else:
         return render(request, 'financial_data_questionaire.html')
+
+def report_payment(request):
+    if (request.method == 'GET'):
+        stripe_config = {
+            'publicKey' : settings.STRIPE_TEST_PUBLIC_KEY
+        }
+        return JsonResponse(stripe_config, safe=False)
+
+def report_checkout(request):
+    if (request.method == 'GET'):
+        domain_url = 'https://pepehands.net:8000/'
+        stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                client_reference_id=request.user.id if request.user.is_authenticated else None,
+                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'cancelled/',
+                payment_method_types=['card'],
+                mode='payment',
+                line_items=[
+                    {
+                        'name': 'Detailed Report',
+                        'quantity': 1,
+                        'currency': 'myr',
+                        'amount': '10000',
+                    }
+                ]
+            )
+            return JsonResponse({'sessionId': checkout_session['id']})
+        except Exception as e:
+            return JsonResponse({'error': str(e)})
+
+def payment_success(request):
+    for charges in Charge.api_list():
+        Charge.sync_from_stripe_data(charges)
+    return render(request, 'payment_success.html')
+
+def payment_cancelled(request):
+    return render(request, 'payment_cancelled.html')
+
+
+
+
 

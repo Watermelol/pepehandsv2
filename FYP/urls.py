@@ -23,11 +23,23 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="dashboard"),
     path('', views.login, name='login'),
     path("logout/", views.logout_account, name="logout"),
-    path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
+    
+    # User First Time Login
     path('end-user-agreement/', views.to_end_user_agreement, name="end_user_agreement"),
     path('user-agreeded/', views.user_agreed, name="user_agreed"),
+    path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
     path('financial_data_questionaire/', views.financial_data_questionaire, name="financial_data_questionaire"),
-    
+
+    # Report Payment
+    path('report_payment/', views.report_payment, name="report_payment"),
+    path('create-checkout-session/', views.report_checkout),
+    path('success/', views.payment_success),
+    path('cancelled/', views.payment_cancelled),
+
+    #  Stripr Web
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+
+
     # Social Login
     path('social-auth/', include('social_django.urls', namespace="social")),
 ]
