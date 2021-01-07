@@ -38,4 +38,4 @@ const report_payment = Vue.createApp({
     delimiters : ['[$', '$]'],
 })
 
-report_payment.mount('#payment_report')
+report_payment.mount('#purchaseReport')
