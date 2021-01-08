@@ -67,4 +67,46 @@ class user_financial_data(models.Model):
     def __str__(self):
         return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
 
+class Suggestions(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    URL = models.CharField(max_length = 255)
+    Title = models.CharField(max_length = 255)
+    Tag = models.CharField(max_length = 255)
+    Types = models.CharField(max_length = 10)
 
+class News(models.Model):
+    Title = models.CharField(max_length = 50)
+    Date = models.DateField()
+    Tag = modelsCharField(max_length = 255)
+    Categories = models.CharField(max_length = 50)
+    Site = models.CharField(max_length = 25)
+    URL = models.CharField(max_length = 255)
+
+class News_Sentiment_Analysis(models.Model):
+    NewsID = models.ForeignKey(News, on_delete = models.CASCADE)
+    Sentiment = models.CharField(max_length = 50)
+
+class Transactions(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    Payment_Status = models.CharField(max_length = 1)
+    Amount = models.DecimalField(max_digits = 3, decimal_place = 2)
+    Currency = models.CharField(max_length = 5)
+    Signature = models.CharField(max_length = 100)
+    ErrorDesc = models.IntegerField()
+    AuthCode = models.CharField(max_length = 20)
+    UsersLoginID = models.CharField(max_length = 10)
+    Date = models.DateField()
+
+class Advices(models.Model):
+    Text = models.CharField(max_length = 255)
+    Tag = models.CharField(max_length = 255)
+
+class Network_Suggestions(models.Model):
+    Name = models.CharField(max_length = 50)
+    Skills = models.CharField(max_length = 255)
+    URL = models.CharField(max_length = 255)
+    Tag = models.CharField(max_length = 255)
+
+class Comment(models.Model):
+    Text = models.CharField(max_length = 255)
+    Tags = models.CharField(max_length = 50)
