@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import Http404, JsonResponse, HttpResponseRedirect
+from django.http import Http404, JsonResponse, HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile
+from .models import user_profile, user_financial_data
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
@@ -27,6 +27,8 @@ def dashboard(request):
                 return redirect('/questionaire/user-profile')
             elif (financial_data_provided != True):
                 return redirect('/financial_data_questionaire')
+            # elif (qualitative_data_provided != True):
+            #     return render(request, 'payment_success.html')
             # if user answer b4 then redirect him to dashboard else bring him to questionaire page
             else:
                 return render(request, 'dashboard.html')
@@ -35,7 +37,7 @@ def dashboard(request):
 def login(request):
     # check if the user is log in ady or not
     if request.user.is_authenticated:
-        return redirect('/dashboard')
+        return redirect('dashboard/')
     else:
         return render(request, 'login.html')
 
@@ -79,12 +81,45 @@ def user_agreed(request):
     return redirect('/questionaire/user-profile')
 
 def financial_data_questionaire(request):
-    if (request.method == 'POST'):
-        jsn = json.loads(request.body)
-        jsn2 = json.dumps(jsn)
-        return JsonResponse(jsn2, safe=False)
-    else:
+    if (request.method != 'POST'):
         return render(request, 'financial_data_questionaire.html')
+    else:
+        jsn = json.loads(request.body)
+        current_user = user_profile.objects.get(user_id=request.user.id)
+        current_user_id = current_user.user_id
+        # print(jsn["data"])
+        for financial_data in jsn["data"]:
+            financial_data_entry = user_financial_data(
+                user_id = current_user.id,
+                quater = financial_data["quater"],
+                revenue = financial_data["revenue"],
+                net_profit= financial_data["net_profit"],
+                expenses= financial_data["expenses"],
+                return_on_equity= financial_data["return_on_equity"],
+                firm_value= financial_data["firm_value"],
+                debt= financial_data["debt"],
+                equity= financial_data["equity"],
+                return_on_asset= financial_data["return_on_asset"],
+                return_on_investment= financial_data["return_on_investment"],
+                networking_capital= financial_data["networking_capital"],
+                spending_on_research= financial_data["spending_on_research"],
+                property_plant_equipment= financial_data["property_plant_equipment"],
+                cash_flow= financial_data["cash_flow"],
+                goodwill= financial_data["goodwill"],
+                total_assets= financial_data["total_assets"],
+                total_liabilities= financial_data["total_liabilities"],
+                current_ratio= financial_data["current_ratio"],
+                quick_ratio= financial_data["quick_ratio"],
+                cash_ratio= financial_data["cash_ratio"]
+            )
+
+            financial_data_entry.save()
+        
+        
+        current_user.financial_data_provided = True
+        current_user.save()
+        return HttpResponse("data saved", status=200)
+        
 
 def report_payment(request):
     if (request.method == 'GET'):

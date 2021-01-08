@@ -39,13 +39,11 @@ class user_financial_data(models.Model):
     quaters = [
         ('Q1', 'Quater 1'),
         ('Q2', 'Quater 2'),
-        ('Q3', 'Quater 3'),
-        ('Q4', 'Quater 4'),
     ]
 
     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
     created_date_time = models.DateTimeField(auto_now_add=True)
-    quater = models.CharField('Quater', max_length=255)
+    quater = models.CharField('Quater', choices=quaters, max_length=50, default='Q1')
     revenue = models.FloatField('Revenue')
     net_profit = models.FloatField('Net Profit')
     expenses = models.FloatField('Expenses')

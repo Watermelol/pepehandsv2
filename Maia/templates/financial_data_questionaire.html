@@ -43,9 +43,8 @@
                     </div>
                 </div>
                 <div id=financial_data_forms class="container col-md-7">
-                    <div id="accordion" style="margin-top: 20vh;">
-                        <button @click="add_financial_data_record" class="btn btn-info btn-sm">Add Record</button>
-                        <button @click="submit_financial_data_record" class="btn btn-success btn-sm">Submit Record</button>
+                    <div id="accordion" style="margin-top: 10vh;">
+                        <button @click="submit_financial_data_record" class="btn btn-success btn-sm pull-right">Submit Record</button>
                         <div v-for= "(data, index) in user_financial_data.data">
                             <div class="card">
                                 <div class="card-header" id="headingOne">
@@ -62,8 +61,6 @@
                                                 <select name="quater" class="form-control" style="width: 100% !important;" v-model='data.quater'>
                                                     <option value="Q1">Quater 1</option>
                                                     <option value="Q2">Quater 2</option>
-                                                    <option value="Q3">Quater 3</option>
-                                                    <option value="Q4">Quater 4</option>
                                                 </select>
 
                                                 <label for="revenue">Revenue</label>
@@ -127,7 +124,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <button v-if="data_size != 1" @click="remove_financial_data_record(index)" class="btn btn-danger btn-sm pull-right m-3">REMOVE</button>
                                 </div>
                             </div>
                             
