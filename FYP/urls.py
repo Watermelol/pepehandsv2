@@ -42,4 +42,9 @@ urlpatterns = [
 
     # Social Login
     path('social-auth/', include('social_django.urls', namespace="social")),
+
+    # User Profile Page
+    path('user-profile/', views.user_profile_page , name='user_profile'),
+    path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
+    path('user/get/payment_history', views.get_user_payment_history, name='retrieve_user_payment_history')
 ]

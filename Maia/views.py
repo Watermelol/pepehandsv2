@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile, user_financial_data
+from .models import user_profile, user_financial_data, user_payment
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
@@ -159,6 +159,42 @@ def payment_success(request):
 
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')
+
+def user_profile_page(request):
+    return render(request, 'user_profile_page.html')
+
+def get_user_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user_profile = {
+        'firstName': current_user.first_name,
+        'lastName': current_user.last_name,
+        'companyName': current_user.company_name,
+        'company_industry': current_user.company_industry.industry_name,
+        'address1': current_user.address_1,
+        'address2': current_user.address_2,
+        'city': current_user.city,
+        'zipCode': current_user.zip_code,
+    }
+    # print(current_user_profile)
+
+    return JsonResponse(current_user_profile, safe=False)
+
+def get_user_payment_history(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user_payment_history = user_payment.objects.filter(user = current_user)
+    payment_history_data = []
+    for data in current_user_payment_history:
+        jsn_data = {
+            'charges': data.payment_record.amount,
+            'currency': data.payment_record.currency,
+            'created': str(data.payment_record.created)
+        }
+        payment_history_data.append(jsn_data)
+    response_jsn = {
+        'data': payment_history_data
+    }
+    return JsonResponse(response_jsn, safe=False)
+
 
 
 

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+    
+    <div class="container" id="user_profile">
+        {% csrf_token %}
+        <div class="row">
+            <form class="col-12">
+                <fieldset>
+                    <legend>User Infomation:</legend>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="fname">First Name:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="fname" name="fname" v-model= "profile_data.firstName" readonly>
+                            <label for="companyName">Company Name:</label>
+                            <input class="form-control mb-2 text-white" type="email" id="companyName" name="companyName" v-model= "profile_data.companyName" readonly>
+                            <label for="address1">Address 1:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="address1" name="address1" v-model= "profile_data.address1" readonly>
+                            <label for="city">City:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="city" name="city" v-model= "profile_data.city" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label for="lname">Last Name:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="lname" name="lname" v-model= "profile_data.lastName" readonly>
+                            <label for="industryName">Industry Name:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="industryName" name="industryName" v-model= "profile_data.industryName" readonly>
+                            <label for="address2">Address 2:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="address2" name="address2" v-model= "profile_data.address2" readonly>
+                            <label for="zipCode">Zip Code:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="zipCode" name="zipCode" v-model= "profile_data.zipCode" readonly>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="col-12 mb-3">
+                <div class="card-deck">
+                    <div class="card col-6">
+                        <i class="far fa-id-badge align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                        <div class="card-body align-self-center">  
+                            <a href="#" class="btn btn-lg btn-dark">Edit User Information</a>  
+                        </div>
+                    </div>
+                    <div class="card col-6">
+                        <i class="far fa-newspaper align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                        <div class="card-body align-self-center">  
+                            <a href="#" class="btn btn-lg btn-dark">Edit Questionair</a>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card-deck">
+                    <div class="card col-6">
+                        <i class="fas fa-shopping-cart align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                        <div class="card-body align-self-center">
+                            <button @click="openPaymentHistoryModal()" class="btn btn-lg btn-dark">Payment History</button> 
+                        </div>
+                    </div>
+                    <div class="card col-6">
+                        <i class="fa fa-file-pdf align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                        <div class="card-body align-self-center">  
+                            <a href="#" class="btn btn-lg btn-dark">Purchased Report</a>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="paymentHistory" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog" role="document" style="width: 80vh; max-width: 100vh;">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h2 class="modal-title text-white">Payment History</h5>
+                </div>
+                <div class="modal-body" style="height: 35vh; max-height: 35vh;">
+                  <table class="table table-striped" style="width: 100%;">
+                    <tr>
+                      <th class="text-white" style="width: 30%; text-align: center;">Amount</th>
+                      <th class="text-white" style="width: 30%; text-align: center;">Currency</th>
+                      <th class="text-white" style="width: 40%; text-align: center;">Data</th>
+                    </tr>
+                    <tr v-for="history in payment_history">
+                      <td class="text-white" style="text-align: center;">[$ history.charges $]</td>
+                      <td class="text-white" style="text-transform: uppercase; text-align: center;">[$ history.currency $]</td>
+                      <td class="text-white" style="text-align: center;">[$ history.created $]</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
