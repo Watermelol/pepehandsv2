@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{%load static%}
 {% block content %}
     
     <div class="container" id="user_profile">
@@ -36,13 +37,13 @@
                     <div class="card col-6">
                         <i class="far fa-id-badge align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
                         <div class="card-body align-self-center">  
-                            <a href="#" class="btn btn-lg btn-dark">Edit User Information</a>  
+                            <button @click="openEditUserProfileModal()" class="btn btn-lg btn-dark">Edit User Information</button>  
                         </div>
                     </div>
                     <div class="card col-6">
                         <i class="far fa-newspaper align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
                         <div class="card-body align-self-center">  
-                            <a href="#" class="btn btn-lg btn-dark">Edit Questionair</a>  
+                            <button @click='openQuestionaireSelectModel()' class="btn btn-lg btn-dark">Edit Questionair</button>  
                         </div>
                     </div>
                 </div>
@@ -91,8 +92,181 @@
               </div>
             </div>
         </div>
+
+        <div class="modal fade" id="editUserProfile" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog" role="document" style="width: 80vh; max-width: 100vh;">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h2 class="modal-title text-white">Edit Profile</h5>
+                </div>
+                <div class="modal-body mb-2">
+                    <div class="row">
+                        <form class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="text-white" for="fname">Email: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.email == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.email" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="text-white" for="fname">First Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.firstName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.firstName">
+                                    <label class="text-white" for="companyName">Company Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.companyName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="companyName" name="companyName" v-model= "profile_edit.companyName" required>
+                                    <label class="text-white" for="address1">Address 1: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.address1 == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="address1" name="address1" v-model= "profile_edit.address1" required>
+                                    <label class="text-white" for="city">City: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.city == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="city" name="city" v-model= "profile_edit.city" required>
+                                </div>
+                                <div class="col-6">
+                                    <label class="text-white" for="lname">Last Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.lastName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="lname" name="lname" v-model= "profile_edit.lastName" required>
+                                    <label class="text-white" for="industryName">Industry Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.industryName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="industryName" name="industryName" v-model= "profile_edit.industryName" readonly required>
+                                    <label class="text-white" for="address2">Address 2:</label>
+                                    <input :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="address2" name="address2" v-model= "profile_edit.address2">
+                                    <label class="text-white" for="zipCode">Zip Code: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.zipCode == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="zipCode" name="zipCode" v-model= "profile_edit.zipCode" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                    <button type="button" @click="validateAllField()" class="btn btn-secondary">Submit</button> 
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="questionaireSelect" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document" style="max-width: 100vh; margin-top: 15vh;">
+              <div class="modal-content bg-dark">
+                <div class="modal-body mb-2">
+                    <div class="row">
+                        <div class="card-deck col-12" style="margin: auto;">
+                            <div class="card col-6">
+                                <i class="fas fa-money-bill-wave align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                                <div class="card-body align-self-center">
+                                    <button @click='getFinancialData()' class="btn btn-lg btn-dark">Edit Financial Data</button> 
+                                </div>
+                            </div>
+                            <div class="card col-6">
+                                <i class="fas fa-sort-amount-down align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                                <div class="card-body align-self-center">  
+                                    <button class="btn btn-lg btn-dark">Edit Qualitative Data</button>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editFinancialData" tabindex="-1" role="dialog" style="overflow: auto;" data-backdrop="static">
+            <div class="modal-dialog" role="document" style="max-width: 100vh; max-height: 0vh;">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h2 class="modal-title text-white">Edit Financial Data</h5>
+                </div>
+                <div class="modal-body mb-2">
+                    <div id="accordion">
+                        <div v-for= "data in user_financial_data">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#collapse'+data.id" aria-expanded="true" aria-controls="collapseOne">Financial Data Record [$ data.id $]</button>
+                                </h5>
+                                </div>
+                                
+                                <div v-bind:id="'collapse' + data.id" :class="{'show' : data.id==1 ,'collapse':true}" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="quater">Quater</label>
+                                                <select name="quater" class="form-control" style="width: 100% !important;" v-model='data.quater'>
+                                                    <option value="Q1">Quater 1</option>
+                                                    <option value="Q2">Quater 2</option>
+                                                </select>
+
+                                                <label for="revenue">Revenue</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='data.revenue'>
+
+                                                <label for="net_profit">Net Profit</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='data.net_profit'>
+
+                                                <label for="expenses">Expenses</label>
+                                                <input type="number" onClick="this.select();" name="expenses" class="form-control" style="width: 100% !important;" v-model='data.expenses'>
+
+                                                <label for="return_on_equity">Return On Equity</label>
+                                                <input type="number" onClick="this.select();" name="return_on_equity" class="form-control" style="width: 100% !important;" v-model='data.return_on_equity'>
+
+                                                <label for="total_assests">Total Assets</label>
+                                                <input type="number" onClick="this.select();" name="total_assests" class="form-control" style="width: 100% !important;" v-model='data.total_assets'>
+
+                                                <label for="quick_ratio">Quick Ratio</label>
+                                                <input type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='data.quick_ratio'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="firm_value">Firm Value</label>
+                                                <input type="number" onClick="this.select();" name="firm_value" class="form-control" style="width: 100% !important;" v-model='data.firm_value'>
+
+                                                <label for="debt">Debt</label>
+                                                <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='data.debt'>
+
+                                                <label for="equity">Equity</label>
+                                                <input type="number" onClick="this.select();" name="equity" class="form-control" style="width: 100% !important;" v-model='data.equity'>
+
+                                                <label for="return_on_asset">Return On Asset</label>
+                                                <input type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='data.return_on_asset'>
+
+                                                <label for="return_on_investment">Return On Investment</label>
+                                                <input type="number" onClick="this.select();" name="return_on_investment" class="form-control" style="width: 100% !important;" v-model='data.return_on_investment'>
+
+                                                <label for="total_liabilities">Total Liabilities</label>
+                                                <input type="number" onClick="this.select();" name="total_liabilities" class="form-control" style="width: 100% !important;" v-model='data.total_liabilities'>
+
+                                                <label for="cash_ratio">Cash Ratio</label>
+                                                <input type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='data.cash_ratio'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="networking_capital">Networking Capital</label>
+                                                <input type="number" onClick="this.select();" name="networking_capital" class="form-control" style="width: 100% !important;" v-model='data.networking_capital'>
+
+                                                <label for="spending_on_research">Spending On Research</label>
+                                                <input type="number" onClick="this.select();" name="spending_on_research" class="form-control" style="width: 100% !important;" v-model='data.spending_on_research'>
+
+                                                <label for="property_plant_equipment">Property Plant Equipment</label>
+                                                <input type="number" onClick="this.select();" name="property_plant_equipment" class="form-control" style="width: 100% !important;" v-model='data.property_plant_equipment'>
+
+                                                <label for="cash_flow">Cash Flow</label>
+                                                <input type="number" onClick="this.select();" name="cash_flow" class="form-control" style="width: 100% !important;" v-model='data.cash_flow'>
+
+                                                <label for="goodwill">Goodwill</label>
+                                                <input type="number" onClick="this.select();" name="goodwill" class="form-control" style="width: 100% !important;" v-model='data.goodwill'>
+
+                                                <label for="current_ratio">Current Ratio</label>
+                                                <input type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;" v-model='data.current_ratio'>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                    <button type="button" @click="updateFinancialData()" class="btn btn-secondary">Submit</button> 
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 
     
 {% endblock %}
+
 

@@ -11,7 +11,19 @@ const user_profile = Vue.createApp({
                 'city': '',
                 'zipCode': '',
             },
-            payment_history: []
+            profile_edit: {
+                'firstName': '',
+                'lastName': '',
+                'companyName': '',
+                'email': '',
+                'industryName': '',
+                'address1': '',
+                'address2': '',
+                'city': '',
+                'zipCode': '',
+            },
+            payment_history: [],
+            user_financial_data: [],
         }
     },
     methods: {
@@ -30,6 +42,17 @@ const user_profile = Vue.createApp({
                     data.profile_data.address2 = result.address2
                     data.profile_data.city = result.city
                     data.profile_data.zipCode = result.zipCode
+                    data.profile_data.email = result.email
+
+                    data.profile_edit.firstName = result.firstName
+                    data.profile_edit.lastName = result.lastName
+                    data.profile_edit.companyName = result.companyName
+                    data.profile_edit.industryName = result.company_industry
+                    data.profile_edit.address1 = result.address1
+                    data.profile_edit.address2 = result.address2
+                    data.profile_edit.city = result.city
+                    data.profile_edit.zipCode = result.zipCode
+                    data.profile_edit.email = result.email
                 }
             })
         },
@@ -48,9 +71,104 @@ const user_profile = Vue.createApp({
             })
         },
 
+        validateAllField() {
+            if (this.profile_edit.firstName=="" || this.profile_edit.companyName=="" ||
+            this.profile_edit.address1=="" || this.profile_edit.city=="" || this.profile_edit.lastName=="" || this.profile_edit.industryName=="" ||
+            this.profile_edit.zipCode=="" || this.profile_edit.email=="")
+            {
+                toastr.warning('Please Make Sure That You Have Enter All Required Fields')
+            }
+            else{
+                this.updateProfile()
+            }
+        },
+
+        updateProfile() {
+            $('#editUserProfile').modal('hide')
+            this.showGlobalLoader()
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            var user_data = JSON.stringify(this.profile_edit)
+            var data = this
+            $.ajax({
+                url: "/user/update",
+                headers:  {'X-CSRFToken': csrftoken},
+                contentType: "application/json; charset=utf-8",
+                data: user_data,
+                type: 'POST',
+                success: function(result) {
+                    if (result == 'data saved'){
+                        toastr.success("Profile Updated")
+                        setTimeout(() => {
+                            data.hideGlobalLoader()
+                        }, 1000);
+                        data.retrive_user_data()
+                    }
+                }
+            })
+        },
+
+        getFinancialData () {
+            $('#questionaireSelect').modal('hide')
+            this.user_financial_data = []
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/user/get/data/financial",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    $.each(result.data, function(key, value){
+                        data.user_financial_data.push(value)
+                    })
+                }
+            })
+
+            $('#editFinancialData').modal()
+        },
+
+        updateFinancialData () {
+            $('#editFinancialData').modal('hide')
+            this.showGlobalLoader()
+            request_data = {
+                'data': this.user_financial_data
+            }
+            console.log(request_data)
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/user/update/data/financial",
+                headers:  {'X-CSRFToken': csrftoken},
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(request_data),
+                type: 'POST',
+                success: function(result) {
+                    toastr.success("Data Updated")
+                    setTimeout(() => {
+                        data.hideGlobalLoader()
+                    }, 1000);
+                }
+            })
+        },
+
         openPaymentHistoryModal() {
             $('#paymentHistory').modal()
-        }
+        },
+
+        openEditUserProfileModal() {
+            $('#editUserProfile').modal()
+        },
+
+        openQuestionaireSelectModel() {
+            $('#questionaireSelect').modal()
+        },
+
+        showGlobalLoader() {
+            $('#globalLoader').modal('show')
+        },
+
+        hideGlobalLoader() {
+            $('#globalLoader').modal('hide')
+        },
+
     },
     mounted() {
         this.retrive_user_data()

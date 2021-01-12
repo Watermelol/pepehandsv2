@@ -46,5 +46,16 @@ urlpatterns = [
     # User Profile Page
     path('user-profile/', views.user_profile_page , name='user_profile'),
     path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
-    path('user/get/payment_history', views.get_user_payment_history, name='retrieve_user_payment_history')
+    path('user/get/payment_history', views.get_user_payment_history, name='retrieve_user_payment_history'),
+    path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
+    path('user/update', views.update_user_profile, name='update_user_profile'),
+    path('user/get/data/financial', views.get_user_financial_data, name='update_user_profile'),
+    path('user/update/data/financial', views.update_user_financial_data, name='update_user_profile'),
+
+    # Four pillars
+    path('pillars/performance', views.performance_pillars , name='performance_pillars'),
+    path('pillars/business-value', views.business_value_pillars , name='business_value_pillars'),
+    path('pillars/productivity', views.productivity_pillars , name='productivity_pillars'),
+    path('pillars/risk-analysis', views.risk_analysis_pillars , name='risk_analysis_pillars'),
+
 ]
