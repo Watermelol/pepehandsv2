@@ -96,7 +96,8 @@ class user_financial_data(models.Model):
 # class News(models.Model):
 #     Title = models.CharField(max_length = 50)
 #     Date = models.DateField()
-#     Tag = modelsCharField(max_length = 255)
+#     Tag = models.CharField(max_length = 255)
+#     content_text = models.TextField()
 #     Categories = models.CharField(max_length = 50)
 #     Site = models.CharField(max_length = 25)
 #     URL = models.CharField(max_length = 255)

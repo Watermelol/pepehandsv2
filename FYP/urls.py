@@ -29,6 +29,7 @@ urlpatterns = [
     path('user-agreeded/', views.user_agreed, name="user_agreed"),
     path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
     path('financial_data_questionaire/', views.financial_data_questionaire, name="financial_data_questionaire"),
+    path('qualitative_questionaire/', views.qualitative_questionaire, name="qualitative_questionaire"),
 
     # Report Payment
     path('report_payment/', views.report_payment, name="report_payment"),

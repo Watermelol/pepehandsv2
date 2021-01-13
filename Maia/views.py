@@ -27,8 +27,8 @@ def dashboard(request):
                 return redirect('/questionaire/user-profile')
             elif (financial_data_provided != True):
                 return redirect('/financial_data_questionaire')
-            # elif (qualitative_data_provided != True):
-            #     return render(request, 'payment_success.html')
+            elif (qualitative_data_provided != True):
+                return redirect('/qualitative_questionaire')
             # if user answer b4 then redirect him to dashboard else bring him to questionaire page
             else:
                 return render(request, 'dashboard.html')
@@ -79,6 +79,16 @@ def user_agreed(request):
     current_user.user_agreement = True
     current_user.save()
     return redirect('/questionaire/user-profile')
+
+def qualitative_questionaire(request):
+    if (request.method != 'POST'):
+        return render(request, 'qualitative_questionaire.html')
+    else:
+        current_user = user_profile.objects.get(user_id=request.user.id)
+        current_user.qualitative_data_provided = True
+        current_user.save()
+        return HttpResponse("data saved", status=200)
+
 
 def financial_data_questionaire(request):
     if (request.method != 'POST'):
