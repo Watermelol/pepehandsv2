@@ -349,6 +349,23 @@ def productivity_pillars(request):
 def risk_analysis_pillars(request):
     return render(request, 'pillars/risk_analysis_pillar.html')
 
+def get_purchased_report(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    report_purchased = purchased_report.objects.filter(user=current_user)
+    respond_arry = []
+    for data in report_purchased:
+        jsn = {
+            'purchaseDate': str(data.purchased_date),
+            'fileName': data.file_name
+        }
+        respond_arry.append(jsn)
+    respond_jsn = {
+        'data': respond_arry
+    }
+
+    return JsonResponse(respond_jsn, safe=False)
+
+
 
 
 

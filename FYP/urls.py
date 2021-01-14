@@ -52,6 +52,7 @@ urlpatterns = [
     path('user/update', views.update_user_profile, name='update_user_profile'),
     path('user/get/data/financial', views.get_user_financial_data, name='update_user_profile'),
     path('user/update/data/financial', views.update_user_financial_data, name='update_user_profile'),
+    path('user/get/purchased_report', views.get_purchased_report, name='get_purchased_report'),
 
     # Four pillars
     path('pillars/performance', views.performance_pillars , name='performance_pillars'),

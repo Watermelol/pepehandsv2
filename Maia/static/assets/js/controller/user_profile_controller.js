@@ -24,6 +24,7 @@ const user_profile = Vue.createApp({
             },
             payment_history: [],
             user_financial_data: [],
+            user_purchased_report: [],
         }
     },
     methods: {
@@ -131,7 +132,6 @@ const user_profile = Vue.createApp({
             request_data = {
                 'data': this.user_financial_data
             }
-            console.log(request_data)
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             let data = this
             $.ajax({
@@ -147,6 +147,31 @@ const user_profile = Vue.createApp({
                     }, 1000);
                 }
             })
+        },
+
+        getPurchasedReport() {
+            this.user_purchased_report = []
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/user/get/purchased_report",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    $.each(result.data, function(key, value){
+                        value.url = "https://storage.googleapis.com/maia_report_1/pdf/" + value.fileName
+                        data.user_purchased_report.push(value)
+                    })
+                    data.openPurchasedReportModal()
+                }
+            })
+        },
+
+        openReport(url) {
+            window.open(url)
+        },
+
+        openPurchasedReportModal() {
+            $('#purchasedReport').modal()
         },
 
         openPaymentHistoryModal() {
