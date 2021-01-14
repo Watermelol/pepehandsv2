@@ -133,3 +133,11 @@ class Recommandation_Articles(models.Model):
     URL = models.CharField(max_length = 255)
     tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
 
+class purchased_report(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    purchased_date = models.DateTimeField('Purchased Date', auto_now_add=True)
+    file_name = models.CharField('File Name', max_length=255)
+
+    def __str__(self):
+        return (self.file_name)
+

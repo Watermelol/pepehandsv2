@@ -4,11 +4,13 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile, user_financial_data, user_payment
+from .models import user_profile, user_financial_data, user_payment, purchased_report
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
 import stripe
+from datetime import datetime
+from .create_report import createReport
 
 # Create your views here.
 def dashboard(request):
@@ -163,9 +165,21 @@ def report_checkout(request):
             return JsonResponse({'error': str(e)})
 
 def payment_success(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
-    return render(request, 'payment_success.html')
+    fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'
+    createReport(fileName)
+    report_purchased = purchased_report(
+        user = current_user,
+        file_name = fileName
+    )
+
+    report_purchased.save()
+    context={'fileName': fileName}
+    return render(request, 'payment_success.html', context)
 
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')

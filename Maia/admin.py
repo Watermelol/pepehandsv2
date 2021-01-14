@@ -32,4 +32,5 @@ admin.site.register(Network_Suggestions)
 admin.site.register(Recommandation_Video)
 admin.site.register(Recommandation_Articles)
 admin.site.register(user_payment)
+admin.site.register(purchased_report)
 
