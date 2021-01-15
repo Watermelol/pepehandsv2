@@ -36,6 +36,14 @@ const qualitative_data = Vue.createApp({
                     }
                 }
             })
+        },
+
+        answerValidation (answer) {
+            if (answer > 5){
+                answer = 5
+            }else if (answer < 1){
+                answer = 1
+            }
         }
 
     },
