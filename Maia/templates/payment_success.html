@@ -22,6 +22,7 @@
     <body>
         <div class="container" id="after_payment_page">
             {% csrf_token %}
+            <input type="hidden" id="pdfLink" name="pdfLink" value="{{fileName}}">
             <div class="row" style="margin-top: 20vh;">
                 <div class="col-12">
                     <lottie-player align=center src="https://assets3.lottiefiles.com/packages/lf20_P2WnqE.json"  background="transparent"  speed="1"  style="height: 300px;"    autoplay></lottie-player>

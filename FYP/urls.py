@@ -29,6 +29,7 @@ urlpatterns = [
     path('user-agreeded/', views.user_agreed, name="user_agreed"),
     path('questionaire/user-profile', views.to_questionaire_user_profile, name="questionaire_user_profile"),
     path('financial_data_questionaire/', views.financial_data_questionaire, name="financial_data_questionaire"),
+    path('qualitative_questionaire/', views.qualitative_questionaire, name="qualitative_questionaire"),
 
     # Report Payment
     path('report_payment/', views.report_payment, name="report_payment"),
@@ -42,4 +43,21 @@ urlpatterns = [
 
     # Social Login
     path('social-auth/', include('social_django.urls', namespace="social")),
+
+    # User Profile Page
+    path('user-profile/', views.user_profile_page , name='user_profile'),
+    path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
+    path('user/get/payment_history', views.get_user_payment_history, name='retrieve_user_payment_history'),
+    path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
+    path('user/update', views.update_user_profile, name='update_user_profile'),
+    path('user/get/data/financial', views.get_user_financial_data, name='update_user_profile'),
+    path('user/update/data/financial', views.update_user_financial_data, name='update_user_profile'),
+    path('user/get/purchased_report', views.get_purchased_report, name='get_purchased_report'),
+
+    # Four pillars
+    path('pillars/performance', views.performance_pillars , name='performance_pillars'),
+    path('pillars/business-value', views.business_value_pillars , name='business_value_pillars'),
+    path('pillars/productivity', views.productivity_pillars , name='productivity_pillars'),
+    path('pillars/risk-analysis', views.risk_analysis_pillars , name='risk_analysis_pillars'),
+
 ]

@@ -4,11 +4,13 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile, user_financial_data
+from .models import user_profile, user_financial_data, user_payment, purchased_report
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
 import stripe
+from datetime import datetime
+from .create_report import createReport
 
 # Create your views here.
 def dashboard(request):
@@ -27,8 +29,8 @@ def dashboard(request):
                 return redirect('/questionaire/user-profile')
             elif (financial_data_provided != True):
                 return redirect('/financial_data_questionaire')
-            # elif (qualitative_data_provided != True):
-            #     return render(request, 'payment_success.html')
+            elif (qualitative_data_provided != True):
+                return redirect('/qualitative_questionaire')
             # if user answer b4 then redirect him to dashboard else bring him to questionaire page
             else:
                 return render(request, 'dashboard.html')
@@ -79,6 +81,16 @@ def user_agreed(request):
     current_user.user_agreement = True
     current_user.save()
     return redirect('/questionaire/user-profile')
+
+def qualitative_questionaire(request):
+    if (request.method != 'POST'):
+        return render(request, 'qualitative_questionaire.html')
+    else:
+        current_user = user_profile.objects.get(user_id=request.user.id)
+        current_user.qualitative_data_provided = True
+        current_user.save()
+        return HttpResponse("data saved", status=200)
+
 
 def financial_data_questionaire(request):
     if (request.method != 'POST'):
@@ -153,12 +165,211 @@ def report_checkout(request):
             return JsonResponse({'error': str(e)})
 
 def payment_success(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
-    return render(request, 'payment_success.html')
+    fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'
+    createReport(fileName)
+    report_purchased = purchased_report(
+        user = current_user,
+        file_name = fileName
+    )
+
+    report_purchased.save()
+    context={'fileName': fileName}
+    return render(request, 'payment_success.html', context)
 
 def payment_cancelled(request):
     return render(request, 'payment_cancelled.html')
+
+def user_profile_page(request):
+    return render(request, 'user_profile_page.html')
+
+def get_user_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user_profile = {
+        'firstName': current_user.first_name,
+        'lastName': current_user.last_name,
+        'companyName': current_user.company_name,
+        'company_industry': current_user.company_industry.industry_name,
+        'email': current_user.email,
+        'address1': current_user.address_1,
+        'address2': current_user.address_2,
+        'city': current_user.city,
+        'zipCode': current_user.zip_code,
+    }
+
+    return JsonResponse(current_user_profile, safe=False)
+
+def get_user_payment_history(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user_payment_history = user_payment.objects.filter(user = current_user)
+    payment_history_data = []
+    for data in current_user_payment_history:
+        jsn_data = {
+            'charges': data.payment_record.amount,
+            'currency': data.payment_record.currency,
+            'created': str(data.payment_record.created)
+        }
+        payment_history_data.append(jsn_data)
+    response_jsn = {
+        'data': payment_history_data
+    }
+    return JsonResponse(response_jsn, safe=False)
+
+def update_user_profile(request):
+    jsn = json.loads(request.body)
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    current_user.first_name = jsn['firstName']
+    current_user.last_name = jsn['lastName']
+    current_user.company_name = jsn['companyName']
+    current_user.email = jsn['email']
+    current_user.address_1 = jsn['address1']
+    current_user.address_2 = jsn['address2']
+    current_user.zip_code = jsn['zipCode']
+    current_user.city = jsn['city']
+    current_user.save()
+
+    return HttpResponse("data saved", status=200)
+
+def get_user_financial_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data.objects.filter(user=current_user)
+    response_arry = []
+    data_size = 1
+    for data in financial_data:
+        jsn_data = {
+            'id': data_size,
+            'quater' : data.quater,
+            'revenue' : data.revenue,
+            'net_profit' : data.net_profit,
+            'expenses' : data.expenses,
+            'return_on_equity' : data.return_on_equity,
+            'firm_value' : data.firm_value,
+            'debt' : data.debt,
+            'equity' : data.equity,
+            'return_on_asset' : data.return_on_asset,
+            'return_on_investment' : data.return_on_investment,
+            'networking_capital' : data.networking_capital,
+            'spending_on_research' : data.spending_on_research,
+            'property_plant_equipment' : data.property_plant_equipment,
+            'cash_flow' : data.cash_flow,
+            'goodwill' : data.goodwill,
+            'total_assets' : data.total_assets,
+            'total_liabilities' : data.total_liabilities,
+            'current_ratio' : data.current_ratio,
+            'quick_ratio' : data.quick_ratio,
+            'cash_ratio' : data.cash_ratio,
+        }
+        response_arry.append(jsn_data)
+        data_size += 1
+
+    response_jsn = {
+        'data': response_arry
+    }
+    return JsonResponse(response_jsn, safe=False)
+
+# def update_user_profile(request):
+#     jsn = json.loads(request.body)
+#     current_user = user_profile.objects.get(user_id=request.user.id)
+#     current_user.first_name = jsn['firstName']
+#     current_user.last_name = jsn['lastName']
+#     current_user.company_name = jsn['companyName']
+#     current_user.email = jsn['email']
+#     current_user.address_1 = jsn['address1']
+#     current_user.address_2 = jsn['address2']
+#     current_user.zip_code = jsn['zipCode']
+#     current_user.city = jsn['city']
+#     current_user.save()
+
+#     return HttpResponse("data saved", status=200)
+
+def update_user_financial_data(request):
+    jsn = json.loads(request.body)
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data.objects.filter(user=current_user)
+    for data in financial_data:
+        for k in jsn['data']:
+            if(k['quater'] == 'Q1' and data.quater == 'Q1'):
+                data.revenue = k['revenue']
+                data.net_profit = k['net_profit']
+                data.expenses = k['expenses']
+                data.return_on_equity = k['return_on_equity']
+                data.firm_value = k['firm_value']
+                data.debt = k['debt']
+                data.equity = k['equity']
+                data.return_on_asset = k['return_on_asset']
+                data.return_on_investment = k['return_on_investment']
+                data.networking_capital = k['networking_capital']
+                data.spending_on_research = k['spending_on_research']
+                data.property_plant_equipment = k['property_plant_equipment']
+                data.cash_flow = k['cash_flow']
+                data.goodwill = k['goodwill']
+                data.total_assets = k['total_assets']
+                data.total_liabilities = k['total_liabilities']
+                data.current_ratio = k['current_ratio']
+                data.quick_ratio = k['quick_ratio']
+                data.quick_ratio = k['quick_ratio']
+
+            elif(k['quater'] == 'Q2' and data.quater == 'Q2'):
+                data.revenue = k['revenue']
+                data.net_profit = k['net_profit']
+                data.expenses = k['expenses']
+                data.return_on_equity = k['return_on_equity']
+                data.firm_value = k['firm_value']
+                data.debt = k['debt']
+                data.equity = k['equity']
+                data.return_on_asset = k['return_on_asset']
+                data.return_on_investment = k['return_on_investment']
+                data.networking_capital = k['networking_capital']
+                data.spending_on_research = k['spending_on_research']
+                data.property_plant_equipment = k['property_plant_equipment']
+                data.cash_flow = k['cash_flow']
+                data.goodwill = k['goodwill']
+                data.total_assets = k['total_assets']
+                data.total_liabilities = k['total_liabilities']
+                data.current_ratio = k['current_ratio']
+                data.quick_ratio = k['quick_ratio']
+                data.quick_ratio = k['quick_ratio']
+        
+        data.save()
+    return HttpResponse("data saved", status=200)
+
+def performance_pillars(request):
+    return render(request, 'pillars/performance_pillar.html')
+
+def business_value_pillars(request):
+    return render(request, 'pillars/business_value_pillar.html')
+
+def productivity_pillars(request):
+    return render(request, 'pillars/productivity_pillar.html')
+
+def risk_analysis_pillars(request):
+    return render(request, 'pillars/risk_analysis_pillar.html')
+
+def get_purchased_report(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    report_purchased = purchased_report.objects.filter(user=current_user)
+    respond_arry = []
+    for data in report_purchased:
+        jsn = {
+            'purchaseDate': str(data.purchased_date),
+            'fileName': data.file_name
+        }
+        respond_arry.append(jsn)
+    respond_jsn = {
+        'data': respond_arry
+    }
+
+    return JsonResponse(respond_jsn, safe=False)
+
+
+
+
+
+
 
 
 

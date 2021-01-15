@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from djstripe.models import Charge as Strip_Charge
+import json
+
 
 # Create your models here.
 
@@ -9,6 +12,12 @@ class industries(models.Model):
     industry_name = models.CharField('Industry Name', max_length=255)
     def __str__(self):
         return self.industry_name
+
+class tag (models.Model):
+    name = models.CharField('Name', max_length=255, default='')
+    desc = models.CharField('Description', max_length=255, default='')
+    def __str__(self):
+        return self.name
 
 class user_profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -25,6 +34,7 @@ class user_profile(models.Model):
     user_profile_updated = models.BooleanField(default=False)
     financial_data_provided = models.BooleanField(default=False)
     qualitative_data_provided = models.BooleanField(default=False)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
 
     def __str__(self):
         return self.user.username
@@ -34,6 +44,22 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         user_profile.objects.create(user=instance)
     instance.user_profile.save()
+
+class user_payment(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    payment_record = models.OneToOneField(Strip_Charge, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.first_name + ' ' + self.user.last_name + ' (' + self.payment_record.id + ')'
+
+@receiver(post_save, sender=Strip_Charge)
+def create_payment_record(sender, instance, created, **kwargs):
+    if created:
+        billingDetails = instance.billing_details
+        current_user = user_profile.objects.get(email=billingDetails['email'])
+        current_user_payment = user_payment.objects.create(user=current_user, payment_record=instance)
+        current_user_payment.save()
+    
 
 class user_financial_data(models.Model):
     quaters = [
@@ -67,4 +93,51 @@ class user_financial_data(models.Model):
     def __str__(self):
         return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
 
+# class News(models.Model):
+#     Title = models.CharField(max_length = 50)
+#     Date = models.DateField()
+#     Tag = models.CharField(max_length = 255)
+#     content_text = models.TextField()
+#     Categories = models.CharField(max_length = 50)
+#     Site = models.CharField(max_length = 25)
+#     URL = models.CharField(max_length = 255)
+
+# class News_Sentiment_Analysis(models.Model):
+#     NewsID = models.ForeignKey(News, on_delete = models.CASCADE)
+#     Sentiment = models.CharField(max_length = 50)
+
+class Advices(models.Model):
+    Text = models.CharField('Text', max_length = 255)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+
+class Comment(models.Model):
+    Text = models.CharField(max_length = 255)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+
+class Network_Suggestions(models.Model):
+    Name = models.CharField(max_length = 50)
+    Skills = models.CharField(max_length = 255)
+    URL = models.CharField(max_length = 255)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+
+class Recommandation_Video(models.Model):
+    Name = models.CharField(max_length = 50)
+    Video_ID = models.CharField(max_length=255)
+    URL = models.CharField(max_length = 255)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+
+class Recommandation_Articles(models.Model):
+    Title = models.CharField(max_length = 50)
+    Description = models.TextField(blank=True)
+    Site_Name = models.CharField(max_length=50)
+    URL = models.CharField(max_length = 255)
+    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+
+class purchased_report(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    purchased_date = models.DateTimeField('Purchased Date', auto_now_add=True)
+    file_name = models.CharField('File Name', max_length=255)
+
+    def __str__(self):
+        return (self.file_name)
 

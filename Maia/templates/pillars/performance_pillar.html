@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row" id="performancePillarPage">
+        <div class="col-md-12">
+            <div class="row mb-3">
+                <div class="col-md-6 mb-3">
+                    <div class="card-deck h-100">
+                        <div class="card card-chart w-100">
+                            <div class="card-body" style="overflow: auto;">
+                                <canvas id="performance_pillars"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="card-deck h-100">
+                        <div class="card card-chart w-100">
+                            <div class="card-header">
+                                <ul class="nav nav-pills nav-fill">
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':info}]" @click="showInfo" href="#">Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':comments}]" @click="showComment" href="#" >Comments</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body" style="overflow: auto;">
+                                <ul>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card-deck h-100">
+                        <div class="card card-chart w-100">
+                            <div class="card-header">
+                                <ul class="nav nav-pills nav-fill">
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':articles}]" @click="showArticles" href="#">Articles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':videos}]" @click="showVideos" href="#">Videos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a :class="[{'nav-link':true}, {'active':networking}]" @click="showNetworking" href="#">Networking</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <table class="w-100" v-if='articles'>
+                                    <tr>
+                                        <th class="text-white">Title</th>
+                                        <th class="text-white">Author</th>
+                                        <th class="text-white">Site</th>
+                                        <th class="text-white">URL</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    </tr>
+                                </table>
+                                <table class="w-100" v-if='videos'>
+                                    <tr>
+                                        <th class="text-white">Title</th>
+                                        <th class="text-white">Author</th>
+                                        <th class="text-white">Site</th>
+                                        <th class="text-white">URL</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    </tr>
+                                </table>
+                                <table class="w-100" v-if='networking'>
+                                    <tr>
+                                        <th class="text-white">Title</th>
+                                        <th class="text-white">Author</th>
+                                        <th class="text-white">Site</th>
+                                        <th class="text-white">URL</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
+                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
