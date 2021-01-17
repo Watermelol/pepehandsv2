@@ -20,18 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/Dividend Cash Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/Overall Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/Profit Data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/ML_Financial/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/tree.dot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Maia/tree.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FYP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FYP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FYP/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FYP/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,13 +49,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Maia/ML_Financial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MAIA" />
       <recent name="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial" />
     </key>
   </component>
@@ -244,7 +236,6 @@
         <item itemvalue="Python.Expert_Score (1)" />
         <item itemvalue="Python.Liquidity_Score" />
         <item itemvalue="Python.Dividend_Cash_Score" />
-        <item itemvalue="Python.Prospective_Profits (1)" />
         <item itemvalue="Python.Expert_Score (1)" />
       </list>
     </recent_temporary>
