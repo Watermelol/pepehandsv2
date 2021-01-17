@@ -2,60 +2,39 @@ const financial_data_questionaire_controller = Vue.createApp({
     data() {
         return {
             user_financial_data: {
-                data: [
-                    {
-                        'id': 1,
-                        'quater': 'Q1',
-                        'revenue': 0,
-                        'net_profit': 0,
-                        'expenses': 0,
-                        'return_on_equity': 0,
-                        'firm_value': 0,
-                        'debt': 0,
-                        'equity': 0,
-                        'return_on_asset': 0,
-                        'return_on_investment': 0,
-                        'networking_capital': 0,
-                        'spending_on_research': 0,
-                        'property_plant_equipment': 0,
-                        'cash_flow': 0,
-                        'goodwill': 0,
-                        'total_assets': 0,
-                        'total_liabilities': 0,
-                        'current_ratio': 0,
-                        'quick_ratio': 0,
-                        'cash_ratio': 0,
-                    },
-                    {
-                        'id': 2,
-                        'quater': 'Q2',
-                        'revenue': 0,
-                        'net_profit': 0,
-                        'expenses': 0,
-                        'return_on_equity': 0,
-                        'firm_value': 0,
-                        'debt': 0,
-                        'equity': 0,
-                        'return_on_asset': 0,
-                        'return_on_investment': 0,
-                        'networking_capital': 0,
-                        'spending_on_research': 0,
-                        'property_plant_equipment': 0,
-                        'cash_flow': 0,
-                        'goodwill': 0,
-                        'total_assets': 0,
-                        'total_liabilities': 0,
-                        'current_ratio': 0,
-                        'quick_ratio': 0,
-                        'cash_ratio': 0,
-                    }
-                ] 
+                'q1_revenue': 0.00,
+                'q1_profit_before_tax': 0.00,
+                'q1_net_profit': 0.00,
+                'q2_revenue': 0.00,
+                'q2_profit_before_tax': 0.00,
+                'q2_net_profit': 0.00,
+                'q3_revenue': 0.00,
+                'q3_profit_before_tax': 0.00,
+                'q3_net_profit': 0.00,
+                'q4_net_profit': 0.00,
+                'q4_revenue': 0.00,
+                'q4_profit_before_tax': 0.00,
+                'yearly_revenue': 0.00,
+                'yearly_net_profit': 0.00,
+                'cash': 0.00,
+                'debt': 0.00,
+                'total_debt': 0.00,
+                'net_assets': 0.00,
+                'current_ratio': 0.00,
+                'quick_ratio': 0.00,
+                'cash_ratio': 0.00,
+                'return_on_asset': 0.00,
+                'asset_turn_over_ratio': 0.00,
+                'debt_to_asset_ratio': 0.00,
+                'net_tangeble_asset': 0.00,
             },
         }
     },
     methods: {
         submit_financial_data_record () {
+            this.showGlobalLoader()
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            var data = this
             var financial_data = JSON.stringify(this.user_financial_data)
             $.ajax({
                 url: "/financial_data_questionaire/",
@@ -71,69 +50,13 @@ const financial_data_questionaire_controller = Vue.createApp({
             })
         },
 
-        // add_financial_data_record () {
-        //     let financial_data = this.user_financial_data.data
-        //     let financial_data_size = financial_data.length;
-        //     if (financial_data_size < 4){
-        //         this.data_size = this.data_size + 1
-        //         let new_financial_data = {
-        //             'id': this.data_size,
-        //             'quater': 'Q1',
-        //             'revenue': 0,
-        //             'net_profit': 0,
-        //             'expenses': 0,
-        //             'return_on_equity': 0,
-        //             'firm_value': 0,
-        //             'debt': 0,
-        //             'equity': 0,
-        //             'return_on_asset': 0,
-        //             'return_on_investment': 3,
-        //             'networking_capital': 0,
-        //             'spending_on_research': 0,
-        //             'property_plant_equipment': 1,
-        //             'cash_flow': 0,
-        //             'goodwill': 0,
-        //             'total_assets': 0,
-        //             'total_liabilities': 0,
-        //             'current_ratio': 0,
-        //             'quick_ratio': 0,
-        //             'cash_ratio': 0,
-        //         }
-        //         this.user_financial_data.data.push(new_financial_data)
-        //         toastr.success('Record Added')
-        //     }else {
-        //         toastr.info('The Maximum Record Is 4')
-        //     }
-        // },
+        showGlobalLoader() {
+            $('#globalLoader').modal('show')
+        },
 
-        // remove_financial_data_record (index) {
-        //     if (this.data_size > 1){
-        //         Swal.fire({
-        //             title: 'Are you sure?',
-        //             text: "You won't be able to revert this!",
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonColor: '#d33',
-        //             cancelButtonColor: '#3085d6',
-        //             confirmButtonText: 'Remove'
-        //           }).then((result) => {
-        //             if (result.isConfirmed) {
-        //               this.user_financial_data.data.splice(index, 1)
-        //               this.data_size = this.data_size - 1
-        //               $.each(this.user_financial_data.data, function(index, value){
-        //                 let removed_record_id = index + 1
-        //                 if (value.id > removed_record_id){
-        //                     value.id--
-        //                 }
-        //               })
-        //               toastr.error('Record Removed')
-        //             }
-        //           })
-        //     }else {
-        //         toastr.warning('The Minimum Record Is 1')
-        //     }
-            
-        // }
+        hideGlobalLoader() {
+            $('#globalLoader').modal('hide')
+        },
     },
     delimiters : ['[$', '$]']
 })

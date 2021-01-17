@@ -23,7 +23,7 @@ const user_profile = Vue.createApp({
                 'zipCode': '',
             },
             payment_history: [],
-            user_financial_data: [],
+            user_financial_data: {},
             user_purchased_report: [],
         }
     },
@@ -98,8 +98,8 @@ const user_profile = Vue.createApp({
                 type: 'POST',
                 success: function(result) {
                     if (result == 'data saved'){
-                        toastr.success("Profile Updated")
                         setTimeout(() => {
+                            toastr.success("Profile Updated")
                             data.hideGlobalLoader()
                         }, 1000);
                         data.retrive_user_data()
@@ -117,9 +117,7 @@ const user_profile = Vue.createApp({
                 url: "/user/get/data/financial",
                 headers:  {'X-CSRFToken': csrftoken},
                 success: function(result) {
-                    $.each(result.data, function(key, value){
-                        data.user_financial_data.push(value)
-                    })
+                    data.user_financial_data = result
                 }
             })
 
@@ -129,20 +127,17 @@ const user_profile = Vue.createApp({
         updateFinancialData () {
             $('#editFinancialData').modal('hide')
             this.showGlobalLoader()
-            request_data = {
-                'data': this.user_financial_data
-            }
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             let data = this
             $.ajax({
                 url: "/user/update/data/financial",
                 headers:  {'X-CSRFToken': csrftoken},
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(request_data),
+                data: JSON.stringify(data.user_financial_data),
                 type: 'POST',
                 success: function(result) {
-                    toastr.success("Data Updated")
                     setTimeout(() => {
+                        toastr.success("Data Updated")
                         data.hideGlobalLoader()
                     }, 1000);
                 }

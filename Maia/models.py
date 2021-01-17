@@ -59,39 +59,72 @@ def create_payment_record(sender, instance, created, **kwargs):
         current_user = user_profile.objects.get(email=billingDetails['email'])
         current_user_payment = user_payment.objects.create(user=current_user, payment_record=instance)
         current_user_payment.save()
-    
 
-class user_financial_data(models.Model):
-    quaters = [
-        ('Q1', 'Quater 1'),
-        ('Q2', 'Quater 2'),
-    ]
-
+class user_financial_data_v2(models.Model):
     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
     created_date_time = models.DateTimeField(auto_now_add=True)
-    quater = models.CharField('Quater', choices=quaters, max_length=50, default='Q1')
-    revenue = models.FloatField('Revenue')
-    net_profit = models.FloatField('Net Profit')
-    expenses = models.FloatField('Expenses')
-    return_on_equity = models.FloatField('Return On Equity')
-    firm_value = models.FloatField('Firm Value')
+    q1_revenue = models.FloatField('Q1 Revenue')
+    q1_profit_before_tax = models.FloatField('Q1 Profit Before Tax')
+    q1_net_profit = models.FloatField('Q1 Net Profit')
+    q2_revenue = models.FloatField('Q2 Revenue')
+    q2_profit_before_tax = models.FloatField('Q2 Profit Before Tax')
+    q2_net_profit = models.FloatField('Q2 Net Profit')
+    q3_revenue = models.FloatField('Q3 Revenue')
+    q3_profit_before_tax = models.FloatField('Q3 Profit Before Tax')
+    q3_net_profit = models.FloatField('Q3 Net Profit')
+    q4_revenue = models.FloatField('Q4 Revenue')
+    q4_profit_before_tax = models.FloatField('Q4 Profit Before Tax')
+    q4_net_profit = models.FloatField('Q4 Net Profit')
+    yearly_revenue = models.FloatField('Yearly Revenue')
+    yearly_net_profit = models.FloatField('Yearly Net Profit')
+    net_tangeble_asset = models.FloatField('Net Tangeble Asset')
+    cash = models.FloatField('Cash')
     debt = models.FloatField('Debt')
-    equity = models.FloatField('Equity')
-    return_on_asset = models.FloatField('Return On Asset')
-    return_on_investment = models.FloatField('Return On Investment')
-    networking_capital = models.FloatField('Networking Capital')
-    spending_on_research = models.FloatField('Spending On Research')
-    property_plant_equipment = models.FloatField('Property Plant Equipment')
-    cash_flow = models.FloatField('Cash Flow')
-    goodwill = models.FloatField('Goodwill')
-    total_assets = models.FloatField('Total Assets')
-    total_liabilities = models.FloatField('Total Liabilities')
+    total_debt = models.FloatField('Total Debt')
+    net_assets = models.FloatField('Net Assets')
     current_ratio = models.FloatField('Current Ratio')
     quick_ratio = models.FloatField('Quick Ratio')
     cash_ratio = models.FloatField('Cash Ratio')
+    return_on_asset = models.FloatField('Return On Assest')
+    asset_turn_over_ratio = models.FloatField('Asset Turn Over Ratio')
+    debt_to_asset_ratio = models.FloatField('Debt To Asset Ratio')
 
     def __str__(self):
-        return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
+        return self.user.first_name + ' ' + self.user.last_name
+
+    
+
+# class user_financial_data(models.Model):
+#     quaters = [
+#         ('Q1', 'Quater 1'),
+#         ('Q2', 'Quater 2'),
+#     ]
+
+#     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+#     created_date_time = models.DateTimeField(auto_now_add=True)
+#     quater = models.CharField('Quater', choices=quaters, max_length=50, default='Q1')
+#     revenue = models.FloatField('Revenue')
+#     net_profit = models.FloatField('Net Profit')
+#     expenses = models.FloatField('Expenses')
+#     return_on_equity = models.FloatField('Return On Equity')
+#     firm_value = models.FloatField('Firm Value')
+#     debt = models.FloatField('Debt')
+#     equity = models.FloatField('Equity')
+#     return_on_asset = models.FloatField('Return On Asset')
+#     return_on_investment = models.FloatField('Return On Investment')
+#     networking_capital = models.FloatField('Networking Capital')
+#     spending_on_research = models.FloatField('Spending On Research')
+#     property_plant_equipment = models.FloatField('Property Plant Equipment')
+#     cash_flow = models.FloatField('Cash Flow')
+#     goodwill = models.FloatField('Goodwill')
+#     total_assets = models.FloatField('Total Assets')
+#     total_liabilities = models.FloatField('Total Liabilities')
+#     current_ratio = models.FloatField('Current Ratio')
+#     quick_ratio = models.FloatField('Quick Ratio')
+#     cash_ratio = models.FloatField('Cash Ratio')
+
+#     def __str__(self):
+#         return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
 
 # class News(models.Model):
 #     Title = models.CharField(max_length = 50)

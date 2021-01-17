@@ -23,6 +23,8 @@ const qualitative_data = Vue.createApp({
         },
 
         submitAnswer() {
+            this.showGlobalLoader()
+            var data = this
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             $.ajax({
                 url: "/qualitative_questionaire/",
@@ -44,7 +46,15 @@ const qualitative_data = Vue.createApp({
             }else if (answer < 1){
                 answer = 1
             }
-        }
+        },
+
+        showGlobalLoader() {
+            $('#globalLoader').modal('show')
+        },
+
+        hideGlobalLoader() {
+            $('#globalLoader').modal('hide')
+        },
 
     },
 })

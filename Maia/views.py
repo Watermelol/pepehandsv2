@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile, user_financial_data, user_payment, purchased_report
+from .models import user_profile, user_financial_data_v2, user_payment, purchased_report
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
@@ -98,34 +98,38 @@ def financial_data_questionaire(request):
     else:
         jsn = json.loads(request.body)
         current_user = user_profile.objects.get(user_id=request.user.id)
-        current_user_id = current_user.user_id
-        # print(jsn["data"])
-        for financial_data in jsn["data"]:
-            financial_data_entry = user_financial_data(
-                user_id = current_user.id,
-                quater = financial_data["quater"],
-                revenue = financial_data["revenue"],
-                net_profit= financial_data["net_profit"],
-                expenses= financial_data["expenses"],
-                return_on_equity= financial_data["return_on_equity"],
-                firm_value= financial_data["firm_value"],
-                debt= financial_data["debt"],
-                equity= financial_data["equity"],
-                return_on_asset= financial_data["return_on_asset"],
-                return_on_investment= financial_data["return_on_investment"],
-                networking_capital= financial_data["networking_capital"],
-                spending_on_research= financial_data["spending_on_research"],
-                property_plant_equipment= financial_data["property_plant_equipment"],
-                cash_flow= financial_data["cash_flow"],
-                goodwill= financial_data["goodwill"],
-                total_assets= financial_data["total_assets"],
-                total_liabilities= financial_data["total_liabilities"],
-                current_ratio= financial_data["current_ratio"],
-                quick_ratio= financial_data["quick_ratio"],
-                cash_ratio= financial_data["cash_ratio"]
-            )
+        print(jsn)
+        financial_data_entry = user_financial_data_v2(
+            user_id = current_user.id,
+            q1_revenue = int(jsn["q1_revenue"]) * 1000,
+            q1_profit_before_tax= int(jsn["q1_profit_before_tax"]) * 1000,
+            q1_net_profit= int(jsn["q1_net_profit"]) * 1000,
+            q2_revenue = int(jsn["q2_revenue"]) * 1000,
+            q2_profit_before_tax= int(jsn["q2_profit_before_tax"]) * 1000,
+            q2_net_profit= int(jsn["q2_net_profit"]) * 1000,
+            q3_revenue = int(jsn["q3_revenue"]) * 1000,
+            q3_profit_before_tax= int(jsn["q3_profit_before_tax"]) * 1000,
+            q3_net_profit= int(jsn["q3_net_profit"]) * 1000,
+            q4_revenue = int(jsn["q4_revenue"]) * 1000,
+            q4_profit_before_tax= int(jsn["q4_profit_before_tax"]) * 1000,
+            q4_net_profit= int(jsn["q4_net_profit"]) * 1000,
 
-            financial_data_entry.save()
+            yearly_revenue = int(jsn['yearly_revenue']) * 1000,
+            yearly_net_profit = int(jsn["yearly_net_profit"]) * 1000,
+            cash = int(jsn['cash']) * 1000,
+            debt= int(jsn["debt"]) * 1000,
+            total_debt = int(jsn['total_debt']) * 1000,
+            net_assets = int(jsn["net_assets"]) * 1000, 
+            current_ratio = jsn['current_ratio'],
+            quick_ratio= jsn["quick_ratio"], 
+            cash_ratio = jsn['cash_ratio'],
+            return_on_asset= jsn["return_on_asset"], 
+            asset_turn_over_ratio = jsn['asset_turn_over_ratio'],
+            debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
+            net_tangeble_asset = jsn['net_tangeble_asset'],
+        )
+
+        financial_data_entry.save()
         
         
         current_user.financial_data_provided = True
@@ -236,40 +240,35 @@ def update_user_profile(request):
 
 def get_user_financial_data(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
-    financial_data = user_financial_data.objects.filter(user=current_user)
-    response_arry = []
-    data_size = 1
-    for data in financial_data:
-        jsn_data = {
-            'id': data_size,
-            'quater' : data.quater,
-            'revenue' : data.revenue,
-            'net_profit' : data.net_profit,
-            'expenses' : data.expenses,
-            'return_on_equity' : data.return_on_equity,
-            'firm_value' : data.firm_value,
-            'debt' : data.debt,
-            'equity' : data.equity,
-            'return_on_asset' : data.return_on_asset,
-            'return_on_investment' : data.return_on_investment,
-            'networking_capital' : data.networking_capital,
-            'spending_on_research' : data.spending_on_research,
-            'property_plant_equipment' : data.property_plant_equipment,
-            'cash_flow' : data.cash_flow,
-            'goodwill' : data.goodwill,
-            'total_assets' : data.total_assets,
-            'total_liabilities' : data.total_liabilities,
-            'current_ratio' : data.current_ratio,
-            'quick_ratio' : data.quick_ratio,
-            'cash_ratio' : data.cash_ratio,
-        }
-        response_arry.append(jsn_data)
-        data_size += 1
-
-    response_jsn = {
-        'data': response_arry
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    jsn_data = {
+        'q1_revenue': financial_data.q1_revenue / 1000,
+        'q1_profit_before_tax': financial_data.q1_profit_before_tax / 1000,
+        'q1_net_profit': financial_data.q1_net_profit / 1000,
+        'q2_revenue': financial_data.q2_revenue / 1000,
+        'q2_profit_before_tax': financial_data.q2_profit_before_tax / 1000,
+        'q2_net_profit': financial_data.q2_net_profit / 1000,
+        'q3_revenue': financial_data.q3_revenue / 1000,
+        'q3_profit_before_tax': financial_data.q3_profit_before_tax / 1000,
+        'q3_net_profit': financial_data.q3_net_profit / 1000,
+        'q4_net_profit': financial_data.q4_net_profit / 1000,
+        'q4_revenue': financial_data.q4_revenue / 1000,
+        'q4_profit_before_tax': financial_data.q4_profit_before_tax / 1000,
+        'yearly_revenue': financial_data.yearly_revenue / 1000,
+        'yearly_net_profit': financial_data.yearly_net_profit / 1000,
+        'cash': financial_data.cash / 1000,
+        'debt': financial_data.debt / 1000,
+        'total_debt': financial_data.total_debt / 1000,
+        'net_assets': financial_data.net_assets / 1000,
+        'current_ratio': financial_data.current_ratio,
+        'quick_ratio': financial_data.quick_ratio,
+        'cash_ratio': financial_data.cash_ratio,
+        'return_on_asset': financial_data.return_on_asset,
+        'asset_turn_over_ratio': financial_data.asset_turn_over_ratio,
+        'debt_to_asset_ratio': financial_data.debt_to_asset_ratio,
+        'net_tangeble_asset': financial_data.net_tangeble_asset,
     }
-    return JsonResponse(response_jsn, safe=False)
+    return JsonResponse(jsn_data, safe=False)
 
 # def update_user_profile(request):
 #     jsn = json.loads(request.body)
@@ -289,52 +288,36 @@ def get_user_financial_data(request):
 def update_user_financial_data(request):
     jsn = json.loads(request.body)
     current_user = user_profile.objects.get(user_id=request.user.id)
-    financial_data = user_financial_data.objects.filter(user=current_user)
-    for data in financial_data:
-        for k in jsn['data']:
-            if(k['quater'] == 'Q1' and data.quater == 'Q1'):
-                data.revenue = k['revenue']
-                data.net_profit = k['net_profit']
-                data.expenses = k['expenses']
-                data.return_on_equity = k['return_on_equity']
-                data.firm_value = k['firm_value']
-                data.debt = k['debt']
-                data.equity = k['equity']
-                data.return_on_asset = k['return_on_asset']
-                data.return_on_investment = k['return_on_investment']
-                data.networking_capital = k['networking_capital']
-                data.spending_on_research = k['spending_on_research']
-                data.property_plant_equipment = k['property_plant_equipment']
-                data.cash_flow = k['cash_flow']
-                data.goodwill = k['goodwill']
-                data.total_assets = k['total_assets']
-                data.total_liabilities = k['total_liabilities']
-                data.current_ratio = k['current_ratio']
-                data.quick_ratio = k['quick_ratio']
-                data.quick_ratio = k['quick_ratio']
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
 
-            elif(k['quater'] == 'Q2' and data.quater == 'Q2'):
-                data.revenue = k['revenue']
-                data.net_profit = k['net_profit']
-                data.expenses = k['expenses']
-                data.return_on_equity = k['return_on_equity']
-                data.firm_value = k['firm_value']
-                data.debt = k['debt']
-                data.equity = k['equity']
-                data.return_on_asset = k['return_on_asset']
-                data.return_on_investment = k['return_on_investment']
-                data.networking_capital = k['networking_capital']
-                data.spending_on_research = k['spending_on_research']
-                data.property_plant_equipment = k['property_plant_equipment']
-                data.cash_flow = k['cash_flow']
-                data.goodwill = k['goodwill']
-                data.total_assets = k['total_assets']
-                data.total_liabilities = k['total_liabilities']
-                data.current_ratio = k['current_ratio']
-                data.quick_ratio = k['quick_ratio']
-                data.quick_ratio = k['quick_ratio']
-        
-        data.save()
+    financial_data.q1_revenue = int(jsn["q1_revenue"]) * 1000
+    financial_data.q1_profit_before_tax= int(jsn["q1_profit_before_tax"]) * 1000
+    financial_data.q1_net_profit= int(jsn["q1_net_profit"]) * 1000
+    financial_data.q2_revenue = int(jsn["q2_revenue"]) * 1000
+    financial_data.q2_profit_before_tax= int(jsn["q2_profit_before_tax"]) * 1000
+    financial_data.q2_net_profit= int(jsn["q2_net_profit"]) * 1000
+    financial_data.q3_revenue = int(jsn["q3_revenue"]) * 1000
+    financial_data.q3_profit_before_tax= int(jsn["q3_profit_before_tax"]) * 1000
+    financial_data.q3_net_profit= int(jsn["q3_net_profit"]) * 1000
+    financial_data.q4_revenue = int(jsn["q4_revenue"]) * 1000
+    financial_data.q4_profit_before_tax= int(jsn["q4_profit_before_tax"]) * 1000
+    financial_data.q4_net_profit= int(jsn["q4_net_profit"]) * 1000
+
+    financial_data.yearly_revenue = int(jsn['yearly_revenue']) * 1000
+    financial_data.yearly_net_profit = int(jsn["yearly_net_profit"]) * 1000
+    financial_data.cash = int(jsn['cash']) * 1000
+    financial_data.debt= int(jsn["debt"]) * 1000
+    financial_data.total_debt = int(jsn['total_debt']) * 1000
+    financial_data.net_assets = int(jsn["net_assets"]) * 1000
+    financial_data.current_ratio = jsn['current_ratio']
+    financial_data.quick_ratio= jsn["quick_ratio"]
+    financial_data.cash_ratio = jsn['cash_ratio']
+    financial_data.return_on_asset= jsn["return_on_asset"] 
+    financial_data.asset_turn_over_ratio = jsn['asset_turn_over_ratio']
+    financial_data.debt_to_asset_ratio= jsn["debt_to_asset_ratio"] 
+    financial_data.net_tangeble_asset = jsn['net_tangeble_asset']
+
+    financial_data.save()
     return HttpResponse("data saved", status=200)
 
 def performance_pillars(request):

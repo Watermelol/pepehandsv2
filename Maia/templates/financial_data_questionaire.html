@@ -43,93 +43,199 @@
                     </div>
                 </div>
                 <div id=financial_data_forms class="container col-md-7">
-                    <div id="accordion" style="margin-top: 10vh;">
+                    <div id="accordion" style="margin-top: 13vh;">
                         <button @click="submit_financial_data_record" class="btn btn-success btn-sm pull-right">Submit Record</button>
-                        <div v-for= "(data, index) in user_financial_data.data">
+                        <div>
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" v-bind:data-target="'#collapse'+data.id" aria-expanded="true" aria-controls="collapseOne">Financial Data Record [$ data.id $]</button>
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseOne">Quater 1 Financial Data Record</button>
                                 </h5>
                                 </div>
                                 
-                                <div v-bind:id="'collapse' + data.id" :class="{'show' : data.id==1 ,'collapse':true}" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div id="collapse1" class="show collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="quater">Quater</label>
-                                                <select name="quater" class="form-control" style="width: 100% !important;" v-model='data.quater'>
-                                                    <option value="Q1">Quater 1</option>
-                                                    <option value="Q2">Quater 2</option>
-                                                </select>
-
-                                                <label for="revenue">Revenue</label>
-                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='data.revenue'>
-
-                                                <label for="net_profit">Net Profit</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='data.net_profit'>
-
-                                                <label for="expenses">Expenses</label>
-                                                <input type="number" onClick="this.select();" name="expenses" class="form-control" style="width: 100% !important;" v-model='data.expenses'>
-
-                                                <label for="return_on_equity">Return On Equity</label>
-                                                <input type="number" onClick="this.select();" name="return_on_equity" class="form-control" style="width: 100% !important;" v-model='data.return_on_equity'>
-
-                                                <label for="total_assests">Total Assets</label>
-                                                <input type="number" onClick="this.select();" name="total_assests" class="form-control" style="width: 100% !important;" v-model='data.total_assets'>
-
-                                                <label for="quick_ratio">Quick Ratio</label>
-                                                <input type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='data.quick_ratio'>
+                                                <label for="revenue">Revenue (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="firm_value">Firm Value</label>
-                                                <input type="number" onClick="this.select();" name="firm_value" class="form-control" style="width: 100% !important;" v-model='data.firm_value'>
-
-                                                <label for="debt">Debt</label>
-                                                <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='data.debt'>
-
-                                                <label for="equity">Equity</label>
-                                                <input type="number" onClick="this.select();" name="equity" class="form-control" style="width: 100% !important;" v-model='data.equity'>
-
-                                                <label for="return_on_asset">Return On Asset</label>
-                                                <input type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='data.return_on_asset'>
-
-                                                <label for="return_on_investment">Return On Investment</label>
-                                                <input type="number" onClick="this.select();" name="return_on_investment" class="form-control" style="width: 100% !important;" v-model='data.return_on_investment'>
-
-                                                <label for="total_liabilities">Total Liabilities</label>
-                                                <input type="number" onClick="this.select();" name="total_liabilities" class="form-control" style="width: 100% !important;" v-model='data.total_liabilities'>
-
-                                                <label for="cash_ratio">Cash Ratio</label>
-                                                <input type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='data.cash_ratio'>
+                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="networking_capital">Networking Capital</label>
-                                                <input type="number" onClick="this.select();" name="networking_capital" class="form-control" style="width: 100% !important;" v-model='data.networking_capital'>
-
-                                                <label for="spending_on_research">Spending On Research</label>
-                                                <input type="number" onClick="this.select();" name="spending_on_research" class="form-control" style="width: 100% !important;" v-model='data.spending_on_research'>
-
-                                                <label for="property_plant_equipment">Property Plant Equipment</label>
-                                                <input type="number" onClick="this.select();" name="property_plant_equipment" class="form-control" style="width: 100% !important;" v-model='data.property_plant_equipment'>
-
-                                                <label for="cash_flow">Cash Flow</label>
-                                                <input type="number" onClick="this.select();" name="cash_flow" class="form-control" style="width: 100% !important;" v-model='data.cash_flow'>
-
-                                                <label for="goodwill">Goodwill</label>
-                                                <input type="number" onClick="this.select();" name="goodwill" class="form-control" style="width: 100% !important;" v-model='data.goodwill'>
-
-                                                <label for="current_ratio">Current Ratio</label>
-                                                <input type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;" v-model='data.current_ratio'>
+                                                <label for="net_profit">Net Profit (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapseOne">Quater 2 Financial Data Record</button>
+                                </h5>
+                                </div>
+                                
+                                <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="revenue">Revenue (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="net_profit">Net Profit (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapseOne">Quater 3 Financial Data Record</button>
+                                </h5>
+                                </div>
+                                
+                                <div id="collapse3" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="revenue">Revenue (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="net_profit">Net Profit (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapseOne">Quater 4 Financial Data Record</button>
+                                </h5>
+                                </div>
+                                
+                                <div id="collapse4" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="revenue">Revenue (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
+                                            </div>
+                                            <div class="col-4 d-inline-block input-group">
+                                                <label for="net_profit">Net Profit (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapseOne">Yearly Financial Data Record</button>
+                                </h5>
+                                </div>
+                                
+                                <div id="collapse5" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <fieldset>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="yearly_revenue">Yearly Revenue (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="yearly_revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_revenue'>
+
+                                                    <label for="yearly_net_profit">Yearly Net Profit (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="yearly_net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_net_profit'>
+                                                </div>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="cash">Cash (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="cash" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash'>
+
+                                                    <label for="net_assets">Net Asset (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="net_assets" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_assets'>
+                                                </div>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="debt">Debt (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt'>
+
+                                                    <label for="total_debt">Total Debt (Thousand)</label>
+                                                    <input type="number" onClick="this.select();" name="total_debt" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.total_debt'>
+                                                </div>
+                                            </fieldset>
+
+                                            <hr class="border border-light">
+
+                                            <fieldset>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="current_ratio">Current Ratio</label>
+                                                    <input type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.current_ratio'>
+
+                                                    <label for="return_on_asset">Return On Asset</label>
+                                                    <input type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.return_on_asset'>
+                                                </div>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="quick_ratio">Quick Ratio</label>
+                                                    <input type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.quick_ratio'>
+
+                                                    <label for="asset_turn_over_ratio">Asset Turn Over Ratio</label>
+                                                    <input type="number" onClick="this.select();" name="asset_turn_over_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.asset_turn_over_ratio'>
+                                                </div>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="cash_ratio">Cash Ratio</label>
+                                                    <input type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash_ratio'>
+
+                                                    <label for="debt_to_asset_ratio">Debt To Asset Ratio</label>
+                                                    <input type="number" onClick="this.select();" name="debt_to_asset_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt_to_asset_ratio'>
+                                                </div>
+                                                <div class="col-4 d-inline-block input-group">
+                                                    <label for="net_tangeble_asset">Net Tangable Asset</label>
+                                                    <input type="number" onClick="this.select();" name="net_tangeble_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_tangeble_asset'>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="globalLoader" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style='background-color: rgba(0,0,0,0) !important;''>
+                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_ObshHL.json"  background="rgba(0, 0, 0, 0)"  speed="1"  loop  autoplay></lottie-player>
+              </div>
             </div>
         </div>
 
