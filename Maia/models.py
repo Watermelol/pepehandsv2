@@ -118,11 +118,11 @@ class user_financial_data_analysis(models.Model):
 
 class Advices(models.Model):
     Text = models.CharField('Text', max_length = 255)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    tag = models.ForeignKey(tag, default=1 ,verbose_name='Tag', on_delete=models.CASCADE)
 
 class Comment(models.Model):
     Text = models.CharField(max_length = 255)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    tag = models.ForeignKey(tag, default=1 ,verbose_name='Tag', on_delete=models.CASCADE)
 
 class Network_Suggestions(models.Model):
     Name = models.CharField(max_length = 50)
@@ -133,7 +133,6 @@ class Network_Suggestions(models.Model):
 class Recommandation_Video(models.Model):
     Name = models.CharField(max_length = 50)
     Video_ID = models.CharField(max_length=255)
-    URL = models.CharField(max_length = 255)
     tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
 
 class Recommandation_Articles(models.Model):
