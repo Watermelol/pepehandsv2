@@ -92,39 +92,16 @@ class user_financial_data_v2(models.Model):
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name
 
-    
+class user_financial_data_analysis(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    profit_result = models.FloatField('Profit Result')
+    asset_result = models.FloatField('Asset Result')
+    cash_result = models.FloatField('Cash Result')
+    liquidity_result = models.FloatField('Liquidity Result')
+    general_result = models.FloatField('General Result')
 
-# class user_financial_data(models.Model):
-#     quaters = [
-#         ('Q1', 'Quater 1'),
-#         ('Q2', 'Quater 2'),
-#     ]
-
-#     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
-#     created_date_time = models.DateTimeField(auto_now_add=True)
-#     quater = models.CharField('Quater', choices=quaters, max_length=50, default='Q1')
-#     revenue = models.FloatField('Revenue')
-#     net_profit = models.FloatField('Net Profit')
-#     expenses = models.FloatField('Expenses')
-#     return_on_equity = models.FloatField('Return On Equity')
-#     firm_value = models.FloatField('Firm Value')
-#     debt = models.FloatField('Debt')
-#     equity = models.FloatField('Equity')
-#     return_on_asset = models.FloatField('Return On Asset')
-#     return_on_investment = models.FloatField('Return On Investment')
-#     networking_capital = models.FloatField('Networking Capital')
-#     spending_on_research = models.FloatField('Spending On Research')
-#     property_plant_equipment = models.FloatField('Property Plant Equipment')
-#     cash_flow = models.FloatField('Cash Flow')
-#     goodwill = models.FloatField('Goodwill')
-#     total_assets = models.FloatField('Total Assets')
-#     total_liabilities = models.FloatField('Total Liabilities')
-#     current_ratio = models.FloatField('Current Ratio')
-#     quick_ratio = models.FloatField('Quick Ratio')
-#     cash_ratio = models.FloatField('Cash Ratio')
-
-#     def __str__(self):
-#         return ('(User ID ' + str(self.user.id) +')' + ' ' + self.user.first_name + ' ' + self.user.last_name + ' ' + self.quater)
+    def __str__(self):
+        return self.user.first_name + ' ' + self.user.last_name
 
 # class News(models.Model):
 #     Title = models.CharField(max_length = 50)

@@ -131,7 +131,10 @@ def financial_data_questionaire(request):
 
         financial_data_entry.save()
         
-        
+        # pass the data to machinelearning and get the result
+
+        # store the result into database
+
         current_user.financial_data_provided = True
         current_user.save()
         return HttpResponse("data saved", status=200)

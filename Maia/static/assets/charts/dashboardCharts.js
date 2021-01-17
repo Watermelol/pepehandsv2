@@ -21,10 +21,10 @@ gradientChartOptionsConfiguration =  {
 var checkIfExist = document.getElementById("atDashboard")
 
 if(checkIfExist){
-  var performanceCTX = document.getElementById("businessPerformance").getContext("2d");
-  var businessValueCTX = document.getElementById("businessValue").getContext("2d");
-  var productivityCTX = document.getElementById("productivity").getContext("2d");
-  var riskAnalysisCTX = document.getElementById("riskAnalysis").getContext("2d");
+  var performanceCTX = document.getElementById("profitChart").getContext("2d");
+  var businessValueCTX = document.getElementById("assetChart").getContext("2d");
+  var productivityCTX = document.getElementById("cashChart").getContext("2d");
+  var riskAnalysisCTX = document.getElementById("liquidityChart").getContext("2d");
 
   var gradientStroke = performanceCTX.createLinearGradient(0,230,0,50);
 

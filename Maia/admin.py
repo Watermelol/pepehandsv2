@@ -33,4 +33,5 @@ admin.site.register(Recommandation_Video)
 admin.site.register(Recommandation_Articles)
 admin.site.register(user_payment)
 admin.site.register(purchased_report)
+admin.site.register(user_financial_data_analysis)
 
