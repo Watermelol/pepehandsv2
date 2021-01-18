@@ -128,8 +128,12 @@ def financial_data_questionaire(request):
             debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
             net_tangeble_asset = jsn['net_tangeble_asset'],
 
-
-            q1_profit_margin = int(jsn['q1_net_profit'/'q1_revenue']),
+            q1_net_profit_margin = int(jsn['q1_net_profit'])/int(jsn['q1_revenue']),
+            q2_net_profit_margin=int(jsn['q2_net_profit'])/int(jsn['q2_revenue']),
+            q3_net_profit_margin=int(jsn['q3_net_profit'])/int(jsn['q3_revenue']),
+            q4_net_profit_margin=int(jsn['q4_net_profit'])/int(jsn['q4_revenue']),
+            yearly_net_profit_margin = int(jsn['yearly_net_profit'])/int(jsn['yearly_revenue']),
+            cash_turnover_ratio = int(jsn['yearly_revenue'])/int(jsn['cash']),
         )
 
 
@@ -198,16 +202,16 @@ def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt
 
 
 #def expert_result(user_financial_me):
-    ROA = user_financial_me.return_on_asset
-    NA = user_financial_me.net_assets
-    NTA = user_financial_me.net_tangeble_asset
-    CR = user_financial_me.current_ratio
-    Q1_NP = user_financial_me.q1_net_profit
-    DTA = user_financial_me.debt_to_asset_ratio
+   # ROA = user_financial_me.return_on_asset
+   # NA = user_financial_me.net_assets
+   # NTA = user_financial_me.net_tangeble_asset
+   # CR = user_financial_me.current_ratio
+   # Q1_NP = user_financial_me.q1_net_profit
+   # DTA = user_financial_me.debt_to_asset_ratio
 
-    result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
+    #result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
 
-    return result
+    #return result
 
 
 def profit_result(user_financial_me):
@@ -265,6 +269,7 @@ def asset_result(user_financial_me):
     Y_NP = user_financial_me.yearly_net_profit
 
     result = get_profit_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
+
     return result
 
 
