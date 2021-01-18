@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.metrics import confusion_matrix
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import RandomForestClassifier
+import pickle
 
 
 
@@ -16,7 +17,8 @@ ds = pd.read_csv(r'Dividend Cash Data.csv')
 labels = np.array(ds['D_C_S'])
 
 #Features are our variables
-features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill' ])
+#features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill' ])
+features = ds[['Cash_Ratio', 'CR', 'NTA', 'Y_NP', 'Debt', 'CTR', 'Cash']]
 
 features.dropna()
 
@@ -88,6 +90,6 @@ feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse 
 # Print out the feature and importances
 [print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
-
+pickle.dump(rf, open("../Cash_Score_Model.sav", "wb"))
 
 

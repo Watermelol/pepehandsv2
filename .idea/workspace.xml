@@ -21,8 +21,20 @@
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Assets Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets Data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Dividend Cash Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Dividend Cash Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Dividend_Cash_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Dividend_Cash_Score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score_Model.sav" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/Expert_Score_Model.sav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity_Score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Overall Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Overall Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Profit Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Profit Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Prospective_Profits.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Prospective_Profits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/tree.png" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/tree.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/tree.dot" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/tree.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Maia/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,11 +60,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MAIA\Maia" />
+      <recent name="C:\MAIA\Maia\ML_Financial" />
+      <recent name="C:\MAIA\Maia\templates" />
       <recent name="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -60,7 +76,7 @@
       <recent name="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Expert_Score (1)">
+  <component name="RunManager" selected="Python.Assets_Score">
     <configuration name="Assets_Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FYP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,11 +85,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia/ML_Financial" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial\Assets_Score.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -82,7 +98,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Dividend_Cash_Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Dividend_Cash_Score (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FYP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -90,11 +106,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia/ML_Financial" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial\Dividend_Cash_Score.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maia/ML_Financial/Dividend_Cash_Score.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -124,7 +140,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Expert_Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Liquidity_Score (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FYP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -132,11 +148,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia/ML_Financial" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial\Expert_Score.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maia/ML_Financial/Liquidity_Score.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -145,7 +161,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Liquidity_Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Prospective_Profits (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FYP" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -153,32 +169,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia/ML_Financial" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial\Liquidity_Score.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Prospective_Profits" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="FYP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Maia" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\akh36\PycharmProjects\Maia\Maia\ML_Financial\Prospective_Profits.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Maia/ML_Financial/Prospective_Profits.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -233,10 +228,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Assets_Score" />
+        <item itemvalue="Python.Prospective_Profits (1)" />
+        <item itemvalue="Python.Dividend_Cash_Score (1)" />
         <item itemvalue="Python.Expert_Score (1)" />
-        <item itemvalue="Python.Liquidity_Score" />
-        <item itemvalue="Python.Dividend_Cash_Score" />
-        <item itemvalue="Python.Expert_Score (1)" />
+        <item itemvalue="Python.Liquidity_Score (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -276,22 +272,22 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="709" y="28" key="#RandomForest01/0.0.1368.872@0.0.1368.872" timestamp="1610264360124" />
-    <state width="700" height="256" key="GridCell.Tab.0.bottom" timestamp="1610703753208">
+    <state width="1348" height="132" key="GridCell.Tab.0.bottom" timestamp="1610987232443">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="700" height="256" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1610703753208" />
-    <state width="700" height="256" key="GridCell.Tab.0.center" timestamp="1610703753208">
+    <state width="1348" height="132" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1610987232443" />
+    <state width="1348" height="132" key="GridCell.Tab.0.center" timestamp="1610987232443">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="700" height="256" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1610703753208" />
-    <state width="700" height="256" key="GridCell.Tab.0.left" timestamp="1610703753208">
+    <state width="1348" height="132" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1610987232443" />
+    <state width="1348" height="132" key="GridCell.Tab.0.left" timestamp="1610987232442">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="700" height="256" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1610703753208" />
-    <state width="700" height="256" key="GridCell.Tab.0.right" timestamp="1610703753208">
+    <state width="1348" height="132" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1610987232442" />
+    <state width="1348" height="132" key="GridCell.Tab.0.right" timestamp="1610987232443">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
-    <state width="700" height="256" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1610703753208" />
+    <state width="1348" height="132" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1610987232443" />
     <state width="715" height="273" key="GridCell.Tab.1.bottom" timestamp="1610286600320">
       <screen x="0" y="0" width="1368" height="872" />
     </state>

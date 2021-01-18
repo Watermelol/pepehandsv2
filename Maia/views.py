@@ -98,28 +98,28 @@ def financial_data_questionaire(request):
     else:
         jsn = json.loads(request.body)
         current_user = user_profile.objects.get(user_id=request.user.id)
-        print(jsn)
         financial_data_entry = user_financial_data_v2(
             user_id = current_user.id,
-            q1_revenue = int(jsn["q1_revenue"]) * 1000,
-            q1_profit_before_tax= int(jsn["q1_profit_before_tax"]) * 1000,
-            q1_net_profit= int(jsn["q1_net_profit"]) * 1000,
-            q2_revenue = int(jsn["q2_revenue"]) * 1000,
-            q2_profit_before_tax= int(jsn["q2_profit_before_tax"]) * 1000,
-            q2_net_profit= int(jsn["q2_net_profit"]) * 1000,
-            q3_revenue = int(jsn["q3_revenue"]) * 1000,
-            q3_profit_before_tax= int(jsn["q3_profit_before_tax"]) * 1000,
-            q3_net_profit= int(jsn["q3_net_profit"]) * 1000,
-            q4_revenue = int(jsn["q4_revenue"]) * 1000,
-            q4_profit_before_tax= int(jsn["q4_profit_before_tax"]) * 1000,
-            q4_net_profit= int(jsn["q4_net_profit"]) * 1000,
+            q1_revenue = int(jsn["q1_revenue"]),
+            q1_profit_before_tax= int(jsn["q1_profit_before_tax"]),
+            q1_net_profit= int(jsn["q1_net_profit"]),
+            q2_revenue = int(jsn["q2_revenue"]),
+            q2_profit_before_tax= int(jsn["q2_profit_before_tax"]),
+            q2_net_profit= int(jsn["q2_net_profit"]),
+            q3_revenue = int(jsn["q3_revenue"]),
+            q3_profit_before_tax= int(jsn["q3_profit_before_tax"]),
+            q3_net_profit= int(jsn["q3_net_profit"]),
+            q4_revenue = int(jsn["q4_revenue"]),
+            q4_profit_before_tax= int(jsn["q4_profit_before_tax"]),
+            q4_net_profit= int(jsn["q4_net_profit"]),
 
-            yearly_revenue = int(jsn['yearly_revenue']) * 1000,
-            yearly_net_profit = int(jsn["yearly_net_profit"]) * 1000,
-            cash = int(jsn['cash']) * 1000,
-            debt= int(jsn["debt"]) * 1000,
-            total_debt = int(jsn['total_debt']) * 1000,
-            net_assets = int(jsn["net_assets"]) * 1000, 
+
+            yearly_revenue = int(jsn['yearly_revenue']),
+            yearly_net_profit = int(jsn["yearly_net_profit"]),
+            cash = int(jsn['cash']),
+            debt= int(jsn["debt"]),
+            total_debt = int(jsn['total_debt']),
+            net_assets = int(jsn["net_assets"]),
             current_ratio = jsn['current_ratio'],
             quick_ratio= jsn["quick_ratio"], 
             cash_ratio = jsn['cash_ratio'],
@@ -127,18 +127,139 @@ def financial_data_questionaire(request):
             asset_turn_over_ratio = jsn['asset_turn_over_ratio'],
             debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
             net_tangeble_asset = jsn['net_tangeble_asset'],
+
+
+            q1_profit_margin = int(jsn['q1_net_profit'/'q1_revenue']),
         )
 
+
+
         financial_data_entry.save()
-        
+        financial_data_me = user_financial_data_v2.objects.get(user = current_user)
+        # gets the current user financial data
+
+        #ex = expert_result(financial_data_me)
+        #print(ex)
+
+
         # pass the data to machinelearning and get the result
+
 
         # store the result into database
 
         current_user.financial_data_provided = True
         current_user.save()
         return HttpResponse("data saved", status=200)
+
+
         
+def get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA):
+    import pickle
+    model = pickle.load(open("Maia/Expert_Score_Model.sav", "rb"))
+    prediction = model.predict([[ROA, NA, NTA, CR, Q1_NP, DTA]])
+    return prediction
+
+
+def get_profit_predictions(ROA, Y_NP, NTA, Q1_NPM, Q2_NPM, Q3_NPM, Q4_NPM, YNPM, CTR):
+    import pickle
+    model = pickle.load(open("Maia/Profit_Score_Model.sav", "rb"))
+    profit_prediction = model.predict([[ROA, Y_NP, NTA, Q1_NPM, Q2_NPM, Q3_NPM, Q4_NPM, YNPM, CTR]])
+    return profit_prediction
+
+def get_liquidity_predictions(NTA, CR, Cash_Ratio, QR, Cash):
+    import pickle
+    model = pickle.load(open("Maia/Liquidity_Score_Model.sav", "rb"))
+    liquidity_prediction = model.predit([[NTA, CR, Cash_Ratio, QR, Cash]])
+    return liquidity_prediction
+
+def get_cash_predictions(Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash):
+    import pickle
+    model = pickle.load(open("Maia/Cash_Score_Model.sav", "rb"))
+    cash_prediction =  model.predit([[Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash]])
+    return cash_prediction
+
+def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP):
+    import pickle
+    model = pickle.load(open("Maia/Asset_Score_Model.sav", "rb"))
+    asset_prediction = model.predit([[YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP]])
+    return asset_prediction
+
+
+
+#def expert_result(user_financial_me):
+    ROA = user_financial_me.return_on_asset
+    NA = user_financial_me.net_assets
+    NTA = user_financial_me.net_tangeble_asset
+    CR = user_financial_me.current_ratio
+    Q1_NP = user_financial_me.q1_net_profit
+    DTA = user_financial_me.debt_to_asset_ratio
+
+    result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
+
+    return result
+
+
+def profit_result(user_financial_me):
+    ROA = user_financial_me.return_on_asset
+    Y_NP = user_financial_me.yearly_net_profit
+    NTA = user_financial_me.net_tangeble_asset
+    Q1_NPM = user_financial_me.q1_net_profit_margin
+    Q2_NPM = user_financial_me.q2_net_profit_margin
+    Q3_NPM = user_financial_me.q3_net_profit_margin
+    Q4_NPM = user_financial_me.q4_net_profit_margin
+    YNPM = user_financial_me.yearly_net_profit_margin
+    CTR = user_financial_me.cash_turnover_ratio
+
+    result = get_profit_predictions(ROA, Y_NP, NTA, Q1_NPM, Q2_NPM, Q3_NPM, Q4_NPM, YNPM, CTR)
+
+    return result
+
+def liquidity_result(user_financial_me):
+    NTA = user_financial_me.net_tangeble_asset
+    CR = user_financial_me.current_ratio
+    Cash_Ratio = user_financial_me.cash_ratio
+    QR = user_financial_me.quick_ratio
+    Cash = user_financial_me.cash
+
+    result = get_liquidity_predictions(NTA, CR, Cash_Ratio, QR, Cash)
+
+    return result
+
+def cash_result(user_financial_me):
+    Cash_Ratio = user_financial_me.cash_ratio
+    CR = user_financial_me.current_ratio
+    NTA = user_financial_me.net_tangeble_asset
+    Y_NP = user_financial_me.yearly_net_profit
+    Debt = user_financial_me.debt
+    CTR = user_financial_me.cash_turnover_ratio
+    Cash = user_financial_me.cash
+
+    result = get_cash_predictions(Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash)
+
+    return result
+
+def asset_result(user_financial_me):
+    YNPM = user_financial_me.yearly_net_profit_margin
+    ATR = user_financial_me.asset_turn_over_ratio
+    DTA = user_financial_me.debt_to_asset_ratio
+    ROA = user_financial_me.return_on_asset
+    Cash_Ratio = user_financial_me.cash_ratio
+    QR = user_financial_me.quick_ratio
+    CR = user_financial_me.current_ratio
+    NA = user_financial_me.net_assets
+    NTA = user_financial_me.net_tangeble_asset
+    Debt = user_financial_me.debt
+    TD = user_financial_me.total_debt
+    Y_R = user_financial_me.yearly_revenue
+    Y_NP = user_financial_me.yearly_net_profit
+
+    result = get_profit_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
+
+
+
+
+
+
 
 def report_payment(request):
     if (request.method == 'GET'):

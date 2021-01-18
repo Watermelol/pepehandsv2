@@ -15,7 +15,9 @@ labels = np.array(ds['Expert_S'])
 
 #Features are our variables being inputted to help calculate our labels
 #For this, we are using all the variables inside the dataframe except the one listed below as they are unobtainable for unseen data
-features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill' ])
+#features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill' ])
+features = ds[['P_S', 'A_S', 'D_C_S', 'L_S']]
+
 
 #Dropping all null variables (Yet they are no null variables)
 features.dropna()
@@ -92,7 +94,7 @@ feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse 
 # Print out the feature and importances
 [print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
-pickle.dump(rf,open("Expert_Score_Model.sav", "wb"))
+pickle.dump(rf, open("../Expert_Score_Model.sav", "wb"))
 
 
 
