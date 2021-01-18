@@ -1,13 +1,10 @@
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import confusion_matrix
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
-from pprint import pprint
+import pickle
+
 
 
 
@@ -18,8 +15,8 @@ ds = pd.read_csv(r'Assets Data.csv')
 labels = np.array(ds['A_S'])
 
 #Features are our variables
-features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill', 'Q3_NP', 'Q4_NP', 'Q2_NP', 'Q1_NP', 'Q1_PBT', 'Q2_PBT', 'Q3_PBT', 'Q4_PBT', 'Y_NP', 'Q3_R', 'Q2_R', 'Q1_R', 'Q4_R', 'Y_R' ])
-
+#features = ds.drop(columns=['P_S', 'Name', 'Sector', 'Expert_S', 'A_S', 'D_C_S', 'L_S', 'Goodwill'])
+features = ds[['YNPM', 'ATR', 'DTA', 'ROA', 'Cash_Ratio', 'QR', 'CR', 'NA', 'NTA', 'Debt', 'TD', 'Y_R', 'Y_NP' ]]
 
 features.dropna()
 
@@ -101,14 +98,15 @@ print('Accuracy:', round(accuracy, 2), '%.')
 
 
 # Get numerical feature importances
-importances = list(rf_random.feature_importances_)
+#importances = list(rf_random.feature_importances_)
 # List of tuples with variable and importance
-feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
+#feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
 # Sort the feature importances by most important first
-feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+#feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
 # Print out the feature and importances
-[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+#[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
 
+pickle.dump(rf_random, open("../Asset_Score_Model.sav", "wb"))
 
 
