@@ -59,5 +59,5 @@ urlpatterns = [
     path('pillars/business-value', views.business_value_pillars , name='business_value_pillars'),
     path('pillars/productivity', views.productivity_pillars , name='productivity_pillars'),
     path('pillars/risk-analysis', views.risk_analysis_pillars , name='risk_analysis_pillars'),
-
+    # path('pillars/performance/videos', views.performance_pillars , name='performance_pillars_videos'),
 ]

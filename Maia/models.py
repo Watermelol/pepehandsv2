@@ -13,9 +13,15 @@ class industries(models.Model):
     def __str__(self):
         return self.industry_name
 
-class tag (models.Model):
+# class tag (models.Model):
+#     name = models.CharField('Name', max_length=255, default='')
+#     desc = models.CharField('Description', max_length=255, default='')
+#     def __str__(self):
+#         return self.name
+
+class tag_profit (models.Model):
     name = models.CharField('Name', max_length=255, default='')
-    desc = models.CharField('Description', max_length=255, default='')
+    desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
@@ -34,7 +40,7 @@ class user_profile(models.Model):
     user_profile_updated = models.BooleanField(default=False)
     financial_data_provided = models.BooleanField(default=False)
     qualitative_data_provided = models.BooleanField(default=False)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
     def __str__(self):
         return self.user.username
@@ -118,29 +124,32 @@ class user_financial_data_analysis(models.Model):
 
 class Advices(models.Model):
     Text = models.CharField('Text', max_length = 255)
-    tag = models.ForeignKey(tag, default=1 ,verbose_name='Tag', on_delete=models.CASCADE)
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
 class Comment(models.Model):
     Text = models.CharField(max_length = 255)
-    tag = models.ForeignKey(tag, default=1 ,verbose_name='Tag', on_delete=models.CASCADE)
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
 class Network_Suggestions(models.Model):
     Name = models.CharField(max_length = 50)
     Skills = models.CharField(max_length = 255)
     URL = models.CharField(max_length = 255)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
 class Recommandation_Video(models.Model):
-    Name = models.CharField(max_length = 50)
+    Name = models.TextField()
     Video_ID = models.CharField(max_length=255)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
+
+    def __str__(self):
+        return (self.Name)
 
 class Recommandation_Articles(models.Model):
     Title = models.CharField(max_length = 50)
     Description = models.TextField(blank=True)
     Site_Name = models.CharField(max_length=50)
     URL = models.CharField(max_length = 255)
-    tag = models.ManyToManyField(tag, default=1 ,verbose_name='Tag')
+    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
 class purchased_report(models.Model):
     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
