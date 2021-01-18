@@ -138,6 +138,17 @@ def financial_data_questionaire(request):
         financial_data_me = user_financial_data_v2.objects.get(user = current_user)
         # gets the current user financial data
 
+        pp = profit_result(financial_data_me)
+        ap = asset_result(financial_data_me)
+        lp = liquidity_result(financial_data_me)
+        cp = cash_result(financial_data_me)
+
+        print(pp)
+        print(ap)
+        print(lp)
+        print(cp)
+
+
         #ex = expert_result(financial_data_me)
         #print(ex)
 
@@ -254,6 +265,7 @@ def asset_result(user_financial_me):
     Y_NP = user_financial_me.yearly_net_profit
 
     result = get_profit_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
+    return result
 
 
 

@@ -20,20 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Assets Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Assets_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Dividend Cash Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Dividend Cash Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Dividend_Cash_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Dividend_Cash_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Expert_Score_Model.sav" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/Expert_Score_Model.sav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Liquidity_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Overall Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Overall Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Profit Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Profit Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/Prospective_Profits.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/Prospective_Profits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/ML_Financial/tree.png" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/ML_Financial/tree.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/tree.dot" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/tree.dot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maia/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
