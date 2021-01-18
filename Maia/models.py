@@ -94,6 +94,11 @@ class user_financial_data_v2(models.Model):
     return_on_asset = models.FloatField('Return On Assest')
     asset_turn_over_ratio = models.FloatField('Asset Turn Over Ratio')
     debt_to_asset_ratio = models.FloatField('Debt To Asset Ratio')
+    q1_net_profit_margin = models.FloatField('Q1 Net Profit Margin')
+    q2_net_profit_margin = models.FloatField('Q2 Net Profit Margin')
+    q3_net_profit_margin = models.FloatField('Q3 Net Profit Margin')
+    q4_net_profit_margin = models.FloatField('Q4 Net Profit Margin')
+    cash_turnover_ratio = models.FloatField('Cash Turnover Ratio')
 
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name
@@ -123,18 +128,23 @@ class user_financial_data_analysis(models.Model):
 #     Sentiment = models.CharField(max_length = 50)
 
 class Advices(models.Model):
-    Text = models.CharField('Text', max_length = 255)
+    Text = models.TextField()
     profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
 
 class Comment(models.Model):
-    Text = models.CharField(max_length = 255)
+    Text = models.TextField()
     profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
+    def __str__(self):
+        return (self.Text)
 
 class Network_Suggestions(models.Model):
     Name = models.CharField(max_length = 50)
-    Skills = models.CharField(max_length = 255)
+    Skills = models.TextField()
     URL = models.CharField(max_length = 255)
+    thumbnails = models.TextField(blank=True)
     profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
+    def __str__(self):
+        return (self.Name)
 
 class Recommandation_Video(models.Model):
     Name = models.TextField()
@@ -145,11 +155,14 @@ class Recommandation_Video(models.Model):
         return (self.Name)
 
 class Recommandation_Articles(models.Model):
-    Title = models.CharField(max_length = 50)
+    Title = models.TextField()
     Description = models.TextField(blank=True)
-    Site_Name = models.CharField(max_length=50)
+    Site_Name = models.CharField(max_length=100)
     URL = models.CharField(max_length = 255)
     profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
+
+    def __str__(self):
+        return (self.Title)
 
 class purchased_report(models.Model):
     user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
