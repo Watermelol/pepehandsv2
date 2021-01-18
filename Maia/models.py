@@ -98,6 +98,7 @@ class user_financial_data_v2(models.Model):
     q2_net_profit_margin = models.FloatField('Q2 Net Profit Margin')
     q3_net_profit_margin = models.FloatField('Q3 Net Profit Margin')
     q4_net_profit_margin = models.FloatField('Q4 Net Profit Margin')
+    yearly_net_profit_margin = models.FloatField('Yearly Net Profit Margin')
     cash_turnover_ratio = models.FloatField('Cash Turnover Ratio')
 
     def __str__(self):
