@@ -130,7 +130,7 @@ def financial_data_questionaire(request):
             net_tangeble_asset = jsn['net_tangeble_asset'],
 
 
-            q1_profit_margin = int(jsn['q1_net_profit'/'q1_revenue']),
+            q1__profit_margin = int(jsn['q1_net_profit'/'q1_revenue']),
         )
 
 
@@ -199,16 +199,16 @@ def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt
 
 
 #def expert_result(user_financial_me):
-    ROA = user_financial_me.return_on_asset
-    NA = user_financial_me.net_assets
-    NTA = user_financial_me.net_tangeble_asset
-    CR = user_financial_me.current_ratio
-    Q1_NP = user_financial_me.q1_net_profit
-    DTA = user_financial_me.debt_to_asset_ratio
+    # ROA = user_financial_me.return_on_asset
+    # NA = user_financial_me.net_assets
+    # NTA = user_financial_me.net_tangeble_asset
+    # CR = user_financial_me.current_ratio
+    # Q1_NP = user_financial_me.q1_net_profit
+    # DTA = user_financial_me.debt_to_asset_ratio
 
-    result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
+    # result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
 
-    return result
+    # return result
 
 
 def profit_result(user_financial_me):
@@ -267,12 +267,6 @@ def asset_result(user_financial_me):
 
     result = get_profit_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
     return result
-
-
-
-
-
-
 
 def report_payment(request):
     if (request.method == 'GET'):
@@ -407,21 +401,6 @@ def get_user_financial_data(request):
     }
     return JsonResponse(jsn_data, safe=False)
 
-# def update_user_profile(request):
-#     jsn = json.loads(request.body)
-#     current_user = user_profile.objects.get(user_id=request.user.id)
-#     current_user.first_name = jsn['firstName']
-#     current_user.last_name = jsn['lastName']
-#     current_user.company_name = jsn['companyName']
-#     current_user.email = jsn['email']
-#     current_user.address_1 = jsn['address1']
-#     current_user.address_2 = jsn['address2']
-#     current_user.zip_code = jsn['zipCode']
-#     current_user.city = jsn['city']
-#     current_user.save()
-
-#     return HttpResponse("data saved", status=200)
-
 def update_user_financial_data(request):
     jsn = json.loads(request.body)
     current_user = user_profile.objects.get(user_id=request.user.id)
@@ -542,6 +521,207 @@ def get_profit_comment(request):
 def get_profit_suggestion(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     profit_suggestion = Advices.objects.filter(profit_tag = current_user.profit_tag)
+    suggestions = []
+    for suggestion in profit_suggestion:
+        suggestions.append(suggestion.Text)
+    response = {
+        'data': suggestions
+    }
+    return JsonResponse(response, safe=False)
+
+# Get Asset 
+
+def get_asset_video(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_videos = Recommandation_Video.objects.filter(asset_tag = current_user.asset_tag)
+    videos_id = []
+    for video in recommand_videos:
+        videos_id.append(video.Video_ID)
+    response = retrive_youtube_videos(videos_id)
+    return JsonResponse(response, safe=False)
+
+def get_asset_article(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_article = Recommandation_Articles.objects.filter(asset_tag = current_user.asset_tag)
+    articles = []
+    for article in recommand_article:
+        jsn = {
+            'title': article.Title,
+            'description': article.Description,
+            'siteName': article.Site_Name,
+            'url': article.URL,
+        }
+        articles.append(jsn)
+    response = {
+        'data': articles
+    }
+    return JsonResponse(response, safe=False)
+
+def get_asset_networking(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    networking_peoples = Network_Suggestions.objects.filter(asset_tag = current_user.asset_tag)
+    peoples = []
+    for people in networking_peoples:
+        jsn = {
+            'name': people.Name,
+            'skills': people.Skills,
+            'url': people.URL,
+            'thumbnails': people.thumbnails
+        }
+        peoples.append(jsn)
+    response = {
+        'data': peoples
+    }
+    return JsonResponse(response, safe=False)
+
+def get_asset_comment(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_comment = Comment.objects.filter(asset_tag = current_user.asset_tag)
+    comments = []
+    for comment in profit_comment:
+        comments.append(comment.Text)
+    response = {
+        'data': comments
+    }
+    return JsonResponse(response, safe=False)
+
+def get_asset_suggestion(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_suggestion = Advices.objects.filter(asset_tag = current_user.asset_tag)
+    suggestions = []
+    for suggestion in profit_suggestion:
+        suggestions.append(suggestion.Text)
+    response = {
+        'data': suggestions
+    }
+    return JsonResponse(response, safe=False)
+
+# get Cash
+
+def get_cash_video(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_videos = Recommandation_Video.objects.filter(cash_tag = current_user.cash_tag)
+    videos_id = []
+    for video in recommand_videos:
+        videos_id.append(video.Video_ID)
+    response = retrive_youtube_videos(videos_id)
+    return JsonResponse(response, safe=False)
+
+def get_cash_article(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_article = Recommandation_Articles.objects.filter(cash_tag = current_user.cash_tag)
+    articles = []
+    for article in recommand_article:
+        jsn = {
+            'title': article.Title,
+            'description': article.Description,
+            'siteName': article.Site_Name,
+            'url': article.URL,
+        }
+        articles.append(jsn)
+    response = {
+        'data': articles
+    }
+    return JsonResponse(response, safe=False)
+
+def get_cash_networking(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    networking_peoples = Network_Suggestions.objects.filter(cash_tag = current_user.cash_tag)
+    peoples = []
+    for people in networking_peoples:
+        jsn = {
+            'name': people.Name,
+            'skills': people.Skills,
+            'url': people.URL,
+            'thumbnails': people.thumbnails
+        }
+        peoples.append(jsn)
+    response = {
+        'data': peoples
+    }
+    return JsonResponse(response, safe=False)
+
+def get_cash_comment(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_comment = Comment.objects.filter(cash_tag = current_user.cash_tag)
+    comments = []
+    for comment in profit_comment:
+        comments.append(comment.Text)
+    response = {
+        'data': comments
+    }
+    return JsonResponse(response, safe=False)
+
+def get_cash_suggestion(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_suggestion = Advices.objects.filter(cash_tag = current_user.cash_tag)
+    suggestions = []
+    for suggestion in profit_suggestion:
+        suggestions.append(suggestion.Text)
+    response = {
+        'data': suggestions
+    }
+    return JsonResponse(response, safe=False)
+
+#  get Liquidity
+
+def get_liquidity_video(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_videos = Recommandation_Video.objects.filter(liquidity_tag = current_user.liquidity_tag)
+    videos_id = []
+    for video in recommand_videos:
+        videos_id.append(video.Video_ID)
+    response = retrive_youtube_videos(videos_id)
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_article(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_article = Recommandation_Articles.objects.filter(liquidity_tag = current_user.liquidity_tag)
+    articles = []
+    for article in recommand_article:
+        jsn = {
+            'title': article.Title,
+            'description': article.Description,
+            'siteName': article.Site_Name,
+            'url': article.URL,
+        }
+        articles.append(jsn)
+    response = {
+        'data': articles
+    }
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_networking(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    networking_peoples = Network_Suggestions.objects.filter(liquidity_tag = current_user.liquidity_tag)
+    peoples = []
+    for people in networking_peoples:
+        jsn = {
+            'name': people.Name,
+            'skills': people.Skills,
+            'url': people.URL,
+            'thumbnails': people.thumbnails
+        }
+        peoples.append(jsn)
+    response = {
+        'data': peoples
+    }
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_comment(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_comment = Comment.objects.filter(liquidity_tag = current_user.liquidity_tag)
+    comments = []
+    for comment in profit_comment:
+        comments.append(comment.Text)
+    response = {
+        'data': comments
+    }
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_suggestion(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_suggestion = Advices.objects.filter(liquidity_tag = current_user.liquidity_tag)
     suggestions = []
     for suggestion in profit_suggestion:
         suggestions.append(suggestion.Text)

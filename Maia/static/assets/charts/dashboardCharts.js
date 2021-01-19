@@ -25,6 +25,7 @@ if(checkIfExist){
   var businessValueCTX = document.getElementById("assetChart").getContext("2d");
   var productivityCTX = document.getElementById("cashChart").getContext("2d");
   var riskAnalysisCTX = document.getElementById("liquidityChart").getContext("2d");
+  var overallAnalysisCTX = document.getElementById("overallChart").getContext("2d");
 
   var gradientStroke = performanceCTX.createLinearGradient(0,230,0,50);
 
@@ -75,6 +76,12 @@ if(checkIfExist){
   });
 
   var riskAnalysisChart = new Chart(riskAnalysisCTX, {
+    type: 'doughnut',
+    data: data,
+    options: gradientChartOptionsConfiguration
+  });
+
+  var riskAnalysisChart = new Chart(overallAnalysisCTX, {
     type: 'doughnut',
     data: data,
     options: gradientChartOptionsConfiguration

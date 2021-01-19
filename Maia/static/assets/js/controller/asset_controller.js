@@ -7,6 +7,11 @@ const value_pillars = Vue.createApp({
             articles: false,
             videos: false,
             networking: false,
+            youtube_videos: [],
+            recommanded_articles: [],
+            people_networking: [],
+            asset_comment: [],
+            asset_suggestion: [],
         }
     },
     methods:{
@@ -126,14 +131,96 @@ const value_pillars = Vue.createApp({
             }else{
             
             }                               
-        }
+        },
+
+        get_articles() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/asset/article",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.recommanded_articles = result.data
+                }
+            })
+        },
+
+        goToArticle(url) {
+            window.open(url)
+        },
+
+        get_videos() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/asset/videos",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.youtube_videos = result.items
+                }
+            })
+        },
+
+        goToVideo(id) {
+            window.open('https://www.youtube.com/watch?v=' + id )
+        },
+
+        get_networking() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/asset/networking",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    let array = []
+                    $.each(result.data, function(k, v){
+                        v.skills = v.skills.split('\n')
+                    })
+                    data.people_networking = result.data
+                }
+            })
+        },
+
+        goToLinkedin(url) {
+            window.open(url)
+        },
+
+        get_comment() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/asset/comment",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.asset_comment = result.data
+                }
+            })
+        },
+
+        get_suggestion() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/asset/suggestion",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.asset_suggestion = result.data
+                }
+            })
+        },
     },
     mounted(){
         this.showArticles()
         this.showInfo()
         this.renderChart()
-        
-    }
+        this.get_videos()
+        this.get_articles()
+        this.get_networking()
+        this.get_comment()
+        this.get_suggestion()
+    },
+    delimiters : ['[$', '$]'],
+
 })
 
 value_pillars.mount('#assetPillarPage')

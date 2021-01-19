@@ -55,13 +55,35 @@ urlpatterns = [
     path('user/get/purchased_report', views.get_purchased_report, name='get_purchased_report'),
 
     # Four pillars
+    # Profit
     path('pillars/profit', views.profit_pillars , name='profit_pillars'),
-    path('pillars/asset', views.asset_pillars , name='asset_pillars'),
-    path('pillars/cash', views.cash_pillars , name='cash_pillars'),
-    path('pillars/liquidity', views.liquidity_pillars , name='liquidity_pillars'),
     path('pillars/profit/videos', views.get_profit_video , name='profit_pillars_videos'),
     path('pillars/profit/article', views.get_profit_article , name='profit_pillars_article'),
     path('pillars/profit/networking', views.get_profit_networking , name='profit_pillars_networking'),
     path('pillars/profit/comment', views.get_profit_comment , name='profit_pillars_comment'),
     path('pillars/profit/suggestion', views.get_profit_suggestion , name='profit_pillars_suggestion'),
+
+    # Asset
+    path('pillars/asset', views.asset_pillars , name='asset_pillars'),
+    path('pillars/asset/videos', views.get_asset_video , name='asset_pillars_videos'),
+    path('pillars/asset/article', views.get_asset_article , name='asset_pillars_article'),
+    path('pillars/asset/networking', views.get_asset_networking , name='asset_pillars_networking'),
+    path('pillars/asset/comment', views.get_asset_comment , name='asset_pillars_comment'),
+    path('pillars/asset/suggestion', views.get_asset_suggestion , name='asset_pillars_suggestion'),
+
+    # Cash
+    path('pillars/cash', views.cash_pillars , name='cash_pillars'),
+    path('pillars/cash/videos', views.get_cash_video , name='cash_pillars_videos'),
+    path('pillars/cash/article', views.get_cash_article , name='cash_pillars_article'),
+    path('pillars/cash/networking', views.get_cash_networking , name='cash_pillars_networking'),
+    path('pillars/cash/comment', views.get_cash_comment , name='cash_pillars_comment'),
+    path('pillars/cash/suggestion', views.get_cash_suggestion , name='cash_pillars_suggestion'),
+
+    # Liquidity
+    path('pillars/liquidity', views.liquidity_pillars , name='liquidity_pillars'),
+    path('pillars/liquidity/videos', views.get_liquidity_video , name='liquidity_pillars_videos'),
+    path('pillars/liquidity/article', views.get_liquidity_article , name='liquidity_pillars_article'),
+    path('pillars/liquidity/networking', views.get_liquidity_networking , name='liquidity_pillars_networking'),
+    path('pillars/liquidity/comment', views.get_liquidity_comment , name='liquidity_pillars_comment'),
+    path('pillars/liquidity/suggestion', views.get_liquidity_suggestion , name='liquidity_pillars_suggestion'),
 ]
