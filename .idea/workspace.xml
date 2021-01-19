@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maia/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +49,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Maia backup/views.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -258,6 +259,10 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state x="709" y="28" key="#RandomForest01/0.0.1368.872@0.0.1368.872" timestamp="1610264360124" />
+    <state x="465" y="191" key="FileChooserDialogImpl" timestamp="1611068004320">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="465" y="191" key="FileChooserDialogImpl/0.0.1368.872@0.0.1368.872" timestamp="1611068004320" />
     <state width="1348" height="132" key="GridCell.Tab.0.bottom" timestamp="1610988823411">
       <screen x="0" y="0" width="1368" height="872" />
     </state>
