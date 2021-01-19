@@ -7,6 +7,11 @@ const productivity_pillars = Vue.createApp({
             articles: false,
             videos: false,
             networking: false,
+            youtube_videos: [],
+            recommanded_articles: [],
+            people_networking: [],
+            cash_comment: [],
+            cash_suggestion: [],
         }
     },
     methods:{
@@ -66,10 +71,10 @@ const productivity_pillars = Vue.createApp({
                  responsive: true,
               };
             
-              var checkIfExist = document.getElementById("productivity_pillars")
+              var checkIfExist = document.getElementById("cash_pillars")
             
               if (checkIfExist){
-                var productivityPillarCTX = document.getElementById("productivity_pillars").getContext("2d");
+                var productivityPillarCTX = document.getElementById("cash_pillars").getContext("2d");
               
                 var gradientStroke = productivityPillarCTX.createLinearGradient(0,230,0,50);
                 
@@ -126,14 +131,95 @@ const productivity_pillars = Vue.createApp({
             }else{
         
             }                              
-        }
+        },
+
+        get_articles() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/article",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.recommanded_articles = result.data
+                }
+            })
+        },
+
+        goToArticle(url) {
+            window.open(url)
+        },
+
+        get_videos() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/videos",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.youtube_videos = result.items
+                }
+            })
+        },
+
+        goToVideo(id) {
+            window.open('https://www.youtube.com/watch?v=' + id )
+        },
+
+        get_networking() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/networking",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    let array = []
+                    $.each(result.data, function(k, v){
+                        v.skills = v.skills.split('\n')
+                    })
+                    data.people_networking = result.data
+                }
+            })
+        },
+
+        goToLinkedin(url) {
+            window.open(url)
+        },
+
+        get_comment() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/comment",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.cash_comment = result.data
+                }
+            })
+        },
+
+        get_suggestion() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/suggestion",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.cash_suggestion = result.data
+                }
+            })
+        },
     },
     mounted(){
         this.showArticles()
         this.showInfo()
         this.renderChart()
-        
-    }
+        this.get_videos()
+        this.get_articles()
+        this.get_networking()
+        this.get_comment()
+        this.get_suggestion()
+    },
+    delimiters : ['[$', '$]'],
 })
 
-productivity_pillars.mount('#productivityPillarPage')
+productivity_pillars.mount('#cashPillarPage')

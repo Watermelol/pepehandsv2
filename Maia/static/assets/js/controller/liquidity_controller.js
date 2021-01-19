@@ -7,6 +7,11 @@ const risk_pillars = Vue.createApp({
             articles: false,
             videos: false,
             networking: false,
+            youtube_videos: [],
+            recommanded_articles: [],
+            people_networking: [],
+            liquidity_comment: [],
+            liquidity_suggestion: [],
         }
     },
     methods:{
@@ -66,10 +71,10 @@ const risk_pillars = Vue.createApp({
                  responsive: true,
               };
             
-              var checkIfExist = document.getElementById("risk_analysis_pillars")
+              var checkIfExist = document.getElementById("liquidity_pillars")
             
               if (checkIfExist){
-                var riskAnalysisPillarCTX = document.getElementById("risk_analysis_pillars").getContext("2d");
+                var riskAnalysisPillarCTX = document.getElementById("liquidity_pillars").getContext("2d");
               
                 var gradientStroke = riskAnalysisPillarCTX.createLinearGradient(0,230,0,50);
                 
@@ -126,14 +131,94 @@ const risk_pillars = Vue.createApp({
             }else{
         
             }                             
-        }
+        },
+        get_articles() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/liquidity/article",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.recommanded_articles = result.data
+                }
+            })
+        },
+
+        goToArticle(url) {
+            window.open(url)
+        },
+
+        get_videos() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/liquidity/videos",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.youtube_videos = result.items
+                }
+            })
+        },
+
+        goToVideo(id) {
+            window.open('https://www.youtube.com/watch?v=' + id )
+        },
+
+        get_networking() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/liquidity/networking",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    let array = []
+                    $.each(result.data, function(k, v){
+                        v.skills = v.skills.split('\n')
+                    })
+                    data.people_networking = result.data
+                }
+            })
+        },
+
+        goToLinkedin(url) {
+            window.open(url)
+        },
+
+        get_comment() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/liquidity/comment",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.liquidity_comment = result.data
+                }
+            })
+        },
+
+        get_suggestion() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/liquidity/suggestion",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.liquidity_suggestion = result.data
+                }
+            })
+        },
     },
     mounted(){
         this.showArticles()
         this.showInfo()
         this.renderChart()
-        
-    }
+        this.get_videos()
+        this.get_articles()
+        this.get_networking()
+        this.get_comment()
+        this.get_suggestion()
+    },
+    delimiters : ['[$', '$]'],
 })
 
-risk_pillars.mount('#riskPillarPage')
+risk_pillars.mount('#liquidityPillarPage')
