@@ -184,19 +184,19 @@ def get_profit_predictions(ROA, Y_NP, NTA, Q1_NPM, Q2_NPM, Q3_NPM, Q4_NPM, YNPM,
 def get_liquidity_predictions(NTA, CR, Cash_Ratio, QR, Cash):
     import pickle
     model = pickle.load(open("Maia/Liquidity_Score_Model.sav", "rb"))
-    liquidity_prediction = model.predit([[NTA, CR, Cash_Ratio, QR, Cash]])
+    liquidity_prediction = model.predict([[NTA, CR, Cash_Ratio, QR, Cash]])
     return liquidity_prediction
 
 def get_cash_predictions(Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash):
     import pickle
     model = pickle.load(open("Maia/Cash_Score_Model.sav", "rb"))
-    cash_prediction =  model.predit([[Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash]])
+    cash_prediction =  model.predict([[Cash_Ratio, CR, NTA, Y_NP, Debt, CTR, Cash]])
     return cash_prediction
 
 def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP):
     import pickle
     model = pickle.load(open("Maia/Asset_Score_Model.sav", "rb"))
-    asset_prediction = model.predit([[YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP]])
+    asset_prediction = model.predict([[YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP]])
     return asset_prediction
 
 
@@ -268,7 +268,7 @@ def asset_result(user_financial_me):
     Y_R = user_financial_me.yearly_revenue
     Y_NP = user_financial_me.yearly_net_profit
 
-    result = get_profit_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
+    result = get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt, TD, Y_R, Y_NP)
 
     return result
 
