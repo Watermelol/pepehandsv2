@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
-{% load static%}
 {% block content %}
-    <div class="row" id="valuePillarPage">
-        <h1>Asset</h1>
+    <div class="row" id="liquidityPillarPage">
+        <h1>Liquidity</h1>
         <div class="col-md-12">
             <div class="row mb-3">
                 <div class="col-md-6 mb-3">
                     <div class="card-deck h-100">
                         <div class="card card-chart w-100">
                             <div class="card-body" style="overflow: auto;">
-                                <canvas id="value_pillars"></canvas>
+                                <canvas id="liquidity_pillars"></canvas>
                             </div>
                         </div>
                     </div>
@@ -21,14 +20,14 @@
                             <div class="card-header">
                                 <ul class="nav nav-pills nav-fill">
                                     <li class="nav-item">
-                                      <a :class="[{'nav-link':true}, {'active':info}]" @click="showInfo" href="#">Info</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a :class="[{'nav-link':true}, {'active':comments}]" @click="showComment" href="#" >Comments</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
-                                    </li>
+                                        <a :class="[{'nav-link':true}, {'active':info}]" @click="showInfo" href="#">Info</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a :class="[{'nav-link':true}, {'active':comments}]" @click="showComment" href="#" >Comments</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
+                                      </li>
                                 </ul>
                             </div>
                             <div class="card-body" style="overflow: auto;">
@@ -130,5 +129,5 @@
             </div>
         </div>
     </div>
-    
+
 {% endblock %}

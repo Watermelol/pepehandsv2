@@ -66,10 +66,10 @@ const value_pillars = Vue.createApp({
                  responsive: true,
               };
             
-              var checkIfExist = document.getElementById("value_pillars")
+              var checkIfExist = document.getElementById("asset_pillars")
             
               if (checkIfExist){
-                var valuePillarCTX = document.getElementById("value_pillars").getContext("2d");
+                var valuePillarCTX = document.getElementById("asset_pillars").getContext("2d");
               
                 var gradientStroke = valuePillarCTX.createLinearGradient(0,230,0,50);
                 
@@ -136,4 +136,4 @@ const value_pillars = Vue.createApp({
     }
 })
 
-value_pillars.mount('#valuePillarPage')
+value_pillars.mount('#assetPillarPage')

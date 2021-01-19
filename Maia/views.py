@@ -4,13 +4,14 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
-from .models import user_profile, user_financial_data_v2, user_payment, purchased_report
+from .models import *
 from .forms import UserProfile
 from djstripe.models import Charge
 import json
 import stripe
 from datetime import datetime
 from .create_report import createReport
+from .youtubeAPI import retrive_youtube_videos
 
 # Create your views here.
 def dashboard(request):
@@ -456,17 +457,17 @@ def update_user_financial_data(request):
     financial_data.save()
     return HttpResponse("data saved", status=200)
 
-def performance_pillars(request):
-    return render(request, 'pillars/performance_pillar.html')
+def profit_pillars(request):
+    return render(request, 'pillars/profit_pillar.html')
 
-def business_value_pillars(request):
-    return render(request, 'pillars/business_value_pillar.html')
+def asset_pillars(request):
+    return render(request, 'pillars/asset_pillar.html')
 
-def productivity_pillars(request):
-    return render(request, 'pillars/productivity_pillar.html')
+def cash_pillars(request):
+    return render(request, 'pillars/cash_pillar.html')
 
-def risk_analysis_pillars(request):
-    return render(request, 'pillars/risk_analysis_pillar.html')
+def liquidity_pillars(request):
+    return render(request, 'pillars/liquidity_pillar.html')
 
 def get_purchased_report(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
@@ -484,7 +485,71 @@ def get_purchased_report(request):
 
     return JsonResponse(respond_jsn, safe=False)
 
+def get_profit_video(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_videos = Recommandation_Video.objects.filter(profit_tag = current_user.profit_tag)
+    videos_id = []
+    for video in recommand_videos:
+        videos_id.append(video.Video_ID)
+    response = retrive_youtube_videos(videos_id)
+    return JsonResponse(response, safe=False)
 
+def get_profit_article(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    recommand_article = Recommandation_Articles.objects.filter(profit_tag = current_user.profit_tag)
+    articles = []
+    for article in recommand_article:
+        jsn = {
+            'title': article.Title,
+            'description': article.Description,
+            'siteName': article.Site_Name,
+            'url': article.URL,
+        }
+        articles.append(jsn)
+    response = {
+        'data': articles
+    }
+    return JsonResponse(response, safe=False)
+
+def get_profit_networking(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    networking_peoples = Network_Suggestions.objects.filter(profit_tag = current_user.profit_tag)
+    peoples = []
+    for people in networking_peoples:
+        jsn = {
+            'name': people.Name,
+            'skills': people.Skills,
+            'url': people.URL,
+            'thumbnails': people.thumbnails
+        }
+        peoples.append(jsn)
+    response = {
+        'data': peoples
+    }
+    return JsonResponse(response, safe=False)
+
+def get_profit_comment(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_comment = Comment.objects.filter(profit_tag = current_user.profit_tag)
+    comments = []
+    for comment in profit_comment:
+        comments.append(comment.Text)
+    response = {
+        'data': comments
+    }
+    return JsonResponse(response, safe=False)
+
+def get_profit_suggestion(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    profit_suggestion = Advices.objects.filter(profit_tag = current_user.profit_tag)
+    suggestions = []
+    for suggestion in profit_suggestion:
+        suggestions.append(suggestion.Text)
+    response = {
+        'data': suggestions
+    }
+    return JsonResponse(response, safe=False)
+    
 
 
 

@@ -66,10 +66,10 @@ const risk_pillars = Vue.createApp({
                  responsive: true,
               };
             
-              var checkIfExist = document.getElementById("risk_analysis_pillars")
+              var checkIfExist = document.getElementById("liquidity_pillars")
             
               if (checkIfExist){
-                var riskAnalysisPillarCTX = document.getElementById("risk_analysis_pillars").getContext("2d");
+                var riskAnalysisPillarCTX = document.getElementById("liquidity_pillars").getContext("2d");
               
                 var gradientStroke = riskAnalysisPillarCTX.createLinearGradient(0,230,0,50);
                 
@@ -136,4 +136,4 @@ const risk_pillars = Vue.createApp({
     }
 })
 
-risk_pillars.mount('#riskPillarPage')
+risk_pillars.mount('#liquidityPillarPage')

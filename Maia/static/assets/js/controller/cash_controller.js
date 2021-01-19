@@ -66,10 +66,10 @@ const productivity_pillars = Vue.createApp({
                  responsive: true,
               };
             
-              var checkIfExist = document.getElementById("productivity_pillars")
+              var checkIfExist = document.getElementById("cash_pillars")
             
               if (checkIfExist){
-                var productivityPillarCTX = document.getElementById("productivity_pillars").getContext("2d");
+                var productivityPillarCTX = document.getElementById("cash_pillars").getContext("2d");
               
                 var gradientStroke = productivityPillarCTX.createLinearGradient(0,230,0,50);
                 
@@ -136,4 +136,4 @@ const productivity_pillars = Vue.createApp({
     }
 })
 
-productivity_pillars.mount('#productivityPillarPage')
+productivity_pillars.mount('#cashPillarPage')

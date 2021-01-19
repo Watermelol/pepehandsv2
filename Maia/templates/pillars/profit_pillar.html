@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row" id="performancePillarPage">
+    <div class="row" id="profitPillarPage">
+        {% csrf_token %}
         <h1>Profit</h1>
         <div class="col-md-12">
             <div class="row mb-3">
@@ -8,7 +9,7 @@
                     <div class="card-deck h-100">
                         <div class="card card-chart w-100">
                             <div class="card-body" style="overflow: auto;">
-                                <canvas id="performance_pillars"></canvas>
+                                <canvas id="profit_pillars"></canvas>
                             </div>
                         </div>
                     </div>
@@ -31,13 +32,19 @@
                                 </ul>
                             </div>
                             <div class="card-body" style="overflow: auto;">
-                                <ul>
+                                <ul v-if="info">
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
                                     <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
+                                </ul>
+                                <ul v-if="comments">
+                                    <li v-for="comment in profit_comment">[$ comment $]</li>
+                                </ul>
+                                <ul v-if="suggestion">
+                                    <li v-for="suggestion in profit_suggestion">[$ suggestion $]</li>
                                 </ul>
                                 
                             </div>
@@ -65,46 +72,47 @@
                                 </ul>
                             </div>
                             <div class="card-body">
-                                <table class="w-100" v-if='articles'>
+                                <table class="w-100 table" v-if='articles' >
                                     <tr>
-                                        <th class="text-white">Title</th>
-                                        <th class="text-white">Author</th>
-                                        <th class="text-white">Site</th>
-                                        <th class="text-white">URL</th>
+                                        <th class="text-white" style="width: 20%;">Title</th>
+                                        <th class="text-white" style="width: 60%;">Description</th>
+                                        <th class="text-white text-center" style="width: 20%;">Site</th>
                                     </tr>
-                                    <tr>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    <tr v-for="article in recommanded_articles" @click="goToArticle(article.url)">
+                                        <td class="text-light">[$ article.title $]</td>
+                                        <td class="text-light text-justify">[$ article.description $]</td>
+                                        <td class="text-light text-center">[$ article.siteName $]</td>
                                     </tr>
                                 </table>
-                                <table class="w-100" v-if='videos'>
+                                <table class="w-100 table table-hover" v-if='videos'>
                                     <tr>
+                                        <th></th>
                                         <th class="text-white">Title</th>
-                                        <th class="text-white">Author</th>
-                                        <th class="text-white">Site</th>
-                                        <th class="text-white">URL</th>
+                                        <th class="text-white">Channel</th>
                                     </tr>
-                                    <tr>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    <tr v-for="video in youtube_videos" @click="goToVideo(video.id)">
+                                        <td><img class="img-thumbnail" :src="video.snippet.thumbnails.default.url" alt=""></td>
+                                        <td class="text-light">[$ video.snippet.title $]</td>
+                                        <td class="text-light">[$ video.snippet.channelTitle $]</td>
                                     </tr>
                                 </table>
-                                <table class="w-100" v-if='networking'>
+                                <table class="w-100 table" v-if='networking'>
                                     <tr>
-                                        <th class="text-white">Title</th>
-                                        <th class="text-white">Author</th>
-                                        <th class="text-white">Site</th>
-                                        <th class="text-white">URL</th>
+                                        <th style="width: 20%"></th>
+                                        <th style="width: 40%" class="text-white text-center">Name</th>
+                                        <th style="width: 40%" class="text-white">Skills</th>
                                     </tr>
-                                    <tr>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td class="text-light">Lorem ipsum dolor sit amet.</td>
-                                        <td><a class="btn btn-link text-info">Go To Article</a></td>
+                                    <tr v-for ="people in people_networking" @click="goToLinkedin(people.url)">
+                                        <td class="text-center">
+                                            <img class="img-thumbnail" :src="people.thumbnails" v-if="people.thumbnails != ''">
+                                            <i class="fas fa-user-tie" v-else></i>
+                                        </td>
+                                        <td class="text-light text-center">[$ people.name $]</td>
+                                        <td class="text-light">
+                                            <ul>
+                                                <li v-for="skills in people.skills">[$ skills $]</li>
+                                            </ul>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

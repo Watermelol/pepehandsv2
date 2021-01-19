@@ -55,9 +55,13 @@ urlpatterns = [
     path('user/get/purchased_report', views.get_purchased_report, name='get_purchased_report'),
 
     # Four pillars
-    path('pillars/performance', views.performance_pillars , name='performance_pillars'),
-    path('pillars/business-value', views.business_value_pillars , name='business_value_pillars'),
-    path('pillars/productivity', views.productivity_pillars , name='productivity_pillars'),
-    path('pillars/risk-analysis', views.risk_analysis_pillars , name='risk_analysis_pillars'),
-    # path('pillars/performance/videos', views.performance_pillars , name='performance_pillars_videos'),
+    path('pillars/profit', views.profit_pillars , name='profit_pillars'),
+    path('pillars/asset', views.asset_pillars , name='asset_pillars'),
+    path('pillars/cash', views.cash_pillars , name='cash_pillars'),
+    path('pillars/liquidity', views.liquidity_pillars , name='liquidity_pillars'),
+    path('pillars/profit/videos', views.get_profit_video , name='profit_pillars_videos'),
+    path('pillars/profit/article', views.get_profit_article , name='profit_pillars_article'),
+    path('pillars/profit/networking', views.get_profit_networking , name='profit_pillars_networking'),
+    path('pillars/profit/comment', views.get_profit_comment , name='profit_pillars_comment'),
+    path('pillars/profit/suggestion', views.get_profit_suggestion , name='profit_pillars_suggestion'),
 ]
