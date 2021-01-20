@@ -129,44 +129,36 @@ def financial_data_questionaire(request):
             debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
             net_tangeble_asset = jsn['net_tangeble_asset'],
 
-<<<<<<< HEAD
             q1_net_profit_margin = int(jsn['q1_net_profit'])/int(jsn['q1_revenue']),
             q2_net_profit_margin=int(jsn['q2_net_profit'])/int(jsn['q2_revenue']),
             q3_net_profit_margin=int(jsn['q3_net_profit'])/int(jsn['q3_revenue']),
             q4_net_profit_margin=int(jsn['q4_net_profit'])/int(jsn['q4_revenue']),
             yearly_net_profit_margin = int(jsn['yearly_net_profit'])/int(jsn['yearly_revenue']),
             cash_turnover_ratio = int(jsn['yearly_revenue'])/int(jsn['cash']),
-=======
-
-            q1__profit_margin = int(jsn['q1_net_profit'/'q1_revenue']),
->>>>>>> 6235d6c4af73fc7e57b893f2f5f17b5288445d73
         )
 
 
 
         financial_data_entry.save()
-        financial_data_me = user_financial_data_v2.objects.get(user = current_user)
-        # gets the current user financial data
 
-        pp = profit_result(financial_data_me)
-        ap = asset_result(financial_data_me)
-        lp = liquidity_result(financial_data_me)
-        cp = cash_result(financial_data_me)
-
-        print(pp)
-        print(ap)
-        print(lp)
-        print(cp)
+        financial_data_me = user_financial_data_v2.objects.get(user=current_user)
 
 
-        #ex = expert_result(financial_data_me)
-        #print(ex)
+        profit_score = profit_cal(financial_data_me)
+        asset_score = asset_cal(financial_data_me)
+        liquidity_score = liquidity_cal(financial_data_me)
+        cash_score = cash_cal(financial_data_me)
+        expert_score = (cash_score + liquidity_score + asset_score + profit_score)/4
 
-
-        # pass the data to machinelearning and get the result
-
-
-        # store the result into database
+        analysis_entry = user_financial_data_analysis(
+            user = current_user,
+            profit_result = profit_score,
+            asset_result = asset_score,
+            liquidity_result = liquidity_score,
+            cash_result = cash_score,
+            general_result = expert_score
+        )
+        analysis_entry.save()
 
         current_user.financial_data_provided = True
         current_user.save()
@@ -208,18 +200,6 @@ def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt
 
 
 #def expert_result(user_financial_me):
-<<<<<<< HEAD
-   # ROA = user_financial_me.return_on_asset
-   # NA = user_financial_me.net_assets
-   # NTA = user_financial_me.net_tangeble_asset
-   # CR = user_financial_me.current_ratio
-   # Q1_NP = user_financial_me.q1_net_profit
-   # DTA = user_financial_me.debt_to_asset_ratio
-
-    #result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
-
-    #return result
-=======
     # ROA = user_financial_me.return_on_asset
     # NA = user_financial_me.net_assets
     # NTA = user_financial_me.net_tangeble_asset
@@ -230,10 +210,9 @@ def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt
     # result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
 
     # return result
->>>>>>> 6235d6c4af73fc7e57b893f2f5f17b5288445d73
 
 
-def profit_result(user_financial_me):
+def profit_cal(user_financial_me):
     ROA = user_financial_me.return_on_asset
     Y_NP = user_financial_me.yearly_net_profit
     NTA = user_financial_me.net_tangeble_asset
@@ -248,7 +227,7 @@ def profit_result(user_financial_me):
 
     return result
 
-def liquidity_result(user_financial_me):
+def liquidity_cal(user_financial_me):
     NTA = user_financial_me.net_tangeble_asset
     CR = user_financial_me.current_ratio
     Cash_Ratio = user_financial_me.cash_ratio
@@ -259,7 +238,7 @@ def liquidity_result(user_financial_me):
 
     return result
 
-def cash_result(user_financial_me):
+def cash_cal(user_financial_me):
     Cash_Ratio = user_financial_me.cash_ratio
     CR = user_financial_me.current_ratio
     NTA = user_financial_me.net_tangeble_asset
@@ -272,7 +251,7 @@ def cash_result(user_financial_me):
 
     return result
 
-def asset_result(user_financial_me):
+def asset_cal(user_financial_me):
     YNPM = user_financial_me.yearly_net_profit_margin
     ATR = user_financial_me.asset_turn_over_ratio
     DTA = user_financial_me.debt_to_asset_ratio
