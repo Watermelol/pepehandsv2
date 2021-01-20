@@ -158,10 +158,12 @@ def financial_data_questionaire(request):
             liquidity_result = liquidity_score,
             cash_result = cash_score,
             general_result = expert_score
-
-
         )
         analysis_entry.save()
+
+
+
+
 
 
 
@@ -180,8 +182,7 @@ def financial_data_questionaire(request):
         # gets the current user financial data
 
 
-        #ex = expert_result(financial_data_me)
-        #print(ex)
+
 
 
         # pass the data to machinelearning and get the result
@@ -228,29 +229,6 @@ def get_asset_predictions(YNPM, ATR, DTA, ROA, Cash_Ratio, QR, CR, NA, NTA, Debt
 
 
 
-#def expert_result(user_financial_me):
-
-   # ROA = user_financial_me.return_on_asset
-   # NA = user_financial_me.net_assets
-   # NTA = user_financial_me.net_tangeble_asset
-   # CR = user_financial_me.current_ratio
-   # Q1_NP = user_financial_me.q1_net_profit
-   # DTA = user_financial_me.debt_to_asset_ratio
-
-    #result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
-
-    #return result
-
-    # ROA = user_financial_me.return_on_asset
-    # NA = user_financial_me.net_assets
-    # NTA = user_financial_me.net_tangeble_asset
-    # CR = user_financial_me.current_ratio
-    # Q1_NP = user_financial_me.q1_net_profit
-    # DTA = user_financial_me.debt_to_asset_ratio
-
-    # result = get_expert_predictions(ROA, NA, NTA, CR, Q1_NP, DTA)
-
-    # return result
 
 
 
