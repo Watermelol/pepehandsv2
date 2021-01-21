@@ -93,6 +93,9 @@ def qualitative_questionaire(request):
         current_user.save()
         return HttpResponse("data saved", status=200)
 
+def news_setiment_page(request):
+    return render (request, 'news_sentiment.html')
+
 
 def financial_data_questionaire(request):
     if (request.method != 'POST'):

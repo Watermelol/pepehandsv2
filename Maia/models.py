@@ -136,6 +136,9 @@ class user_financial_data_v2(models.Model):
     q4_net_profit_margin = models.FloatField('Q4 Net Profit Margin')
     yearly_net_profit_margin = models.FloatField('Yearly Net Profit Margin')
     cash_turnover_ratio = models.FloatField('Cash Turnover Ratio')
+    total_liability = models.FloatField('Total Liability', default=0)
+    shareholder_equity = models.FloatField('Shareholder Equity', default=0)
+    return_on_equity = models.FloatField('Return on Equity', default=0)
 
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name
