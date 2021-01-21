@@ -44,12 +44,19 @@ class tag_liquidity (models.Model):
         return self.name
 
 class user_profile(models.Model):
+    COMPANY_SIZE = [
+    ('MC', 'Micro'),
+    ('SM', 'Small'),
+    ('MD', 'Medium'),
+]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField('First Name', max_length=255, default='')
     last_name = models.CharField('Last Name', max_length=255, default='')
     company_name = models.CharField('Company Name', max_length=255, default='')
     company_industry = models.ForeignKey(industries, on_delete=models.RESTRICT, default=1 ,verbose_name='Company Industry')
     email = models.EmailField(default='')
+    company_size = models.CharField(max_length=5, choices=COMPANY_SIZE, default='SM')
     address_1 = models.CharField('Address 1', max_length=255, default='')
     address_2 = models.CharField('Address 2', max_length=255, default='', blank=True, null=True)
     zip_code = models.CharField("ZIP / Postal code", max_length=12, default='')

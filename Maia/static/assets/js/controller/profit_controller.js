@@ -224,4 +224,7 @@ const performance_pillars = Vue.createApp({
     delimiters : ['[$', '$]'],
 })
 
-performance_pillars.mount('#profitPillarPage')
+var checkIfExist= document.getElementById("profitPillarPage")
+if (checkIfExist){
+    performance_pillars.mount('#profitPillarPage')
+}

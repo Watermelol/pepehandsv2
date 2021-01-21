@@ -221,4 +221,7 @@ const risk_pillars = Vue.createApp({
     delimiters : ['[$', '$]'],
 })
 
-risk_pillars.mount('#liquidityPillarPage')
+var checkIfExist= document.getElementById("liquidityPillarPage")
+if (checkIfExist){
+    risk_pillars.mount('#liquidityPillarPage')
+}

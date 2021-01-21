@@ -223,4 +223,7 @@ const value_pillars = Vue.createApp({
 
 })
 
-value_pillars.mount('#assetPillarPage')
+var checkIfExist= document.getElementById("assetPillarPage")
+if (checkIfExist){
+    value_pillars.mount('#assetPillarPage')
+}

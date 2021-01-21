@@ -23,6 +23,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="dashboard"),
     path('', views.login, name='login'),
     path("logout/", views.logout_account, name="logout"),
+
+    # dashboard
+    path('dashboard/get/analysisProduct', views.get_analysis_result),
     
     # User First Time Login
     path('end-user-agreement/', views.to_end_user_agreement, name="end_user_agreement"),
