@@ -21,24 +21,32 @@ class industries(models.Model):
 
 class tag_profit (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_asset (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_cash (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_liquidity (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
