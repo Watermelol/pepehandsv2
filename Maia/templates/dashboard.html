@@ -11,12 +11,7 @@
                 <div class="card card-chart w-100">
                     <div class="card-header">Overall</div>
                     <div class="card-body">
-                            <canvas class="w-75 h-75 m-auto" id="overallChart"></canvas>
-                    </div>
-                    <div class="card-footer">
-                        <div align=center>
-                            <h2>Overall Score: [$ overallScore $]%</h2>
-                        </div>
+                        <div id="overallChart"></div>
                     </div>
                 </div>
             </div>
@@ -24,11 +19,10 @@
                 <div class="card card-chart w-100">
                     <div class="card-header">Profitability</div>
                     <div class="card-body">
-                        <canvas id="profitChart"></canvas>
+                        <div id="profitChart"></div>
                     </div>
                     <div class="card-footer">
                         <div align=center>
-                            <h2>Profitability Score: [$ profitabilityScore $]%</h2>
                             <a href="{% url 'profit_pillars' %}" class="btn btn-success btn-sm" style="border-radius: 15px;">Go To Profitability</a>
                         </div>
                     </div>
@@ -39,11 +33,10 @@
                 <div class="card card-chart w-100">
                     <div class="card-header">Asset</div>
                     <div class="card-body">
-                        <canvas id="assetChart"></canvas>
+                        <div id="assetChart"></div>
                     </div>
                     <div class="card-footer">
                         <div align=center>
-                            <h2>Asset Score: [$ assetScore $]%</h2>
                             <a href="{% url 'asset_pillars' %}" class="btn btn-success btn-sm" style="border-radius: 15px;">Go To Asset</a>
                         </div>
                     </div>
@@ -54,11 +47,10 @@
                 <div class="card card-chart w-100">
                     <div class="card-header">Cash</div>
                     <div class="card-body">
-                        <canvas id="cashChart"></canvas>
+                        <div id="cashChart"></div>
                     </div>
                     <div class="card-footer">
                         <div align=center>
-                            <h2>Cash Score: [$ cashScore $]%</h2>
                             <a href="{% url 'cash_pillars' %}" class="btn btn-success btn-sm" style="border-radius: 15px;">Go To Cash</a>
                         </div>
                     </div>
@@ -69,11 +61,10 @@
                 <div class="card card-chart w-100">
                     <div class="card-header">Liquidity</div>
                     <div class="card-body">
-                        <canvas id="liquidityChart"></canvas>
+                        <div id="liquidityChart"></div>
                     </div>
                     <div class="card-footer">
                         <div align=center>
-                            <h2>Liquidity Score: [$ liquidityScore $]%</h2>
                             <a href="{% url 'liquidity_pillars' %}" class="btn btn-success btn-sm" style="border-radius: 15px;">Go To Liquidity</a>
                         </div>
                     </div>

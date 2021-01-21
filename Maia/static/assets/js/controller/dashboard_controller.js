@@ -9,6 +9,14 @@ var dashboard = Vue.createApp({
                 responsive: true,
             },
 
+            overallGradientChartOptionsConfiguration:  {
+                maintainAspectRatio: true,
+                legend: {
+                    display: false
+                },
+                responsive: false,
+            },
+
             checkIfExist: document.getElementById("atDashboard"),
             overallScore: 0,
             profitabilityScore: 0,
@@ -37,206 +45,396 @@ var dashboard = Vue.createApp({
 
         loadOverallCharts() {
             if(this.checkIfExist){
-                
-                var overallAnalysisCTX = document.getElementById("overallChart").getContext("2d");
-            
-                var gradientStroke = overallAnalysisCTX.createLinearGradient(0,230,0,50);
-            
-                gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-                gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-                gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
-                var data = {
-                    labels: [
-                        'Score',
-                        ''
-                    ],
-                    datasets: [{
-                        label: "Data",
-                        fill: true,
-                        backgroundColor: ['#2FB585', '#2F4858'],
-                        borderColor: '#5e72e4',
-                        borderWidth: 2,
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        pointBackgroundColor: '#5e72e4',
-                        pointBorderColor:'rgba(255,255,255,0)',
-                        pointHoverBackgroundColor: '#5e72e4',
-                        pointBorderWidth: 20,
-                        pointHoverRadius: 4,
-                        pointHoverBorderWidth: 15,
-                        pointRadius: 4,
-                        data: [this.overallScore, (100-this.overallScore)],
-                    }]
-                };
-            
-                var overallChart = new Chart(overallAnalysisCTX, {
-                    type: 'doughnut',
-                    data: data,
-                    options: this.gradientChartOptionsConfiguration
-                });
+                var options = {
+                    series: [this.overallScore],
+                    chart: {
+                    height: 450,
+                    type: 'radialBar',
+                  },
+                  plotOptions: {
+                    radialBar: {
+                      startAngle: 0,
+                      endAngle: 360,
+                       hollow: {
+                        margin: 0,
+                        size: '75%',
+                        image: undefined,
+                        imageOffsetX: 0,
+                        imageOffsetY: 0,
+                        position: 'front',
+                        dropShadow: {
+                          enabled: true,
+                          top: 3,
+                          left: 0,
+                          blur: 4,
+                          opacity: 0.24
+                        }
+                      },
+                      track: {
+                        background: '#fff',
+                        strokeWidth: '67%',
+                        margin: 0, // margin is in pixels
+                        dropShadow: {
+                          enabled: true,
+                          top: -3,
+                          left: 0,
+                          blur: 4,
+                          opacity: 0.35
+                        }
+                      },
+                  
+                      dataLabels: {
+                        show: true,
+                        name: {
+                          offsetY: -10,
+                          show: true,
+                          color: '#fff',
+                          fontSize: '17px'
+                        },
+                        value: {
+                          color: '#c8cbcf',
+                          fontSize: '36px',
+                          show: true,
+                        }
+                      }
+                    }
+                  },
+                  fill: {
+                    type: 'gradient',
+                    gradient: {
+                      shade: 'light',
+                      type: 'horizontal',
+                      shadeIntensity: 0.5,
+                      gradientToColors: ['#00C5BF'],
+                      inverseColors: false,
+                      opacityFrom: 1,
+                      opacityTo: 1,
+                      stops: [0, 100]
+                    }
+                  },
+                  stroke: {
+                    lineCap: 'round'
+                  },
+                  labels: ['Overall Score'],
+                  };
+          
+                var chart = new ApexCharts(document.querySelector("#overallChart"), options);
+                chart.render();
             }else{
                 
             }
         },
         loadProfitChart() {
-            var profitabilityCTX = document.getElementById("profitChart").getContext("2d");
-
-            var gradientStroke = profitabilityCTX.createLinearGradient(0,230,0,50);
-            
-            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-            gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-        
-            var data = {
-            labels: [
-                'Score',
-                ''
-            ],
-            datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: ['#2FB585', '#2F4858'],
-                borderColor: '#5e72e4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#5e72e4',
-                pointBorderColor:'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#5e72e4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [this.profitabilityScore, (100-this.profitabilityScore)],
-            }]
-            };
-
-            var profitabilityChart = new Chart(profitabilityCTX, {
-                type: 'doughnut',
-                data: data,
-                options: this.gradientChartOptionsConfiguration
-            });
+            var options = {
+                series: [this.profitabilityScore],
+                chart: {
+                height: 300,
+                type: 'radialBar',
+              },
+              plotOptions: {
+                radialBar: {
+                  startAngle: 0,
+                  endAngle: 360,
+                   hollow: {
+                    margin: 0,
+                    size: '75%',
+                    image: undefined,
+                    imageOffsetX: 0,
+                    imageOffsetY: 0,
+                    position: 'front',
+                    dropShadow: {
+                      enabled: true,
+                      top: 3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.24
+                    }
+                  },
+                  track: {
+                    background: '#fff',
+                    strokeWidth: '67%',
+                    margin: 0, // margin is in pixels
+                    dropShadow: {
+                      enabled: true,
+                      top: -3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.35
+                    }
+                  },
+              
+                  dataLabels: {
+                    show: true,
+                    name: {
+                      offsetY: -10,
+                      show: true,
+                      color: '#fff',
+                      fontSize: '17px'
+                    },
+                    value: {
+                      color: '#c8cbcf',
+                      fontSize: '36px',
+                      show: true,
+                    }
+                  }
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'light',
+                  type: 'horizontal',
+                  shadeIntensity: 0.5,
+                  gradientToColors: ['#00C5BF'],
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 100]
+                }
+              },
+              stroke: {
+                lineCap: 'round'
+              },
+              labels: ['Profitability Score'],
+              };
+      
+            var chart = new ApexCharts(document.querySelector("#profitChart"), options);
+            chart.render();
         },
 
         loadAssetChart() {
-            var assetCTX = document.getElementById("assetChart").getContext("2d");
-
-            var gradientStroke = assetCTX.createLinearGradient(0,230,0,50);
-            
-            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-            gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-        
-            var data = {
-            labels: [
-                'Score',
-                ''
-            ],
-            datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: ['#2FB585', '#2F4858'],
-                borderColor: '#5e72e4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#5e72e4',
-                pointBorderColor:'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#5e72e4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [this.assetScore, (100-this.assetScore)],
-            }]
-            };
-
-            var assetChart = new Chart(assetCTX, {
-                type: 'doughnut',
-                data: data,
-                options: this.gradientChartOptionsConfiguration
-            }); 
+            var options = {
+                series: [this.assetScore],
+                chart: {
+                height: 300,
+                type: 'radialBar',
+              },
+              plotOptions: {
+                radialBar: {
+                  startAngle: 0,
+                  endAngle: 360,
+                   hollow: {
+                    margin: 0,
+                    size: '75%',
+                    image: undefined,
+                    imageOffsetX: 0,
+                    imageOffsetY: 0,
+                    position: 'front',
+                    dropShadow: {
+                      enabled: true,
+                      top: 3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.24
+                    }
+                  },
+                  track: {
+                    background: '#fff',
+                    strokeWidth: '67%',
+                    margin: 0, // margin is in pixels
+                    dropShadow: {
+                      enabled: true,
+                      top: -3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.35
+                    }
+                  },
+              
+                  dataLabels: {
+                    show: true,
+                    name: {
+                      offsetY: -10,
+                      show: true,
+                      color: '#fff',
+                      fontSize: '17px'
+                    },
+                    value: {
+                      color: '#c8cbcf',
+                      fontSize: '36px',
+                      show: true,
+                    }
+                  }
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'light',
+                  type: 'horizontal',
+                  shadeIntensity: 0.5,
+                  gradientToColors: ['#00C5BF'],
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 100]
+                }
+              },
+              stroke: {
+                lineCap: 'round'
+              },
+              labels: ['Asset Score'],
+              };
+      
+            var chart = new ApexCharts(document.querySelector("#assetChart"), options);
+            chart.render();
         },
 
         loadCashChart() {
-            var cashCTX = document.getElementById("cashChart").getContext("2d");
-
-            var gradientStroke = cashCTX.createLinearGradient(0,230,0,50);
-            
-            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-            gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-        
-            var data = {
-            labels: [
-                'Score',
-                ''
-            ],
-            datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: ['#2FB585', '#2F4858'],
-                borderColor: '#5e72e4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#5e72e4',
-                pointBorderColor:'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#5e72e4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [this.cashScore, (100-this.cashScore)],
-            }]
-            };
-
-            var assetChart = new Chart(cashCTX, {
-                type: 'doughnut',
-                data: data,
-                options: this.gradientChartOptionsConfiguration
-            }); 
+            var options = {
+                series: [this.cashScore],
+                chart: {
+                height: 300,
+                type: 'radialBar',
+              },
+              plotOptions: {
+                radialBar: {
+                  startAngle: 0,
+                  endAngle: 360,
+                   hollow: {
+                    margin: 0,
+                    size: '75%',
+                    image: undefined,
+                    imageOffsetX: 0,
+                    imageOffsetY: 0,
+                    position: 'front',
+                    dropShadow: {
+                      enabled: true,
+                      top: 3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.24
+                    }
+                  },
+                  track: {
+                    background: '#fff',
+                    strokeWidth: '67%',
+                    margin: 0, // margin is in pixels
+                    dropShadow: {
+                      enabled: true,
+                      top: -3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.35
+                    }
+                  },
+              
+                  dataLabels: {
+                    show: true,
+                    name: {
+                      offsetY: -10,
+                      show: true,
+                      color: '#fff',
+                      fontSize: '17px'
+                    },
+                    value: {
+                      color: '#c8cbcf',
+                      fontSize: '36px',
+                      show: true,
+                    }
+                  }
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'light',
+                  type: 'horizontal',
+                  shadeIntensity: 0.5,
+                  gradientToColors: ['#00C5BF'],
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 100]
+                }
+              },
+              stroke: {
+                lineCap: 'round'
+              },
+              labels: ['Cash Score'],
+              };
+      
+            var chart = new ApexCharts(document.querySelector("#cashChart"), options);
+            chart.render();
         },
 
         loadLiquidityChart() {
-            var liquidityCTX = document.getElementById("liquidityChart").getContext("2d");
-
-            var gradientStroke = liquidityCTX.createLinearGradient(0,230,0,50);
-            
-            gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-            gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-            gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-        
-            var data = {
-            labels: [
-                'Score',
-                ''
-            ],
-            datasets: [{
-                label: "Data",
-                fill: true,
-                backgroundColor: ['#2FB585', '#2F4858'],
-                borderColor: '#5e72e4',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#5e72e4',
-                pointBorderColor:'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#5e72e4',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [this.liquidityScore, (100-this.liquidityScore)],
-            }]
-            };
-
-            var assetChart = new Chart(liquidityCTX, {
-                type: 'doughnut',
-                data: data,
-                options: this.gradientChartOptionsConfiguration
-            }); 
+            var options = {
+                series: [this.liquidityScore],
+                chart: {
+                height: 300,
+                type: 'radialBar',
+              },
+              plotOptions: {
+                radialBar: {
+                  startAngle: 0,
+                  endAngle: 360,
+                   hollow: {
+                    margin: 0,
+                    size: '75%',
+                    image: undefined,
+                    imageOffsetX: 0,
+                    imageOffsetY: 0,
+                    position: 'front',
+                    dropShadow: {
+                      enabled: true,
+                      top: 3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.24
+                    }
+                  },
+                  track: {
+                    background: '#fff',
+                    strokeWidth: '67%',
+                    margin: 0, // margin is in pixels
+                    dropShadow: {
+                      enabled: true,
+                      top: -3,
+                      left: 0,
+                      blur: 4,
+                      opacity: 0.35
+                    }
+                  },
+              
+                  dataLabels: {
+                    show: true,
+                    name: {
+                      offsetY: -10,
+                      show: true,
+                      color: '#fff',
+                      fontSize: '17px'
+                    },
+                    value: {
+                      color: '#c8cbcf',
+                      fontSize: '36px',
+                      show: true,
+                    }
+                  }
+                }
+              },
+              fill: {
+                type: 'gradient',
+                gradient: {
+                  shade: 'light',
+                  type: 'horizontal',
+                  shadeIntensity: 0.5,
+                  gradientToColors: ['#00C5BF'],
+                  inverseColors: false,
+                  opacityFrom: 1,
+                  opacityTo: 1,
+                  stops: [0, 100]
+                }
+              },
+              stroke: {
+                lineCap: 'round'
+              },
+              labels: ['Liquidity Score'],
+              };
+      
+            var chart = new ApexCharts(document.querySelector("#liquidityChart"), options);
+            chart.render();
         }
     },
     mounted() {

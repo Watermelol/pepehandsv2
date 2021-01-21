@@ -93,6 +93,9 @@ def qualitative_questionaire(request):
         current_user.save()
         return HttpResponse("data saved", status=200)
 
+def news_setiment_page(request):
+    return render (request, 'news_sentiment.html')
+
 
 def financial_data_questionaire(request):
     if (request.method != 'POST'):
@@ -163,32 +166,6 @@ def financial_data_questionaire(request):
 
         )
         analysis_entry.save()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # gets the current user financial data
-
-
-        #ex = expert_result(financial_data_me)
-        #print(ex)
-
-
-        # pass the data to machinelearning and get the result
-
-
-        # store the result into database
 
         current_user.financial_data_provided = True
         current_user.save()
