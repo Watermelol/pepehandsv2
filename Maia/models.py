@@ -73,10 +73,10 @@ class user_profile(models.Model):
     user_profile_updated = models.BooleanField(default=False)
     financial_data_provided = models.BooleanField(default=False)
     qualitative_data_provided = models.BooleanField(default=False)
-    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
-    asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
-    cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
-    liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    profit_tag = models.ManyToManyField(tag_profit, default=1, verbose_name='Profit Tag')
+    asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
+    cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
+    liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
 
     def __str__(self):
         return self.user.username

@@ -60,6 +60,7 @@ urlpatterns = [
     # Four pillars
     # Profit
     path('pillars/profit', views.profit_pillars , name='profit_pillars'),
+    path('pillars/profit/chart-date', views.get_profit_chart_date),
     path('pillars/profit/videos', views.get_profit_video , name='profit_pillars_videos'),
     path('pillars/profit/article', views.get_profit_article , name='profit_pillars_article'),
     path('pillars/profit/networking', views.get_profit_networking , name='profit_pillars_networking'),
