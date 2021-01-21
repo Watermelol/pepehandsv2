@@ -157,7 +157,10 @@ const user_profile = Vue.createApp({
             this.user_financial_data.return_on_asset === '' ||
             this.user_financial_data.asset_turn_over_ratio === '' ||
             this.user_financial_data.debt_to_asset_ratio === '' ||
-            this.user_financial_data.net_tangeble_asset === ''
+            this.user_financial_data.net_tangeble_asset === '' ||
+            this.user_financial_data.total_liability === '' ||
+            this.user_financial_data.shareholder_equity === '' ||
+            this.user_financial_data.return_on_equity === ''
             ){
                 toastr.warning('Please make sure that you have fill in all the column')
             }

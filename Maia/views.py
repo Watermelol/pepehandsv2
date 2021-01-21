@@ -139,7 +139,13 @@ def financial_data_questionaire(request):
             q3_net_profit_margin=int(jsn['q3_net_profit'])/int(jsn['q3_revenue']),
             q4_net_profit_margin=int(jsn['q4_net_profit'])/int(jsn['q4_revenue']),
             yearly_net_profit_margin = int(jsn['yearly_net_profit'])/int(jsn['yearly_revenue']),
-            cash_turnover_ratio = int(jsn['yearly_revenue'])/int(jsn['cash']))
+            cash_turnover_ratio = int(jsn['yearly_revenue'])/int(jsn['cash']),
+            total_liability = int(jsn['total_liability']),
+            shareholder_equity = int(jsn['shareholder_equity']),
+            return_on_equity = int(jsn['return_on_equity']),
+            )
+
+            
 
 
         financial_data_entry.save()
@@ -175,37 +181,6 @@ def financial_data_questionaire(request):
             current_user.profit_tag.add(9)
         else:
             current_user.profit_tag.add(10)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # gets the current user financial data
-
-
-
-
-
-        # pass the data to machinelearning and get the result
-
-
-        # store the result into database
 
         current_user.financial_data_provided = True
         current_user.save()
@@ -440,6 +415,9 @@ def get_user_financial_data(request):
         'asset_turn_over_ratio': financial_data.asset_turn_over_ratio,
         'debt_to_asset_ratio': financial_data.debt_to_asset_ratio,
         'net_tangeble_asset': financial_data.net_tangeble_asset,
+        'total_liability': financial_data.total_liability,
+        'shareholder_equity': financial_data.shareholder_equity,
+        'return_on_equity': financial_data.return_on_equity,
     }
     return JsonResponse(jsn_data, safe=False)
 
@@ -474,6 +452,9 @@ def update_user_financial_data(request):
     financial_data.asset_turn_over_ratio = jsn['asset_turn_over_ratio']
     financial_data.debt_to_asset_ratio= jsn["debt_to_asset_ratio"] 
     financial_data.net_tangeble_asset = jsn['net_tangeble_asset']
+    financial_data.total_liability = jsn['total_liability']
+    financial_data.shareholder_equity= jsn["shareholder_equity"] 
+    financial_data.return_on_equity = jsn['return_on_equity']
 
     financial_data.save()
 
