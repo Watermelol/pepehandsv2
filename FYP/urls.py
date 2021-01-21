@@ -60,7 +60,7 @@ urlpatterns = [
     # Four pillars
     # Profit
     path('pillars/profit', views.profit_pillars , name='profit_pillars'),
-    path('pillars/profit/chart-date', views.get_profit_chart_date),
+    path('pillars/profit/chart-date', views.get_profit_chart_data),
     path('pillars/profit/videos', views.get_profit_video , name='profit_pillars_videos'),
     path('pillars/profit/article', views.get_profit_article , name='profit_pillars_article'),
     path('pillars/profit/networking', views.get_profit_networking , name='profit_pillars_networking'),
@@ -73,7 +73,8 @@ urlpatterns = [
     path('pillars/asset/article', views.get_asset_article , name='asset_pillars_article'),
     path('pillars/asset/networking', views.get_asset_networking , name='asset_pillars_networking'),
     path('pillars/asset/comment', views.get_asset_comment , name='asset_pillars_comment'),
-    path('pillars/asset/suggestion', views.get_asset_suggestion , name='asset_pillars_suggestion'),
+    path('pillars/asset/suggestion', views.get_asset_suggestion),
+    path('pillars/asset/chart-date', views.get_asset_chart_data),
 
     # Cash
     path('pillars/cash', views.cash_pillars , name='cash_pillars'),

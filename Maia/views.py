@@ -821,12 +821,23 @@ def get_analysis_result(request):
 
     return JsonResponse(response, safe=False)
 
-def get_profit_chart_date(request):
+def get_profit_chart_data(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     financial_data = user_financial_data_v2.objects.get(user=current_user)
     response = {
         'profit': [financial_data.q1_net_profit, financial_data.q2_net_profit, financial_data.q3_net_profit, financial_data.q4_net_profit],
         'revenue': [financial_data.q1_revenue, financial_data.q2_revenue, financial_data.q3_revenue, financial_data.q4_revenue],
+    }
+
+    return JsonResponse(response, safe=False)
+
+def get_asset_chart_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    response = {
+        'return_of_asset': financial_data.return_on_asset,
+        'asset_turnover_ratio': financial_data.asset_turn_over_ratio,
+        'debt_to_asset_ratio': financial_data.debt_to_asset_ratio,
     }
 
     return JsonResponse(response, safe=False)

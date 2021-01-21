@@ -12,6 +12,7 @@ const value_pillars = Vue.createApp({
             people_networking: [],
             asset_comment: [],
             asset_suggestion: [],
+            chartData: {},
         }
     },
     methods:{
@@ -51,11 +52,23 @@ const value_pillars = Vue.createApp({
             this.networking= true
         },
 
+        get_chart_data() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+            var data = this
+            $.ajax({
+                url: "/pillars/asset/chart-date",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.chartData = result
+                }
+            })
+        },
+
         renderChart(){
             gradientChartOptionsConfiguration =  {
                 maintainAspectRatio: true,
                 legend: {
-                      display: true
+                      display: false
                  },
               
                  tooltips: {
@@ -69,6 +82,14 @@ const value_pillars = Vue.createApp({
                    position: "nearest"
                  },
                  responsive: true,
+                 scales: {
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true   // minimum value will be 0.
+                        }
+                    }]
+                }
               };
             
               var checkIfExist = document.getElementById("asset_pillars")
@@ -84,14 +105,12 @@ const value_pillars = Vue.createApp({
                 
                 var data = {
                   labels: [
-                    'Just A Thing',
-                    'Another Thing',
-                    'Third Thing',
-                    'Fourth Thing',
-                    'Fifth A Thing',
+                    'Return of Asset',
+                    'Asset Turnover Ratio',
+                    'Debt to Asset Ratio',
                   ],
                   datasets: [{
-                    label: "Quater 1",
+                    label: "Return of Asset",
                     fill: true,
                     borderColor: '#73CD73',
                     borderWidth: 2,
@@ -104,27 +123,12 @@ const value_pillars = Vue.createApp({
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [11, 2.9, 0.9, 4.1, 5.1],
-                  },{
-                      label: "Quater 2",
-                    fill: true,
-                    borderColor: '#42f5f2',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    pointBackgroundColor: '#42f5f2',
-                    pointBorderColor:'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#42f5f2',
-                    pointBorderWidth: 20,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 15,
-                    pointRadius: 4,
-                    data: [2.7, 1.9, 1.5, 2.1, 1.1],
+                    data: [this.chartData.return_of_asset, this.chartData.asset_turnover_ratio, this.chartData.debt_to_asset_ratio],
                   }]
                 };
                 
                 var valuePillarChart = new Chart(valuePillarCTX, {
-                  type: 'line',
+                  type: 'bar',
                   data: data,
                   options: gradientChartOptionsConfiguration
                 });
@@ -210,9 +214,12 @@ const value_pillars = Vue.createApp({
         },
     },
     mounted(){
+        this.get_chart_data()
+        setTimeout(() => {
+            this.renderChart()
+        }, 350);
         this.showArticles()
         this.showInfo()
-        this.renderChart()
         this.get_videos()
         this.get_articles()
         this.get_networking()
