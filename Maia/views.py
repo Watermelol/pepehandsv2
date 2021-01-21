@@ -66,6 +66,7 @@ def to_questionaire_user_profile(request):
             current_user.company_name = user_form.cleaned_data.get('company_name')
             current_user.company_industry = user_form.cleaned_data.get('company_industry')
             current_user.email = user_form.cleaned_data.get('email')
+            current_user.company_size = user_form.cleaned_data.get('company_size')
             current_user.address_1 = user_form.cleaned_data.get('address_1')
             current_user.address_2 = user_form.cleaned_data.get('address_2')
             current_user.zip_code = user_form.cleaned_data.get('zip_code')
@@ -332,6 +333,8 @@ def get_user_data(request):
         'companyName': current_user.company_name,
         'company_industry': current_user.company_industry.industry_name,
         'email': current_user.email,
+        'company_size_value': current_user.get_company_size_display(),
+        'company_size': current_user.company_size,
         'address1': current_user.address_1,
         'address2': current_user.address_2,
         'city': current_user.city,
@@ -363,6 +366,7 @@ def update_user_profile(request):
     current_user.last_name = jsn['lastName']
     current_user.company_name = jsn['companyName']
     current_user.email = jsn['email']
+    current_user.company_size = jsn['company_size']
     current_user.address_1 = jsn['address1']
     current_user.address_2 = jsn['address2']
     current_user.zip_code = jsn['zipCode']
@@ -375,24 +379,24 @@ def get_user_financial_data(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     financial_data = user_financial_data_v2.objects.get(user=current_user)
     jsn_data = {
-        'q1_revenue': financial_data.q1_revenue / 1000,
-        'q1_profit_before_tax': financial_data.q1_profit_before_tax / 1000,
-        'q1_net_profit': financial_data.q1_net_profit / 1000,
-        'q2_revenue': financial_data.q2_revenue / 1000,
-        'q2_profit_before_tax': financial_data.q2_profit_before_tax / 1000,
-        'q2_net_profit': financial_data.q2_net_profit / 1000,
-        'q3_revenue': financial_data.q3_revenue / 1000,
-        'q3_profit_before_tax': financial_data.q3_profit_before_tax / 1000,
-        'q3_net_profit': financial_data.q3_net_profit / 1000,
-        'q4_net_profit': financial_data.q4_net_profit / 1000,
-        'q4_revenue': financial_data.q4_revenue / 1000,
-        'q4_profit_before_tax': financial_data.q4_profit_before_tax / 1000,
-        'yearly_revenue': financial_data.yearly_revenue / 1000,
-        'yearly_net_profit': financial_data.yearly_net_profit / 1000,
-        'cash': financial_data.cash / 1000,
-        'debt': financial_data.debt / 1000,
-        'total_debt': financial_data.total_debt / 1000,
-        'net_assets': financial_data.net_assets / 1000,
+        'q1_revenue': financial_data.q1_revenue,
+        'q1_profit_before_tax': financial_data.q1_profit_before_tax,
+        'q1_net_profit': financial_data.q1_net_profit,
+        'q2_revenue': financial_data.q2_revenue,
+        'q2_profit_before_tax': financial_data.q2_profit_before_tax,
+        'q2_net_profit': financial_data.q2_net_profit,
+        'q3_revenue': financial_data.q3_revenue,
+        'q3_profit_before_tax': financial_data.q3_profit_before_tax,
+        'q3_net_profit': financial_data.q3_net_profit,
+        'q4_net_profit': financial_data.q4_net_profit,
+        'q4_revenue': financial_data.q4_revenue,
+        'q4_profit_before_tax': financial_data.q4_profit_before_tax,
+        'yearly_revenue': financial_data.yearly_revenue,
+        'yearly_net_profit': financial_data.yearly_net_profit,
+        'cash': financial_data.cash,
+        'debt': financial_data.debt,
+        'total_debt': financial_data.total_debt,
+        'net_assets': financial_data.net_assets,
         'current_ratio': financial_data.current_ratio,
         'quick_ratio': financial_data.quick_ratio,
         'cash_ratio': financial_data.cash_ratio,
@@ -408,25 +412,25 @@ def update_user_financial_data(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     financial_data = user_financial_data_v2.objects.get(user=current_user)
 
-    financial_data.q1_revenue = int(jsn["q1_revenue"]) * 1000
-    financial_data.q1_profit_before_tax= int(jsn["q1_profit_before_tax"]) * 1000
-    financial_data.q1_net_profit= int(jsn["q1_net_profit"]) * 1000
-    financial_data.q2_revenue = int(jsn["q2_revenue"]) * 1000
-    financial_data.q2_profit_before_tax= int(jsn["q2_profit_before_tax"]) * 1000
-    financial_data.q2_net_profit= int(jsn["q2_net_profit"]) * 1000
-    financial_data.q3_revenue = int(jsn["q3_revenue"]) * 1000
-    financial_data.q3_profit_before_tax= int(jsn["q3_profit_before_tax"]) * 1000
-    financial_data.q3_net_profit= int(jsn["q3_net_profit"]) * 1000
-    financial_data.q4_revenue = int(jsn["q4_revenue"]) * 1000
-    financial_data.q4_profit_before_tax= int(jsn["q4_profit_before_tax"]) * 1000
-    financial_data.q4_net_profit= int(jsn["q4_net_profit"]) * 1000
+    financial_data.q1_revenue = int(jsn["q1_revenue"])
+    financial_data.q1_profit_before_tax= int(jsn["q1_profit_before_tax"])
+    financial_data.q1_net_profit= int(jsn["q1_net_profit"])
+    financial_data.q2_revenue = int(jsn["q2_revenue"])
+    financial_data.q2_profit_before_tax= int(jsn["q2_profit_before_tax"])
+    financial_data.q2_net_profit= int(jsn["q2_net_profit"])
+    financial_data.q3_revenue = int(jsn["q3_revenue"])
+    financial_data.q3_profit_before_tax= int(jsn["q3_profit_before_tax"])
+    financial_data.q3_net_profit= int(jsn["q3_net_profit"])
+    financial_data.q4_revenue = int(jsn["q4_revenue"])
+    financial_data.q4_profit_before_tax= int(jsn["q4_profit_before_tax"])
+    financial_data.q4_net_profit= int(jsn["q4_net_profit"])
 
-    financial_data.yearly_revenue = int(jsn['yearly_revenue']) * 1000
-    financial_data.yearly_net_profit = int(jsn["yearly_net_profit"]) * 1000
-    financial_data.cash = int(jsn['cash']) * 1000
-    financial_data.debt= int(jsn["debt"]) * 1000
-    financial_data.total_debt = int(jsn['total_debt']) * 1000
-    financial_data.net_assets = int(jsn["net_assets"]) * 1000
+    financial_data.yearly_revenue = int(jsn['yearly_revenue'])
+    financial_data.yearly_net_profit = int(jsn["yearly_net_profit"])
+    financial_data.cash = int(jsn['cash'])
+    financial_data.debt= int(jsn["debt"])
+    financial_data.total_debt = int(jsn['total_debt'])
+    financial_data.net_assets = int(jsn["net_assets"])
     financial_data.current_ratio = jsn['current_ratio']
     financial_data.quick_ratio= jsn["quick_ratio"]
     financial_data.cash_ratio = jsn['cash_ratio']
@@ -436,6 +440,24 @@ def update_user_financial_data(request):
     financial_data.net_tangeble_asset = jsn['net_tangeble_asset']
 
     financial_data.save()
+
+    financial_data_me = user_financial_data_v2.objects.get(user=current_user)
+
+    profit_score = profit_cal(financial_data_me)
+    asset_score = asset_cal(financial_data_me)
+    liquidity_score = liquidity_cal(financial_data_me)
+    cash_score = cash_cal(financial_data_me)
+    expert_score = (cash_score + liquidity_score + asset_score + profit_score)/4
+
+    analysis_entry = user_financial_data_analysis.objects.get(user=current_user)
+    analysis_entry.profit_result = profit_score
+    analysis_entry. asset_result = asset_score
+    analysis_entry.liquidity_result = liquidity_score
+    analysis_entry.cash_result = cash_score
+    analysis_entry.general_result = expert_score
+
+    analysis_entry.save()
+
     return HttpResponse("data saved", status=200)
 
 def profit_pillars(request):
@@ -730,6 +752,19 @@ def get_liquidity_suggestion(request):
     response = {
         'data': suggestions
     }
+    return JsonResponse(response, safe=False)
+
+def get_analysis_result(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    analysis_result = user_financial_data_analysis.objects.get(user= current_user)
+    response = {
+        'overallScore': analysis_result.general_result,
+        'profitabilityScore': analysis_result.profit_result,
+        'assetScore': analysis_result.asset_result,
+        'cashScore': analysis_result.cash_result,
+        'liquidityScore': analysis_result.liquidity_result
+    }
+
     return JsonResponse(response, safe=False)
     
 
