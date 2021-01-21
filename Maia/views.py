@@ -162,6 +162,19 @@ def financial_data_questionaire(request):
         )
         analysis_entry.save()
 
+        financial_score_me = user_financial_data_analysis.objects.get(user=current_user)
+
+        if (financial_score_me.profit_result <= 1.9):
+            current_user.profit_tag.add(7)
+        elif (financial_score_me.profit_result >= 2 and financial_score_me.profit_result <= 3):
+            current_user.profit_tag.add(8)
+        elif (financial_score_me.profit_result >= 3.1 and financial_score_me.profit_result <= 4.8):
+            current_user.profit_tag.add(9)
+        else:
+            current_user.profit_tag.add(10)
+
+
+
 
 
 
@@ -477,6 +490,19 @@ def update_user_financial_data(request):
     analysis_entry.general_result = expert_score
 
     analysis_entry.save()
+
+    financial_score_me = user_financial_data_analysis.objects.get(user=current_user)
+
+
+    if (financial_score_me.profit_result <= 1.9):
+        current_user.profit_tag.add(7)
+    elif (financial_score_me.profit_result >= 2 and financial_score_me.profit_result <= 3):
+        current_user.profit_tag.add(8)
+    elif (financial_score_me.profit_result >= 3.1 and financial_score_me.profit_result <= 4.8):
+        current_user.profit_tag.add(9)
+    else:
+        current_user.profit_tag.add(10)
+
 
     return HttpResponse("data saved", status=200)
 

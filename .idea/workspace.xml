@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/templates/pillars/asset_pillar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/templates/pillars/asset_pillar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/templates/pillars/profit_pillar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/templates/pillars/profit_pillar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maia/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -297,5 +295,9 @@
       <screen x="0" y="0" width="1368" height="872" />
     </state>
     <state width="715" height="273" key="GridCell.Tab.1.right/0.0.1368.872@0.0.1368.872" timestamp="1610286600320" />
+    <state x="347" y="184" width="672" height="678" key="search.everywhere.popup" timestamp="1611240407682">
+      <screen x="0" y="0" width="1368" height="872" />
+    </state>
+    <state x="347" y="184" width="672" height="678" key="search.everywhere.popup/0.0.1368.872@0.0.1368.872" timestamp="1611240407682" />
   </component>
 </project>
