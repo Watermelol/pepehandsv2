@@ -12,6 +12,7 @@ const performance_pillars = Vue.createApp({
             people_networking: [],
             profit_comment: [],
             profit_suggestion: [],
+            chartData: {},
         }
     },
     methods:{
@@ -51,6 +52,18 @@ const performance_pillars = Vue.createApp({
             this.networking= true
         },
 
+        getChartData() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+            var data = this
+            $.ajax({
+                url: "/pillars/profit/chart-date",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.chartData = result
+                }
+            })
+        },
+
         renderChart(){
             gradientChartOptionsConfiguration =  {
                 maintainAspectRatio: true,
@@ -84,14 +97,13 @@ const performance_pillars = Vue.createApp({
                 
                 var data = {
                   labels: [
-                    'Just A Thing',
-                    'Another Thing',
-                    'Third Thing',
-                    'Fourth Thing',
-                    'Fifth A Thing',
+                    'Quater 1',
+                    'Quater 2',
+                    'Quater 3',
+                    'Quater 4',
                   ],
                   datasets: [{
-                    label: "Quater 1",
+                    label: "Profit",
                     fill: true,
                     borderColor: '#73CD73',
                     borderWidth: 2,
@@ -104,9 +116,9 @@ const performance_pillars = Vue.createApp({
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [1.7, 2.9, 0.9, 4.1, 5.1],
+                    data: this.chartData.profit,
                   },{
-                      label: "Quater 2",
+                      label: "Revenue",
                     fill: true,
                     borderColor: '#42f5f2',
                     borderWidth: 2,
@@ -119,7 +131,7 @@ const performance_pillars = Vue.createApp({
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [2.7, 1.9, 1.5, 2.1, 1.1],
+                    data: this.chartData.revenue,
                   }]
                 };
                 
@@ -212,9 +224,12 @@ const performance_pillars = Vue.createApp({
         },
     },
     mounted(){
+        this.getChartData()
+        setTimeout(() => {
+            this.renderChart()
+        }, 350);
         this.showArticles()
         this.showInfo()
-        this.renderChart()
         this.get_videos()
         this.get_articles()
         this.get_networking()
@@ -224,4 +239,7 @@ const performance_pillars = Vue.createApp({
     delimiters : ['[$', '$]'],
 })
 
-performance_pillars.mount('#profitPillarPage')
+var checkIfExist= document.getElementById("profitPillarPage")
+if (checkIfExist){
+    performance_pillars.mount('#profitPillarPage')
+}

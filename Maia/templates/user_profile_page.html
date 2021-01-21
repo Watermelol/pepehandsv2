@@ -10,6 +10,11 @@
             overflow-y: auto;    /* Trigger vertical scroll    */
             overflow-x: hidden;  /* Hide the horizontal scroll */
         }
+
+        option { 
+            /* Whatever color  you want */
+            background-color: #525f7f;
+        }
     </style>
     
     <div class="container" id="user_profile">
@@ -22,6 +27,8 @@
                         <div class="col-6">
                             <label for="fname">First Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="fname" name="fname" v-model= "profile_data.firstName" readonly>
+                            <label for="lname">Email:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="lname" name="lname" v-model= "profile_data.email" readonly>
                             <label for="companyName">Company Name:</label>
                             <input class="form-control mb-2 text-white" type="email" id="companyName" name="companyName" v-model= "profile_data.companyName" readonly>
                             <label for="address1">Address 1:</label>
@@ -32,6 +39,8 @@
                         <div class="col-6">
                             <label for="lname">Last Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="lname" name="lname" v-model= "profile_data.lastName" readonly>
+                            <label for="company_size">Company Size:</label>
+                            <input class="form-control mb-2 text-white" type="text" id="company_size" name="company_size" v-model= "profile_data.company_size_value" readonly>
                             <label for="industryName">Industry Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="industryName" name="industryName" v-model= "profile_data.industryName" readonly>
                             <label for="address2">Address 2:</label>
@@ -116,13 +125,11 @@
                     <div class="row">
                         <form class="col-12">
                             <div class="row">
-                                <div class="col-12">
-                                    <label class="text-white" for="fname">Email: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.email == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.email" required>
-                                </div>
                                 <div class="col-6">
                                     <label class="text-white" for="fname">First Name: <span class="text-danger">*</span></label>
                                     <input :class=" [{ 'border-danger': profile_edit.firstName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.firstName">
+                                    <label class="text-white" for="fname">Email: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.email == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.email" required>
                                     <label class="text-white" for="companyName">Company Name: <span class="text-danger">*</span></label>
                                     <input :class=" [{ 'border-danger': profile_edit.companyName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="companyName" name="companyName" v-model= "profile_edit.companyName" required>
                                     <label class="text-white" for="address1">Address 1: <span class="text-danger">*</span></label>
@@ -132,9 +139,15 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="text-white" for="lname">Last Name: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.lastName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="lname" name="lname" v-model= "profile_edit.lastName" required>
+                                    <input :class=" [{ 'border-danger': profile_edit.lastName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="lname" name="lname" v-model= "profile_edit.lastName">
                                     <label class="text-white" for="industryName">Industry Name: <span class="text-danger">*</span></label>
                                     <input :class=" [{ 'border-danger': profile_edit.industryName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="industryName" name="industryName" v-model= "profile_edit.industryName" readonly required>
+                                    <label class="text-white" for="company_size">Company Size:</label>
+                                    <select :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" name="company_size" id="company_size" v-model="profile_edit.company_size" required>
+                                        <option value="MC">Micro</option>
+                                        <option value="SM">Small</option>
+                                        <option value="MD">Medium</option>
+                                    </select>
                                     <label class="text-white" for="address2">Address 2:</label>
                                     <input :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="address2" name="address2" v-model= "profile_edit.address2">
                                     <label class="text-white" for="zipCode">Zip Code: <span class="text-danger">*</span></label>

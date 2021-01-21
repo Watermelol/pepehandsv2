@@ -25,7 +25,7 @@
             option { 
                 /* Whatever color  you want */
                 background-color: #525f7f;
-}
+            }
         </style>
         <a href="{% url 'logout' %}" class="btn btn-warning pull-right btn-sm" id="logoutbutton" style="margin-right: 2vh; margin-top: 2vh; z-index: 999;">
             <i class="fas fa-sign-out-alt" style="font-size: 1rem; margin: 0; padding: 5px 5px 5px 5px;"></i>
@@ -57,8 +57,11 @@
                                         <div class="col-sm-6">
                                             {{ user_form.company_industry|as_crispy_field }}
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             {{ user_form.email|as_crispy_field }}
+                                        </div>
+                                        <div class="col-6">
+                                            {{ user_form.company_size|as_crispy_field }}
                                         </div>
                                         <div class="col-sm-6">
                                             {{ user_form.address_1|as_crispy_field }}

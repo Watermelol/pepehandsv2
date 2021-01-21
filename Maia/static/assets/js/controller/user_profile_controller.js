@@ -5,6 +5,7 @@ const user_profile = Vue.createApp({
                 'firstName': '',
                 'lastName': '',
                 'companyName': '',
+                'email': '',
                 'industryName': '',
                 'address1': '',
                 'address2': '',
@@ -44,6 +45,8 @@ const user_profile = Vue.createApp({
                     data.profile_data.city = result.city
                     data.profile_data.zipCode = result.zipCode
                     data.profile_data.email = result.email
+                    data.profile_data.company_size = result.company_size
+                    data.profile_data.company_size_value = result.company_size_value
 
                     data.profile_edit.firstName = result.firstName
                     data.profile_edit.lastName = result.lastName
@@ -54,6 +57,8 @@ const user_profile = Vue.createApp({
                     data.profile_edit.city = result.city
                     data.profile_edit.zipCode = result.zipCode
                     data.profile_edit.email = result.email
+                    data.profile_edit.company_size = result.company_size
+                    data.profile_data.company_size_value = result.company_size_value
                 }
             })
         },
@@ -125,23 +130,54 @@ const user_profile = Vue.createApp({
         },
 
         updateFinancialData () {
-            $('#editFinancialData').modal('hide')
-            this.showGlobalLoader()
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             let data = this
-            $.ajax({
-                url: "/user/update/data/financial",
-                headers:  {'X-CSRFToken': csrftoken},
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(data.user_financial_data),
-                type: 'POST',
-                success: function(result) {
-                    setTimeout(() => {
-                        toastr.success("Data Updated")
-                        data.hideGlobalLoader()
-                    }, 1000);
-                }
-            })
+            if (
+            this.user_financial_data.q1_revenue === '' ||
+            this.user_financial_data.q1_profit_before_tax === '' ||
+            this.user_financial_data.q1_net_profit === '' ||
+            this.user_financial_data.q2_revenue === '' ||
+            this.user_financial_data.q2_profit_before_tax === '' ||
+            this.user_financial_data.q2_net_profit === '' ||
+            this.user_financial_data.q3_revenue === '' ||
+            this.user_financial_data.q3_profit_before_tax === '' ||
+            this.user_financial_data.q3_net_profit === '' ||
+            this.user_financial_data.q4_revenue === '' ||
+            this.user_financial_data.q4_profit_before_tax === '' ||
+            this.user_financial_data.q4_net_profit === '' ||
+            this.user_financial_data.yearly_revenue === '' ||
+            this.user_financial_data.yearly_net_profit === '' ||
+            this.user_financial_data.cash === '' ||
+            this.user_financial_data.debt === '' ||
+            this.user_financial_data.total_debt === '' ||
+            this.user_financial_data.net_assets === '' ||
+            this.user_financial_data.current_ratio === '' ||
+            this.user_financial_data.quick_ratio === '' ||
+            this.user_financial_data.cash_ratio === '' ||
+            this.user_financial_data.return_on_asset === '' ||
+            this.user_financial_data.asset_turn_over_ratio === '' ||
+            this.user_financial_data.debt_to_asset_ratio === '' ||
+            this.user_financial_data.net_tangeble_asset === ''
+            ){
+                toastr.warning('Please make sure that you have fill in all the column')
+            }
+            else{
+                $('#editFinancialData').modal('hide')
+                this.showGlobalLoader()
+                $.ajax({
+                    url: "/user/update/data/financial",
+                    headers:  {'X-CSRFToken': csrftoken},
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data.user_financial_data),
+                    type: 'POST',
+                    success: function(result) {
+                        setTimeout(() => {
+                            toastr.success("Data Updated")
+                            data.hideGlobalLoader()
+                        }, 1000);
+                    }
+                })
+            }
         },
 
         getPurchasedReport() {
@@ -196,5 +232,7 @@ const user_profile = Vue.createApp({
     },
     delimiters : ['[$', '$]'],
 })
-
-user_profile.mount('#user_profile')
+var checkIfExist= document.getElementById("user_profile")
+if (checkIfExist){
+    user_profile.mount('#user_profile')
+}

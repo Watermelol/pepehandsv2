@@ -21,35 +21,50 @@ class industries(models.Model):
 
 class tag_profit (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_asset (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_cash (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class tag_liquidity (models.Model):
     name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
     desc = models.CharField('Description', max_length=255, default='', blank=True)
     def __str__(self):
         return self.name
 
 class user_profile(models.Model):
+    COMPANY_SIZE = [
+    ('MC', 'Micro'),
+    ('SM', 'Small'),
+    ('MD', 'Medium'),
+]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField('First Name', max_length=255, default='')
     last_name = models.CharField('Last Name', max_length=255, default='')
     company_name = models.CharField('Company Name', max_length=255, default='')
     company_industry = models.ForeignKey(industries, on_delete=models.RESTRICT, default=1 ,verbose_name='Company Industry')
     email = models.EmailField(default='')
+    company_size = models.CharField(max_length=5, choices=COMPANY_SIZE, default='SM')
     address_1 = models.CharField('Address 1', max_length=255, default='')
     address_2 = models.CharField('Address 2', max_length=255, default='', blank=True, null=True)
     zip_code = models.CharField("ZIP / Postal code", max_length=12, default='')
@@ -58,10 +73,10 @@ class user_profile(models.Model):
     user_profile_updated = models.BooleanField(default=False)
     financial_data_provided = models.BooleanField(default=False)
     qualitative_data_provided = models.BooleanField(default=False)
-    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
-    asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
-    cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
-    liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    profit_tag = models.ManyToManyField(tag_profit, default=1, verbose_name='Profit Tag')
+    asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
+    cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
+    liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
 
     def __str__(self):
         return self.user.username

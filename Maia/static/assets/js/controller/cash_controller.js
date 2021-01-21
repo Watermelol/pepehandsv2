@@ -222,4 +222,7 @@ const productivity_pillars = Vue.createApp({
     delimiters : ['[$', '$]'],
 })
 
-productivity_pillars.mount('#cashPillarPage')
+var checkIfExist= document.getElementById("cashPillarPage")
+if (checkIfExist){
+    productivity_pillars.mount('#cashPillarPage')
+}
