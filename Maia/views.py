@@ -848,10 +848,10 @@ def get_news_sentiment(request):
 
     # Get industry
     current_user = user_profile.objects.get(user_id = request.user.id)
-    industry =  current_user.company_industry.industry_name + ".pkl"
+    file_name =  current_user.company_industry.industry_name + ".pkl"
 
     # Open pickle file
-    pickle_file = open(industry, "rb")
+    pickle_file = open(file_name, "rb")
         while True:
             try:
                 news_list = pickle.load(pickle_file)
@@ -869,11 +869,26 @@ def get_news_sentiment(request):
     average_sentiment_score /= len(news_list)
     average_sentiment_magitude /= len(news_list)
 
+    # Magnitude has a score from 0 to infinite
+        # Assign emotion strength
+        if average_sentiment_magitude >= 5:
+            classification = "Strongly "
+
+        # Score has a score from -1 to 1
+        # Assign score emotion
+        if average_sentiment_score >= 0.25:
+            classification += "Positive "
+        elif average_sentiment_score <= -0.25:
+            classification += "Negative "
+        else:
+            classification += "Neutral "
+
     # Build the response
     response = {
         overallSentimentScore: average_sentiment_score
         overallMagnitude: average_sentiment_magitude
-        news: news_list
+        sentimentClassification: classification
+        newsList: news_list
     }
 
     return JsonResponse(response, safe = False)
