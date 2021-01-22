@@ -12,6 +12,7 @@ import stripe
 from datetime import datetime
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
+from news_processor import news_info
 
 # Create your views here.
 def dashboard(request):
@@ -892,8 +893,3 @@ def get_news_sentiment(request):
     }
 
     return JsonResponse(response, safe = False)
-
-
-
-
-
