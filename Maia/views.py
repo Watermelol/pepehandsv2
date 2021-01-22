@@ -842,10 +842,41 @@ def get_asset_chart_data(request):
 
     return JsonResponse(response, safe=False)
     
+# News sentiment handling
+def get_news_sentiment(request):
+    import pickle
 
+    # Get industry
+    current_user = user_profile.objects.get(user_id = request.user.id)
+    industry =  current_user.company_industry.industry_name + ".pkl"
 
+    # Open pickle file
+    pickle_file = open(industry, "rb")
+        while True:
+            try:
+                news_list = pickle.load(pickle_file)
+            except EOFError:
+                break
+    pickle_file.close()
 
+    # Average scores
+    average_sentiment_score = 0
+    average_sentiment_magitude = 0
+    for news_var in news_list:
+        average_sentiment_score += news_var.emotion_score
+        average_sentiment_magitude += news_var.emotion_strength
 
+    average_sentiment_score /= len(news_list)
+    average_sentiment_magitude /= len(news_list)
+
+    # Build the response
+    response = {
+        overallSentimentScore: average_sentiment_score
+        overallMagnitude: average_sentiment_magitude
+        news: news_list
+    }
+
+    return JsonResponse(response, safe = False)
 
 
 
