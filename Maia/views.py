@@ -848,7 +848,7 @@ def get_news_sentiment(request):
 
     # Get industry
     current_user = user_profile.objects.get(user_id = request.user.id)
-    file_name =  current_user.company_industry.industry_name + ".pkl"
+    file_name =  "/News_Sentiment/" + current_user.company_industry.industry_name + ".pkl"
 
     # Open pickle file
     pickle_file = open(file_name, "rb")
