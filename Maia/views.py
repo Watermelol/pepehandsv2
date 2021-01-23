@@ -110,16 +110,19 @@ def financial_data_questionaire(request):
             q1_revenue = int(jsn["q1_revenue"]),
             q1_profit_before_tax= int(jsn["q1_profit_before_tax"]),
             q1_net_profit= int(jsn["q1_net_profit"]),
+            q1_net_cash_flow =int(jsn["q1_net_cash_flow"]),
             q2_revenue = int(jsn["q2_revenue"]),
             q2_profit_before_tax= int(jsn["q2_profit_before_tax"]),
             q2_net_profit= int(jsn["q2_net_profit"]),
+            q2_net_cash_flow =int(jsn["q2_net_cash_flow"]),
             q3_revenue = int(jsn["q3_revenue"]),
             q3_profit_before_tax= int(jsn["q3_profit_before_tax"]),
             q3_net_profit= int(jsn["q3_net_profit"]),
+            q3_net_cash_flow =int(jsn["q3_net_cash_flow"]),
             q4_revenue = int(jsn["q4_revenue"]),
             q4_profit_before_tax= int(jsn["q4_profit_before_tax"]),
             q4_net_profit= int(jsn["q4_net_profit"]),
-
+            q4_net_cash_flow =int(jsn["q4_net_cash_flow"]),
 
             yearly_revenue = int(jsn['yearly_revenue']),
             yearly_net_profit = int(jsn["yearly_net_profit"]),
@@ -134,7 +137,6 @@ def financial_data_questionaire(request):
             asset_turn_over_ratio = jsn['asset_turn_over_ratio'],
             debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
             net_tangeble_asset = jsn['net_tangeble_asset'],
-
 
             q1_net_profit_margin = int(jsn['q1_net_profit'])/int(jsn['q1_revenue']),
             q2_net_profit_margin=int(jsn['q2_net_profit'])/int(jsn['q2_revenue']),
@@ -395,15 +397,19 @@ def get_user_financial_data(request):
         'q1_revenue': financial_data.q1_revenue,
         'q1_profit_before_tax': financial_data.q1_profit_before_tax,
         'q1_net_profit': financial_data.q1_net_profit,
+        'q1_net_cash_flow': financial_data.q1_net_cash_flow,
         'q2_revenue': financial_data.q2_revenue,
         'q2_profit_before_tax': financial_data.q2_profit_before_tax,
         'q2_net_profit': financial_data.q2_net_profit,
+        'q2_net_cash_flow': financial_data.q2_net_cash_flow,
         'q3_revenue': financial_data.q3_revenue,
         'q3_profit_before_tax': financial_data.q3_profit_before_tax,
         'q3_net_profit': financial_data.q3_net_profit,
+        'q3_net_cash_flow': financial_data.q3_net_cash_flow,
         'q4_net_profit': financial_data.q4_net_profit,
         'q4_revenue': financial_data.q4_revenue,
         'q4_profit_before_tax': financial_data.q4_profit_before_tax,
+        'q4_net_cash_flow': financial_data.q4_net_cash_flow,
         'yearly_revenue': financial_data.yearly_revenue,
         'yearly_net_profit': financial_data.yearly_net_profit,
         'cash': financial_data.cash,
@@ -431,15 +437,19 @@ def update_user_financial_data(request):
     financial_data.q1_revenue = int(jsn["q1_revenue"])
     financial_data.q1_profit_before_tax= int(jsn["q1_profit_before_tax"])
     financial_data.q1_net_profit= int(jsn["q1_net_profit"])
+    financial_data.q1_net_cash_flow= int(jsn["q1_net_cash_flow"])
     financial_data.q2_revenue = int(jsn["q2_revenue"])
     financial_data.q2_profit_before_tax= int(jsn["q2_profit_before_tax"])
     financial_data.q2_net_profit= int(jsn["q2_net_profit"])
+    financial_data.q2_net_cash_flow= int(jsn["q2_net_cash_flow"])
     financial_data.q3_revenue = int(jsn["q3_revenue"])
     financial_data.q3_profit_before_tax= int(jsn["q3_profit_before_tax"])
     financial_data.q3_net_profit= int(jsn["q3_net_profit"])
+    financial_data.q3_net_cash_flow= int(jsn["q3_net_cash_flow"])
     financial_data.q4_revenue = int(jsn["q4_revenue"])
     financial_data.q4_profit_before_tax= int(jsn["q4_profit_before_tax"])
     financial_data.q4_net_profit= int(jsn["q4_net_profit"])
+    financial_data.q4_net_cash_flow= int(jsn["q4_net_cash_flow"])
 
     financial_data.yearly_revenue = int(jsn['yearly_revenue'])
     financial_data.yearly_net_profit = int(jsn["yearly_net_profit"])

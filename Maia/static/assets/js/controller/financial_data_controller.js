@@ -5,15 +5,19 @@ const financial_data_questionaire_controller = Vue.createApp({
                 'q1_revenue': 0.00,
                 'q1_profit_before_tax': 0.00,
                 'q1_net_profit': 0.00,
+                'q1_net_cash_flow': 0.00,
                 'q2_revenue': 0.00,
                 'q2_profit_before_tax': 0.00,
                 'q2_net_profit': 0.00,
+                'q2_net_cash_flow': 0.00,
                 'q3_revenue': 0.00,
                 'q3_profit_before_tax': 0.00,
                 'q3_net_profit': 0.00,
+                'q3_net_cash_flow': 0.00,
                 'q4_net_profit': 0.00,
                 'q4_revenue': 0.00,
                 'q4_profit_before_tax': 0.00,
+                'q4_net_cash_flow': 0.00,
                 'yearly_revenue': 0.00,
                 'yearly_net_profit': 0.00,
                 'cash': 0.00,
@@ -39,15 +43,19 @@ const financial_data_questionaire_controller = Vue.createApp({
             this.user_financial_data.q1_revenue === '' ||
             this.user_financial_data.q1_profit_before_tax === '' ||
             this.user_financial_data.q1_net_profit === '' ||
+            this.user_financial_data.q1_net_cash_flow === '' ||
             this.user_financial_data.q2_revenue === '' ||
             this.user_financial_data.q2_profit_before_tax === '' ||
             this.user_financial_data.q2_net_profit === '' ||
+            this.user_financial_data.q2_net_cash_flow === '' ||
             this.user_financial_data.q3_revenue === '' ||
             this.user_financial_data.q3_profit_before_tax === '' ||
             this.user_financial_data.q3_net_profit === '' ||
+            this.user_financial_data.q3_net_cash_flow === '' ||
             this.user_financial_data.q4_revenue === '' ||
             this.user_financial_data.q4_profit_before_tax === '' ||
             this.user_financial_data.q4_net_profit === '' ||
+            this.user_financial_data.q4_net_cash_flow === '' ||
             this.user_financial_data.yearly_revenue === '' ||
             this.user_financial_data.yearly_net_profit === '' ||
             this.user_financial_data.cash === '' ||

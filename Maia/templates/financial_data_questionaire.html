@@ -56,17 +56,21 @@
                                 <div id="collapse1" class="show collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q1_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q1_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q1_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
+                                            </div>
+                                            <div class="col-3 d-inline-block input-group">
+                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q1_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -84,17 +88,21 @@
                                 <div id="collapse2" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q2_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q2_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q2_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
+                                            </div>
+                                            <div class="col-3 d-inline-block input-group">
+                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q2_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -112,17 +120,21 @@
                                 <div id="collapse3" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q3_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q3_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q3_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
+                                            </div>
+                                            <div class="col-3 d-inline-block input-group">
+                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q3_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -140,17 +152,21 @@
                                 <div id="collapse4" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q4_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q4_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
                                             </div>
-                                            <div class="col-4 d-inline-block input-group">
+                                            <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
                                                 <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q4_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
+                                            </div>
+                                            <div class="col-3 d-inline-block input-group">
+                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q4_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
