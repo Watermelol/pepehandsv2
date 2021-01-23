@@ -12,7 +12,7 @@ import stripe
 from datetime import datetime
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
-from news_processor import news_info
+from news_processor import *
 
 # Create your views here.
 def dashboard(request):
@@ -849,15 +849,15 @@ def get_news_sentiment(request):
 
     # Get industry
     current_user = user_profile.objects.get(user_id = request.user.id)
-    file_name =  "/News_Sentiment/" + current_user.company_industry.industry_name + ".pkl"
+    file_name =  "Maia/News_Sentiment/" + current_user.company_industry.industry_name + ".pkl"
 
     # Open pickle file
     pickle_file = open(file_name, "rb")
-        while True:
-            try:
-                news_list = pickle.load(pickle_file)
-            except EOFError:
-                break
+    while True:
+        try:
+            news_list = pickle.load(pickle_file)
+        except EOFError:
+            break
     pickle_file.close()
 
     # Average scores
@@ -871,25 +871,31 @@ def get_news_sentiment(request):
     average_sentiment_magitude /= len(news_list)
 
     # Magnitude has a score from 0 to infinite
-        # Assign emotion strength
-        if average_sentiment_magitude >= 5:
-            classification = "Strongly "
+    # Assign emotion strength
+    classification = ""
+    if average_sentiment_magitude >= 5:
+        classification = "Strongly "
 
-        # Score has a score from -1 to 1
-        # Assign score emotion
-        if average_sentiment_score >= 0.25:
-            classification += "Positive "
-        elif average_sentiment_score <= -0.25:
-            classification += "Negative "
-        else:
-            classification += "Neutral "
+    # Score has a score from -1 to 1
+    # Assign score emotion
+    if average_sentiment_score >= 0.25:
+        classification += "Positive "
+    elif average_sentiment_score <= -0.25:
+        classification += "Negative "
+    else:
+        classification += "Neutral "
+
+    # For loop to list out news_list
+    news_array = []
+    for tempNews in news_list:
+        news_array.append[tempNews.title, tempNews.url, tempNews.date_published, tempNews.emotion_score, tempNews.emotion_strength, tempNews.emotion_classification]
 
     # Build the response
     response = {
-        overallSentimentScore: average_sentiment_score
-        overallMagnitude: average_sentiment_magitude
-        sentimentClassification: classification
-        newsList: news_list
+        'overallSentimentScore': average_sentiment_score,
+        'overallMagnitude': average_sentiment_magitude,
+        'sentimentClassification': classification,
+        'newsList': news_array
     }
 
     return JsonResponse(response, safe = False)
