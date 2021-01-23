@@ -2,28 +2,35 @@
 {%load static%}
 {% block content %}
     <h1>News Sentiment</h1>
-    <div class="card-column" id="news_sentiment">
-        {% csrf_token %}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">Overall Score</h5>
-            </div>
-            <div class="card-body">
-                <div id="newsSentimentChart"></div>
+    <div id="news_sentiment">
+        <div class="card-column">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Overall News Sentiment</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="newsSentimentChart"></div>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
+    
+        <table class="table table-hover">
+            <tr>
+                <th style="width: 60%; color: #fff;">Title</th>
+                <th style="width: 20%; text-align: center; color: #fff;">Sentiment Score</th>
+            </tr>
+            <tr v-for="news in news_sentiment.newsList" @click="goToNews(news.url)">
+                <td>[$news.news_title$]</td>
+                <td v-if="news.emotion_score_word == 'Neutral'"><p align='center' :class=" [{ 'text-danger': news.emotion_score_word == 'Negative' }, { 'text-success': news.emotion_score_word == 'Positive' }, { 'text-info': news.emotion_score_word == 'Neutral' }]">[$news.emotion_score_word$]</p></td>
+                <td v-else><p align='center' :class=" [{ 'text-danger': news.emotion_score_word == 'Negative' }, { 'text-success': news.emotion_score_word == 'Positive' }, { 'text-info': news.emotion_score_word == 'Neutral' }]">[$news.emotion_strength_word$] [$news.emotion_score_word$]</p></td>
+            </tr>
+        </table>
     </div>
-
-    <table class="table table-hover">
-        <tr>
-            <th style="width: 60%;">Title</th>
-            <th style="width: 20%;">Sentiment Score</th>
-            <th style="width: 20%;">Magnitude</th>
-        </tr>
-        <tr>
-            <td>This is a test data</td>
-            <td>-1</td>
-            <td>0.6</td>
-        </tr>
-    </table>
+    
 {% endblock %}

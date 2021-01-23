@@ -55,7 +55,10 @@ const risk_pillars = Vue.createApp({
             gradientChartOptionsConfiguration =  {
                 maintainAspectRatio: true,
                 legend: {
-                      display: true
+                      display: true,
+                      labels: {
+                          fontColor: '#fff'
+                      }
                  },
               
                  tooltips: {
@@ -69,6 +72,18 @@ const risk_pillars = Vue.createApp({
                    position: "nearest"
                  },
                  responsive: true,
+                 scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: '#fff'
+                        },
+                    }],
+                  xAxes: [{
+                        ticks: {
+                            fontColor: '#fff'
+                        },
+                    }]
+                } 
               };
             
               var checkIfExist = document.getElementById("liquidity_pillars")

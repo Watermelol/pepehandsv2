@@ -13,6 +13,7 @@ from datetime import datetime
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
 from news_processor import *
+import datetime
 
 # Create your views here.
 def dashboard(request):
@@ -886,9 +887,36 @@ def get_news_sentiment(request):
         classification += "Neutral "
 
     # For loop to list out news_list
+    news_number = 1
     news_array = []
     for tempNews in news_list:
-        news_array.append[tempNews.title, tempNews.url, tempNews.date_published, tempNews.emotion_score, tempNews.emotion_strength, tempNews.emotion_classification]
+        if news_number <= 20:
+            score_word = ''
+            magnitude_word = ''
+            if tempNews.emotion_score >= 0.25:
+                score_word += "Positive"
+            elif tempNews.emotion_score <= -0.25:
+                score_word += "Negative"
+            else:
+                score_word += "Neutral"
+
+            if tempNews.emotion_strength >= 5:
+                magnitude_word = 'Strongly'
+            
+            news_array.append({
+                'news_title': tempNews.title,
+                'url': tempNews.url,
+                'date': tempNews.date_published,
+                'epoch': datetime.datetime.strptime(tempNews.date_published, '%Y-%m-%dT%H:%M:%S').timestamp(),
+                'emotion_score': tempNews.emotion_score,
+                'emotion_score_word': score_word,
+                'emotion_strength': tempNews.emotion_strength,
+                'emotion_strength_word': magnitude_word,
+                'emotion_classification': tempNews.emotion_classification
+            })
+            news_number += 1
+        else:
+            break
 
     # Build the response
     response = {

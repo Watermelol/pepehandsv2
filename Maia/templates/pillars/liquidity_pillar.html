@@ -30,21 +30,31 @@
                                       </li>
                                 </ul>
                             </div>
-                            <div class="card-body" style="overflow: auto;">
-                                <ul v-if='info'>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                    <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat impedit inventore unde perspiciatis doloribus quo?</li>
-                                </ul>
-                                <ul v-if="comments">
-                                    <li v-for="comment in liquidity_comment">[$ comment $]</li>
-                                </ul>
-                                <ul v-if="suggestion">
-                                    <li v-for="suggestion in liquidity_suggestion">[$ suggestion $]</li>
-                                </ul>
+                            <div class="card-body" style="overflow: auto; max-height: 40vh;">
+                                <table class="table" v-if='info'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, tempora!</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, eum!</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, cupiditate.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, doloribus.</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="comments">
+                                    <tr v-for="comment in liquidity_comment">
+                                        <td style="font-size: 1rem;">[$ comment $]</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="suggestion">
+                                    <tr v-for="suggestion in liquidity_suggestion">
+                                        <td style="font-size: 1rem;">[$ suggestion $]</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>

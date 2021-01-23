@@ -23,6 +23,7 @@ var dashboard = Vue.createApp({
             assetScore: 0,
             cashScore: 0,
             liquidityScore: 0,
+            showChart: false,
         }
     },
 
@@ -39,6 +40,7 @@ var dashboard = Vue.createApp({
                     data.assetScore = (result.assetScore * 10).toFixed(2)
                     data.cashScore = (result.cashScore * 10).toFixed(2)
                     data.liquidityScore = (result.liquidityScore * 10).toFixed(2)
+                    data.showChart = true
                 }
             })
         },
@@ -437,15 +439,19 @@ var dashboard = Vue.createApp({
             chart.render();
         }
     },
+    watch: {
+      showChart: function(val){
+        if (val){
+          this.loadOverallCharts()
+          this.loadProfitChart()
+          this.loadAssetChart()
+          this.loadCashChart()
+          this.loadLiquidityChart()
+        }
+      }
+    },
     mounted() {
-        this.getAnalysisResult()
-        setTimeout(() => {
-            this.loadOverallCharts()
-            this.loadProfitChart()
-            this.loadAssetChart()
-            this.loadCashChart()
-            this.loadLiquidityChart()
-        }, 350);
+      this.getAnalysisResult()
     },
     delimiters : ['[$', '$]'],
 })

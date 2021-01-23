@@ -31,20 +31,31 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="card-body" style="overflow: auto;">
-                                <ul v-if='info'>
-                                    <li>Assets are items of value, such as property and equipment, which your company owns or leases in order to operate. </li>
-                                    <li>Asset are an important means of creating value for your business and helps predict the profitability of the buisness. </li>
-                                    <li>Efficient management of assets are cruical as errors can lead to inaccurate valuation of your business or incorrect tax reporting. </li>
-                                    <li>Financial values such as return-on-asset, debt ratio and asset turnover ratio are of the utmost importance when measuring Asset.</li>
-
-                                </ul>
-                                <ul v-if="comments">
-                                    <li v-for="comment in asset_comment">[$ comment $]</li>
-                                </ul>
-                                <ul v-if="suggestion">
-                                    <li v-for="suggestion in asset_suggestion">[$ suggestion $]</li>
-                                </ul>
+                            <div class="card-body" style="overflow: auto; max-height: 40vh;">
+                                <table class="table" v-if='info'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Assets are items of value, such as property and equipment, which your company owns or leases in order to operate.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Asset are an important means of creating value for your business and helps predict the profitability of the buisness. </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Efficient management of assets are cruical as errors can lead to inaccurate valuation of your business or incorrect tax reporting. </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Financial values such as return-on-asset, debt ratio and asset turnover ratio are of the utmost importance when measuring Asset.</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="comments">
+                                    <tr v-for="comment in asset_comment">
+                                        <td style="font-size: 1rem;">[$ comment $]</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="suggestion">
+                                    <tr v-for="suggestion in asset_suggestion">
+                                        <td style="font-size: 1rem;">[$ suggestion $]</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
