@@ -93,5 +93,6 @@ urlpatterns = [
     path('pillars/liquidity/suggestion', views.get_liquidity_suggestion , name='liquidity_pillars_suggestion'),
 
     # News Sentiment
-    path('news-sentiment/', views.news_setiment_page, name='news_sentiment')
+    path('news-sentiment/', views.news_setiment_page, name='news_sentiment'),
+    path('news-sentiment/get', views.get_news_sentiment, name='get_news_sentiment')
 ]

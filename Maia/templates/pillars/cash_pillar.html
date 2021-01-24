@@ -46,6 +46,33 @@
                                 <ul v-if="suggestion">
                                     <li v-for="suggestion in cash_suggestion">[$ suggestion $]</li>
                                 </ul>
+=======
+                            <div class="card-body" style="overflow: auto; max-height: 40vh;">
+                                <table class="table" v-if='info'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, tempora!</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, eum!</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, cupiditate.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, doloribus.</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="comments">
+                                    <tr v-for="comment in cash_comment">
+                                        <td style="font-size: 1rem;">[$ comment $]</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="suggestion">
+                                    <tr v-for="suggestion in cash_suggestion">
+                                        <td style="font-size: 1rem;">[$ suggestion $]</td>
+                                    </tr>
+                                </table>
+>>>>>>> 193ae2109cc5a70dbec59ebbd3f10d1820c13514
                             </div>
                         </div>
                     </div>

@@ -46,8 +46,4 @@ def run_score_classification(score):
         classification += "Negative "
     else:
         classification += "Neutral "
-
     return classification
-
-text = open('Python Code\\text.txt', 'r').read()
-print(run_score_classification(run_sentiment_analysis(text)))

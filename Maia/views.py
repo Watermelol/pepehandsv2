@@ -12,6 +12,8 @@ import stripe
 from datetime import datetime
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
+from news_processor import *
+import datetime
 
 # Create your views here.
 def dashboard(request):
@@ -108,16 +110,19 @@ def financial_data_questionaire(request):
             q1_revenue = int(jsn["q1_revenue"]),
             q1_profit_before_tax= int(jsn["q1_profit_before_tax"]),
             q1_net_profit= int(jsn["q1_net_profit"]),
+            q1_net_cash_flow =int(jsn["q1_net_cash_flow"]),
             q2_revenue = int(jsn["q2_revenue"]),
             q2_profit_before_tax= int(jsn["q2_profit_before_tax"]),
             q2_net_profit= int(jsn["q2_net_profit"]),
+            q2_net_cash_flow =int(jsn["q2_net_cash_flow"]),
             q3_revenue = int(jsn["q3_revenue"]),
             q3_profit_before_tax= int(jsn["q3_profit_before_tax"]),
             q3_net_profit= int(jsn["q3_net_profit"]),
+            q3_net_cash_flow =int(jsn["q3_net_cash_flow"]),
             q4_revenue = int(jsn["q4_revenue"]),
             q4_profit_before_tax= int(jsn["q4_profit_before_tax"]),
             q4_net_profit= int(jsn["q4_net_profit"]),
-
+            q4_net_cash_flow =int(jsn["q4_net_cash_flow"]),
 
             yearly_revenue = int(jsn['yearly_revenue']),
             yearly_net_profit = int(jsn["yearly_net_profit"]),
@@ -132,7 +137,6 @@ def financial_data_questionaire(request):
             asset_turn_over_ratio = jsn['asset_turn_over_ratio'],
             debt_to_asset_ratio= jsn["debt_to_asset_ratio"], 
             net_tangeble_asset = jsn['net_tangeble_asset'],
-
 
             q1_net_profit_margin = int(jsn['q1_net_profit'])/int(jsn['q1_revenue']),
             q2_net_profit_margin=int(jsn['q2_net_profit'])/int(jsn['q2_revenue']),
@@ -393,15 +397,19 @@ def get_user_financial_data(request):
         'q1_revenue': financial_data.q1_revenue,
         'q1_profit_before_tax': financial_data.q1_profit_before_tax,
         'q1_net_profit': financial_data.q1_net_profit,
+        'q1_net_cash_flow': financial_data.q1_net_cash_flow,
         'q2_revenue': financial_data.q2_revenue,
         'q2_profit_before_tax': financial_data.q2_profit_before_tax,
         'q2_net_profit': financial_data.q2_net_profit,
+        'q2_net_cash_flow': financial_data.q2_net_cash_flow,
         'q3_revenue': financial_data.q3_revenue,
         'q3_profit_before_tax': financial_data.q3_profit_before_tax,
         'q3_net_profit': financial_data.q3_net_profit,
+        'q3_net_cash_flow': financial_data.q3_net_cash_flow,
         'q4_net_profit': financial_data.q4_net_profit,
         'q4_revenue': financial_data.q4_revenue,
         'q4_profit_before_tax': financial_data.q4_profit_before_tax,
+        'q4_net_cash_flow': financial_data.q4_net_cash_flow,
         'yearly_revenue': financial_data.yearly_revenue,
         'yearly_net_profit': financial_data.yearly_net_profit,
         'cash': financial_data.cash,
@@ -429,15 +437,19 @@ def update_user_financial_data(request):
     financial_data.q1_revenue = int(jsn["q1_revenue"])
     financial_data.q1_profit_before_tax= int(jsn["q1_profit_before_tax"])
     financial_data.q1_net_profit= int(jsn["q1_net_profit"])
+    financial_data.q1_net_cash_flow= int(jsn["q1_net_cash_flow"])
     financial_data.q2_revenue = int(jsn["q2_revenue"])
     financial_data.q2_profit_before_tax= int(jsn["q2_profit_before_tax"])
     financial_data.q2_net_profit= int(jsn["q2_net_profit"])
+    financial_data.q2_net_cash_flow= int(jsn["q2_net_cash_flow"])
     financial_data.q3_revenue = int(jsn["q3_revenue"])
     financial_data.q3_profit_before_tax= int(jsn["q3_profit_before_tax"])
     financial_data.q3_net_profit= int(jsn["q3_net_profit"])
+    financial_data.q3_net_cash_flow= int(jsn["q3_net_cash_flow"])
     financial_data.q4_revenue = int(jsn["q4_revenue"])
     financial_data.q4_profit_before_tax= int(jsn["q4_profit_before_tax"])
     financial_data.q4_net_profit= int(jsn["q4_net_profit"])
+    financial_data.q4_net_cash_flow= int(jsn["q4_net_cash_flow"])
 
     financial_data.yearly_revenue = int(jsn['yearly_revenue'])
     financial_data.yearly_net_profit = int(jsn["yearly_net_profit"])
@@ -842,12 +854,86 @@ def get_asset_chart_data(request):
 
     return JsonResponse(response, safe=False)
     
+# News sentiment handling
+def get_news_sentiment(request):
+    import pickle
 
+    # Get industry
+    current_user = user_profile.objects.get(user_id = request.user.id)
+    file_name =  "Maia/News_Sentiment/" + current_user.company_industry.industry_name + ".pkl"
 
+    # Open pickle file
+    pickle_file = open(file_name, "rb")
+    while True:
+        try:
+            news_list = pickle.load(pickle_file)
+        except EOFError:
+            break
+    pickle_file.close()
 
+    # Average scores
+    average_sentiment_score = 0
+    average_sentiment_magitude = 0
+    for news_var in news_list:
+        average_sentiment_score += news_var.emotion_score
+        average_sentiment_magitude += news_var.emotion_strength
 
+    average_sentiment_score /= len(news_list)
+    average_sentiment_magitude /= len(news_list)
 
+    # Magnitude has a score from 0 to infinite
+    # Assign emotion strength
+    classification = ""
+    if average_sentiment_magitude >= 5:
+        classification = "Strongly "
 
+    # Score has a score from -1 to 1
+    # Assign score emotion
+    if average_sentiment_score >= 0.25:
+        classification += "Positive "
+    elif average_sentiment_score <= -0.25:
+        classification += "Negative "
+    else:
+        classification += "Neutral "
 
+    # For loop to list out news_list
+    news_number = 1
+    news_array = []
+    for tempNews in news_list:
+        if news_number <= 20:
+            score_word = ''
+            magnitude_word = ''
+            if tempNews.emotion_score >= 0.25:
+                score_word += "Positive"
+            elif tempNews.emotion_score <= -0.25:
+                score_word += "Negative"
+            else:
+                score_word += "Neutral"
 
+            if tempNews.emotion_strength >= 5:
+                magnitude_word = 'Strongly'
+            
+            news_array.append({
+                'news_title': tempNews.title,
+                'url': tempNews.url,
+                'date': tempNews.date_published,
+                'epoch': datetime.datetime.strptime(tempNews.date_published, '%Y-%m-%dT%H:%M:%S').timestamp(),
+                'emotion_score': tempNews.emotion_score,
+                'emotion_score_word': score_word,
+                'emotion_strength': tempNews.emotion_strength,
+                'emotion_strength_word': magnitude_word,
+                'emotion_classification': tempNews.emotion_classification
+            })
+            news_number += 1
+        else:
+            break
 
+    # Build the response
+    response = {
+        'overallSentimentScore': average_sentiment_score,
+        'overallMagnitude': average_sentiment_magitude,
+        'sentimentClassification': classification,
+        'newsList': news_array
+    }
+
+    return JsonResponse(response, safe = False)

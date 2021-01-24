@@ -31,21 +31,31 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="card-body" style="overflow: auto;">
-                                <ul v-if="info">
-                                    <li>Profitability is a metric used to determine the scope of a company's profit in relation to the size of the business.</li>
-                                    <li>It can also be defined as a business's ability to produce a return on an investment based on its resources in comparison with an alternative investment.</li>
-                                    <li>Companies can realize a profit, but not be profitable.</li>
-                                    <li>Financial values such as the companies ROA, sales growth, profit margin and ROE are of the utmost importance when measuring Profitability.</li>
-
-                                </ul>
-                                <ul v-if="comments">
-                                    <li v-for="comment in profit_comment">[$ comment $]</li>
-                                </ul>
-                                <ul v-if="suggestion">
-                                    <li v-for="suggestion in profit_suggestion">[$ suggestion $]</li>
-                                </ul>
-                                
+                            <div class="card-body" style="overflow: auto; max-height: 40vh;">
+                                <table class="table" v-if="info">
+                                    <tr>
+                                        <td style="font-size: 1rem;">Profitability is a metric used to determine the scope of a company's profit in relation to the size of the business.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">It can also be defined as a business's ability to produce a return on an investment based on its resources in comparison with an alternative investment.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Companies can realize a profit, but not be profitable.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Financial values such as the companies ROA, sales growth, profit margin and ROE are of the utmost importance when measuring Profitability.</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="comments">
+                                    <tr v-for="comment in profit_comment">
+                                        <td style="font-size: 1rem;">[$ comment $]</td>
+                                    </tr>
+                                </table>
+                                <table class="table" v-if="suggestion">
+                                    <tr v-for="suggestion in profit_suggestion">
+                                        <td style="font-size: 1rem;">[$ suggestion $]</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
