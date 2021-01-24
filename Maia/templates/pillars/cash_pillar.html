@@ -31,35 +31,19 @@
                                       <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="card-body" style="overflow: auto;">
-                                <ul v-if='info'>
-                                    <li>Cashflow is the difference between the amount of cash the company has at the beginning of an accounting period versus the amount of cash it has at the end of an accounting period. </li>
-                                    <li>Cash flow represents, or is based upon, the operating activities of the business.</li>
-                                    <li>It can also be liken to the net amount of cash moving in and out of a business at any given time.</li>
-                                    <li>Financial values such as Quarterly cash flow, cash ratio and current ratio are priotised when measuring Cash.</li>
-
-                                </ul>
-                                <ul v-if="comments">
-                                    <li v-for="comment in cash_comment">[$ comment $]</li>
-                                </ul>
-                                <ul v-if="suggestion">
-                                    <li v-for="suggestion in cash_suggestion">[$ suggestion $]</li>
-                                </ul>
-=======
                             <div class="card-body" style="overflow: auto; max-height: 40vh;">
                                 <table class="table" v-if='info'>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, tempora!</td>
+                                        <td style="font-size: 1rem;">Cashflow is the difference between the amount of cash the company has at the beginning of an accounting period versus the amount of cash it has at the end of an accounting period.</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, eum!</td>
+                                        <td style="font-size: 1rem;">Cash flow represents, or is based upon, the operating activities of the business.</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, cupiditate.</td>
+                                        <td style="font-size: 1rem;">It can also be liken to the net amount of cash moving in and out of a business at any given time.</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, doloribus.</td>
+                                        <td style="font-size: 1rem;">Financial values such as Quarterly cash flow, cash ratio and cash turnover ratio are priotised when measuring Cash.</td>
                                     </tr>
                                 </table>
                                 <table class="table" v-if="comments">
@@ -72,7 +56,6 @@
                                         <td style="font-size: 1rem;">[$ suggestion $]</td>
                                     </tr>
                                 </table>
->>>>>>> 193ae2109cc5a70dbec59ebbd3f10d1820c13514
                             </div>
                         </div>
                     </div>
