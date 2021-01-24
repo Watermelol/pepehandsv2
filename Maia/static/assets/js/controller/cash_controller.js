@@ -12,6 +12,8 @@ const productivity_pillars = Vue.createApp({
             people_networking: [],
             cash_comment: [],
             cash_suggestion: [],
+            chartData: {},
+            dataLoaded: false,
         }
     },
     methods:{
@@ -49,6 +51,19 @@ const productivity_pillars = Vue.createApp({
             this.articles= false
             this.videos= false
             this.networking= true
+        },
+
+        getChartData() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let data = this
+            $.ajax({
+                url: "/pillars/cash/chart-data",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.chartData = result
+                    data.dataLoaded= true
+                }
+            })
         },
 
         renderChart(){
@@ -99,14 +114,13 @@ const productivity_pillars = Vue.createApp({
                 
                 var data = {
                   labels: [
-                    'Just A Thing',
-                    'Another Thing',
-                    'Third Thing',
-                    'Fourth Thing',
-                    'Fifth A Thing',
+                    'Quater 1',
+                    'Quater 2',
+                    'Quater 3',
+                    'Quater 4',
                   ],
                   datasets: [{
-                    label: "Quater 1",
+                    label: "Net Cash Flow",
                     fill: true,
                     borderColor: '#73CD73',
                     borderWidth: 2,
@@ -119,22 +133,7 @@ const productivity_pillars = Vue.createApp({
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [22, 2.9, 0.9, 4.1, 5.1],
-                  },{
-                      label: "Quater 2",
-                    fill: true,
-                    borderColor: '#42f5f2',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    pointBackgroundColor: '#42f5f2',
-                    pointBorderColor:'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#42f5f2',
-                    pointBorderWidth: 20,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 15,
-                    pointRadius: 4,
-                    data: [2.7, 1.9, 1.5, 2.1, 1.1],
+                    data: [this.chartData.q1_net_cash_flow, this.chartData.q2_net_cash_flow, this.chartData.q3_net_cash_flow, this.chartData.q4_net_cash_flow,],
                   }]
                 };
                 
@@ -227,12 +226,19 @@ const productivity_pillars = Vue.createApp({
     mounted(){
         this.showArticles()
         this.showInfo()
-        this.renderChart()
+        this.getChartData()
         this.get_videos()
         this.get_articles()
         this.get_networking()
         this.get_comment()
         this.get_suggestion()
+    },
+    watch: {
+        dataLoaded() {
+            if (this.dataLoaded){
+                this.renderChart()
+            }
+        }
     },
     delimiters : ['[$', '$]'],
 })

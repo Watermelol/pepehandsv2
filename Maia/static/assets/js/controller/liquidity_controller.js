@@ -12,6 +12,8 @@ const risk_pillars = Vue.createApp({
             people_networking: [],
             liquidity_comment: [],
             liquidity_suggestion: [],
+            chartData: {},
+            dataLoaded: false,
         }
     },
     methods:{
@@ -51,11 +53,24 @@ const risk_pillars = Vue.createApp({
             this.networking= true
         },
 
+        getChartData() {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+            var data = this
+            $.ajax({
+                url: "/pillars/liquidity/chart-data",
+                headers:  {'X-CSRFToken': csrftoken},
+                success: function(result) {
+                    data.chartData = result
+                    data.dataLoaded = true
+                }
+            })
+        },
+
         renderChart(){
             gradientChartOptionsConfiguration =  {
                 maintainAspectRatio: true,
                 legend: {
-                      display: true,
+                      display: false,
                       labels: {
                           fontColor: '#fff'
                       }
@@ -74,16 +89,18 @@ const risk_pillars = Vue.createApp({
                  responsive: true,
                  scales: {
                     yAxes: [{
+                        display: true,
                         ticks: {
+                            beginAtZero: true,  // minimum value will be 0.
                             fontColor: '#fff'
-                        },
+                        }
                     }],
-                  xAxes: [{
+                    xAxes: [{
                         ticks: {
                             fontColor: '#fff'
                         },
                     }]
-                } 
+                }
               };
             
               var checkIfExist = document.getElementById("liquidity_pillars")
@@ -99,47 +116,28 @@ const risk_pillars = Vue.createApp({
                 
                 var data = {
                   labels: [
-                    'Just A Thing',
-                    'Another Thing',
-                    'Third Thing',
-                    'Fourth Thing',
-                    'Fifth A Thing',
+                    'Quick Ratio',
+                    'Current Ratio',
+                    'Cash Ratio',
                   ],
                   datasets: [{
-                    label: "Quater 1",
                     fill: true,
-                    borderColor: '#73CD73',
+                    borderColor: ['#73CD73', '#1fd2ed', '#0a19f2'],
                     borderWidth: 2,
                     borderDash: [],
                     borderDashOffset: 0.0,
-                    pointBackgroundColor: '#73CD73',
-                    pointBorderColor:'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#73CD73',
+                    pointBackgroundColor: ['#73CD73', '#1fd2ed', '#0a19f2'],
+                    pointHoverBackgroundColor: ['#73CD73', '#1fd2ed', '#0a19f2'],
                     pointBorderWidth: 20,
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [33, 2.9, 0.9, 4.1, 5.1],
-                  },{
-                      label: "Quater 2",
-                    fill: true,
-                    borderColor: '#42f5f2',
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    pointBackgroundColor: '#42f5f2',
-                    pointBorderColor:'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#42f5f2',
-                    pointBorderWidth: 20,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 15,
-                    pointRadius: 4,
-                    data: [2.7, 1.9, 1.5, 2.1, 1.1],
+                    data: [this.chartData.quick_ratio, this.chartData.current_ratio, this.chartData.cash_ratio],
                   }]
                 };
                 
                 var performancePillarChart = new Chart(riskAnalysisPillarCTX, {
-                  type: 'line',
+                  type: 'bar',
                   data: data,
                   options: gradientChartOptionsConfiguration
                 });
@@ -226,12 +224,19 @@ const risk_pillars = Vue.createApp({
     mounted(){
         this.showArticles()
         this.showInfo()
-        this.renderChart()
+        this.getChartData()
         this.get_videos()
         this.get_articles()
         this.get_networking()
         this.get_comment()
         this.get_suggestion()
+    },
+    watch: {
+        dataLoaded() {
+            if (this.dataLoaded){
+                this.renderChart()
+            } 
+        }
     },
     delimiters : ['[$', '$]'],
 })

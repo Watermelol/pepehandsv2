@@ -8,6 +8,7 @@
                     <div class="card-deck h-100">
                         <div class="card card-chart w-100">
                             <div class="card-body" style="overflow: auto;">
+                                <h3>Quick Ratio vs Current Ratio vs Cash Ratio</h3>
                                 <canvas id="liquidity_pillars"></canvas>
                             </div>
                         </div>
@@ -30,35 +31,22 @@
                                       </li>
                                 </ul>
                             </div>
-                            <div class="card-body" style="overflow: auto;">
-                                <ul v-if='info'>
-                                    <li>Liquidity refers to the ease with which an asset, or security, can be converted into ready cash without affecting its market price.</li>
-                                    <li>Every asset has their own places on the liquidity spectrum .</li>
-                                    <li>Cash is universally considered the most liquid asset because it can most quickly and easily be converted into other assets.</li>
-                                    <li>Liquidity is important for learning how easily a company can pay off it’s short term liabilities and debts.</li>
-                                    <li>In measuring liquidity, values such as the companies current ratio, quick ratio and cash ratio are important.</li>
-
-                                </ul>
-                                <ul v-if="comments">
-                                    <li v-for="comment in liquidity_comment">[$ comment $]</li>
-                                </ul>
-                                <ul v-if="suggestion">
-                                    <li v-for="suggestion in liquidity_suggestion">[$ suggestion $]</li>
-                                </ul>
-=======
                             <div class="card-body" style="overflow: auto; max-height: 40vh;">
                                 <table class="table" v-if='info'>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, tempora!</td>
+                                        <td style="font-size: 1rem;">Liquidity refers to the ease with which an asset, or security, can be converted into ready cash without affecting its market price.</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, eum!</td>
+                                        <td style="font-size: 1rem;">Every asset has their own places on the liquidity spectrum .</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, cupiditate.</td>
+                                        <td style="font-size: 1rem;">Cash is universally considered the most liquid asset because it can most quickly and easily be converted into other assets.</td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size: 1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, doloribus.</td>
+                                        <td style="font-size: 1rem;">Liquidity is important for learning how easily a company can pay off it’s short term liabilities and debts.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">In measuring liquidity, values such as the companies current ratio, quick ratio and cash ratio are important.</td>
                                     </tr>
                                 </table>
                                 <table class="table" v-if="comments">
@@ -71,7 +59,6 @@
                                         <td style="font-size: 1rem;">[$ suggestion $]</td>
                                     </tr>
                                 </table>
->>>>>>> 193ae2109cc5a70dbec59ebbd3f10d1820c13514
                             </div>
                         </div>
                     </div>

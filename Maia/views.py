@@ -177,6 +177,7 @@ def financial_data_questionaire(request):
 
         financial_score_me = user_financial_data_analysis.objects.get(user=current_user)
 
+        #PROFITS TAGGING
         if (financial_score_me.profit_result <= 1.9):
             current_user.profit_tag.add(7)
         elif (financial_score_me.profit_result >= 2 and financial_score_me.profit_result <= 3):
@@ -185,6 +186,126 @@ def financial_data_questionaire(request):
             current_user.profit_tag.add(9)
         else:
             current_user.profit_tag.add(10)
+
+        if (financial_data_me.q1_net_profit >= financial_data_me.q4_net_profit):
+            current_user.profit_tag.add(18)
+        else:
+            current_user.profit_tag.add(17)
+
+        if (financial_data_me.return_on_equity <= 10):
+            current_user.profit_tag.add(11)
+        else:
+            current_user.profit_tag.add(12)
+
+        if (current_user.company_industry.industry_name == 'Services'):
+            if (financial_data_me.return_on_asset <= 6):
+                current_user.profit_tag.add(13)
+            else:
+                current_user.profit_tag.add(14)
+        else:
+            if (financial_data_me.return_on_asset <= -2.6):
+                current_user.profit_tag.add(15)
+            else:
+                current_user.profit_tag.add(16)
+        current_user.profit_tag.remove(1)
+
+        #ASSET TAGGING
+        if (financial_score_me.asset_result <= 2.0):
+            current_user.asset_tag.add(2)
+        elif (financial_score_me.asset_result >= 2.1 and financial_score_me.asset_result <= 4.5):
+            current_user.asset_tag.add(3)
+        elif (financial_score_me.asset_result >= 4.6 and financial_score_me.asset_result <= 6.2):
+            current_user.asset_tag.add(4)
+        else:
+            current_user.asset_tag.add(5)
+
+        if (current_user.company_industry.industry_name == 'Services'):
+            if (financial_data_me.return_on_asset <= 6):
+                current_user.asset_tag.add(6)
+            else:
+                current_user.asset_tag.add(7)
+        else:
+            if (financial_data_me.return_on_asset <= -2.6):
+                current_user.asset_tag.add(8)
+            else:
+                current_user.asset_tag.add(9)
+
+
+        if (current_user.company_industry.industry_name == 'Services'):
+            if (financial_data_me.asset_turn_over_ratio <= 0.9):
+                current_user.asset_tag.add(12)
+            else:
+                current_user.asset_tag.add(13)
+        else:
+            if (financial_data_me.asset_turn_over_ratio <= 4.1):
+                current_user.asset_tag.add(10)
+            else:
+                current_user.asset_tag.add(11)
+
+
+        if (current_user.company_industry.industry_name == 'Services'):
+            if (financial_data_me.debt_to_asset_ratio <= 3.7):
+                current_user.asset_tag.add(16)
+            else:
+                current_user.asset_tag.add(17)
+        else:
+            if (financial_data_me.debt_to_asset_ratio <= 0.49):
+                current_user.asset_tag.add(14)
+            else:
+                current_user.asset_tag.add(15)
+        current_user.asset_tag.remove(1)
+
+        #CASH TAGGING
+        if (financial_score_me.cash_result <= 3.3):
+            current_user.cash_tag.add(2)
+        elif (financial_score_me.cash_result >= 3.4 and financial_score_me.cash_result <= 4.4):
+            current_user.cash_tag.add(3)
+        elif (financial_score_me.cash_result >= 4.5 and financial_score_me.cash_result <= 5.4):
+            current_user.cash_tag.add(4)
+        else:
+            current_user.cash_tag.add(5)
+
+        if (financial_data_me.cash_ratio <= 0.19):
+            current_user.cash_tag.add(6)
+        else:
+            current_user.cash_tag.add(7)
+
+        if (financial_data_me.cash_turnover_ratio <= 1.99):
+            current_user.cash_tag.add(8)
+        else:
+            current_user.cash_tag.add(9)
+
+        if (financial_data_me.q1_net_cash_flow >= financial_data_me.q4_net_cash_flow):
+            current_user.cash_tag.add(11)
+        else:
+            current_user.cash_tag.add(10)
+        current_user.cash_tag.remove(1)
+
+        #LIQUIDITY TAG
+        if (financial_score_me.liquidity_result <= 4.4):
+            current_user.liquidity_tag.add(2)
+        elif (financial_score_me.liquidity_result >= 4.5 and financial_score_me.liquidity_result <= 5.7):
+            current_user.liquidity_tag.add(3)
+        elif (financial_score_me.liquidity_result >= 5.8 and financial_score_me.liquidity_result <= 7.0):
+            current_user.liquidity_tag.add(4)
+        else:
+            current_user.liquidity_tag.add(5)
+
+        if (financial_data_me.current_ratio <= 0.99):
+            current_user.liquidity_tag.add(6)
+        else:
+            current_user.liquidity_tag.add(7)
+
+        if (financial_data_me.quick_ratio <= 0.99):
+            current_user.liquidity_tag.add(8)
+        else:
+            current_user.liquidity_tag.add(9)
+
+        if (financial_data_me.cash_ratio <= 0.19):
+            current_user.liquidity_tag.add(10)
+        else:
+            current_user.liquidity_tag.add(11)
+        current_user.liquidity_tag.remove(1)
 
         current_user.financial_data_provided = True
         current_user.save()
@@ -489,7 +610,8 @@ def update_user_financial_data(request):
 
     financial_score_me = user_financial_data_analysis.objects.get(user=current_user)
 
-
+    #PROFITS TAGGING
+    current_user.profit_tag.clear()
     if (financial_score_me.profit_result <= 1.9):
         current_user.profit_tag.add(7)
     elif (financial_score_me.profit_result >= 2 and financial_score_me.profit_result <= 3):
@@ -499,7 +621,131 @@ def update_user_financial_data(request):
     else:
         current_user.profit_tag.add(10)
 
+    if (financial_data_me.q1_net_profit >= financial_data_me.q4_net_profit):
+        current_user.profit_tag.add(18)
+    else:
+        current_user.profit_tag.add(17)
 
+    if (financial_data_me.return_on_equity <= 10):
+        current_user.profit_tag.add(11)
+    else:
+        current_user.profit_tag.add(12)
+
+    if (current_user.company_industry.industry_name == 'Services'):
+        if (financial_data_me.return_on_asset <= 6):
+            current_user.profit_tag.add(13)
+        else:
+            current_user.profit_tag.add(14)
+    else:
+        if (financial_data_me.return_on_asset <= -2.6):
+            current_user.profit_tag.add(15)
+        else:
+            current_user.profit_tag.add(16)
+    current_user.profit_tag.remove(1)
+
+    #ASSET TAGGING
+    current_user.asset_tag.clear()
+    if (financial_score_me.asset_result <= 2.0):
+        current_user.asset_tag.add(2)
+    elif (financial_score_me.asset_result >= 2.1 and financial_score_me.asset_result <= 4.5):
+        current_user.asset_tag.add(3)
+    elif (financial_score_me.asset_result >= 4.6 and financial_score_me.asset_result <= 6.2):
+        current_user.asset_tag.add(4)
+    else:
+        current_user.asset_tag.add(5)
+
+    if (current_user.company_industry.industry_name == 'Services'):
+        if (financial_data_me.return_on_asset <= 6):
+            current_user.asset_tag.add(6)
+        else:
+            current_user.asset_tag.add(7)
+    else:
+        if (financial_data_me.return_on_asset <= -2.6):
+            current_user.asset_tag.add(8)
+        else:
+            current_user.asset_tag.add(9)
+
+
+    if (current_user.company_industry.industry_name == 'Services'):
+        if (financial_data_me.asset_turn_over_ratio <= 0.9):
+            current_user.asset_tag.add(12)
+        else:
+            current_user.asset_tag.add(13)
+    else:
+        if (financial_data_me.asset_turn_over_ratio <= 4.1):
+            current_user.asset_tag.add(10)
+        else:
+            current_user.asset_tag.add(11)
+
+
+    if (current_user.company_industry.industry_name == 'Services'):
+        if (financial_data_me.debt_to_asset_ratio <= 3.7):
+            current_user.asset_tag.add(16)
+        else:
+            current_user.asset_tag.add(17)
+    else:
+        if (financial_data_me.debt_to_asset_ratio <= 0.49):
+            current_user.asset_tag.add(14)
+        else:
+            current_user.asset_tag.add(15)
+    current_user.asset_tag.remove(1)
+
+    #CASH TAGGING
+    current_user.cash_tag.clear()
+    if (financial_score_me.cash_result <= 3.3):
+        current_user.cash_tag.add(2)
+    elif (financial_score_me.cash_result >= 3.4 and financial_score_me.cash_result <= 4.4):
+        current_user.cash_tag.add(3)
+    elif (financial_score_me.cash_result >= 4.5 and financial_score_me.cash_result <= 5.4):
+        current_user.cash_tag.add(4)
+    else:
+        current_user.cash_tag.add(5)
+
+    if (financial_data_me.cash_ratio <= 0.19):
+        current_user.cash_tag.add(6)
+    else:
+        current_user.cash_tag.add(7)
+
+    if (financial_data_me.cash_turnover_ratio <= 1.99):
+        current_user.cash_tag.add(8)
+    else:
+        current_user.cash_tag.add(9)
+
+    if (financial_data_me.q1_net_cash_flow >= financial_data_me.q4_net_cash_flow):
+        current_user.cash_tag.add(11)
+    else:
+        current_user.cash_tag.add(10)
+    current_user.cash_tag.remove(1)
+
+     #LIQUIDITY TAG
+    current_user.liquidity_tag.clear()
+    if (financial_score_me.liquidity_result <= 4.4):
+        current_user.liquidity_tag.add(2)
+    elif (financial_score_me.liquidity_result >= 4.5 and financial_score_me.liquidity_result <= 5.7):
+        current_user.liquidity_tag.add(3)
+    elif (financial_score_me.liquidity_result >= 5.8 and financial_score_me.liquidity_result <= 7.0):
+        current_user.liquidity_tag.add(4)
+    else:
+        current_user.liquidity_tag.add(5)
+
+    if (financial_data_me.current_ratio <= 0.99):
+        current_user.liquidity_tag.add(6)
+    else:
+        current_user.liquidity_tag.add(7)
+
+    if (financial_data_me.quick_ratio <= 0.99):
+        current_user.liquidity_tag.add(8)
+    else:
+        current_user.liquidity_tag.add(9)
+
+    if (financial_data_me.cash_ratio <= 0.19):
+        current_user.liquidity_tag.add(10)
+    else:
+        current_user.liquidity_tag.add(11)
+    current_user.liquidity_tag.remove(1)
+
+
+    current_user.save()
     return HttpResponse("data saved", status=200)
 
 def profit_pillars(request):
@@ -937,3 +1183,26 @@ def get_news_sentiment(request):
     }
 
     return JsonResponse(response, safe = False)
+
+def get_cash_chart_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    response = {
+        'q1_net_cash_flow': financial_data.q1_net_cash_flow,
+        'q2_net_cash_flow': financial_data.q2_net_cash_flow,
+        'q3_net_cash_flow': financial_data.q3_net_cash_flow,
+        'q4_net_cash_flow': financial_data.q4_net_cash_flow,
+    }
+
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_chart_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    response = {
+        'quick_ratio': financial_data.quick_ratio,
+        'current_ratio': financial_data.current_ratio,
+        'cash_ratio': financial_data.cash_ratio,
+    }
+
+    return JsonResponse(response, safe=False)
