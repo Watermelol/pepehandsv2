@@ -21,9 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="882e7b48-a172-4d8e-871d-8d40a518150f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/templates/pillars/cash_pillar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/templates/pillars/cash_pillar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/templates/pillars/liquidity_pillar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/templates/pillars/liquidity_pillar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maia/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Maia/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
