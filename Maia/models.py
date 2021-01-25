@@ -194,20 +194,20 @@ class Network_Suggestions(models.Model):
     Skills = models.TextField()
     URL = models.CharField(max_length = 255)
     thumbnails = models.TextField(blank=True)
-    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
-    asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
-    cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
-    liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    profit_tag = models.ManyToManyField(tag_profit, default=1, verbose_name='Profit Tag')
+    asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
+    cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
+    liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
     def __str__(self):
         return (self.Name)
 
 class Recommandation_Video(models.Model):
     Name = models.TextField()
     Video_ID = models.CharField(max_length=255)
-    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
-    asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
-    cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
-    liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    profit_tag = models.ManyToManyField(tag_profit, default=1, verbose_name='Profit Tag')
+    asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
+    cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
+    liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
 
     def __str__(self):
         return (self.Name)
@@ -217,10 +217,10 @@ class Recommandation_Articles(models.Model):
     Description = models.TextField(blank=True)
     Site_Name = models.CharField(max_length=100)
     URL = models.CharField(max_length = 255)
-    profit_tag = models.ForeignKey(tag_profit, default=1, on_delete=models.RESTRICT, verbose_name='Profit Tag')
-    asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
-    cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
-    liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    profit_tag = models.ManyToManyField(tag_profit, default=1, verbose_name='Profit Tag')
+    asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
+    cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
+    liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
 
     def __str__(self):
         return (self.Title)
