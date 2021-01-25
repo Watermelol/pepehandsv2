@@ -83,6 +83,7 @@ urlpatterns = [
     path('pillars/cash/networking', views.get_cash_networking , name='cash_pillars_networking'),
     path('pillars/cash/comment', views.get_cash_comment , name='cash_pillars_comment'),
     path('pillars/cash/suggestion', views.get_cash_suggestion , name='cash_pillars_suggestion'),
+    path('pillars/cash/chart-data', views.get_cash_chart_data),
 
     # Liquidity
     path('pillars/liquidity', views.liquidity_pillars , name='liquidity_pillars'),
@@ -91,6 +92,7 @@ urlpatterns = [
     path('pillars/liquidity/networking', views.get_liquidity_networking , name='liquidity_pillars_networking'),
     path('pillars/liquidity/comment', views.get_liquidity_comment , name='liquidity_pillars_comment'),
     path('pillars/liquidity/suggestion', views.get_liquidity_suggestion , name='liquidity_pillars_suggestion'),
+    path('pillars/liquidity/chart-data', views.get_liquidity_chart_data),
 
     # News Sentiment
     path('news-sentiment/', views.news_setiment_page, name='news_sentiment'),

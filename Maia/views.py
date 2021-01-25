@@ -1182,3 +1182,26 @@ def get_news_sentiment(request):
     }
 
     return JsonResponse(response, safe = False)
+
+def get_cash_chart_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    response = {
+        'q1_net_cash_flow': financial_data.q1_net_cash_flow,
+        'q2_net_cash_flow': financial_data.q2_net_cash_flow,
+        'q3_net_cash_flow': financial_data.q3_net_cash_flow,
+        'q4_net_cash_flow': financial_data.q4_net_cash_flow,
+    }
+
+    return JsonResponse(response, safe=False)
+
+def get_liquidity_chart_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    response = {
+        'quick_ratio': financial_data.quick_ratio,
+        'current_ratio': financial_data.current_ratio,
+        'cash_ratio': financial_data.cash_ratio,
+    }
+
+    return JsonResponse(response, safe=False)
