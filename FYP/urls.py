@@ -37,7 +37,7 @@ urlpatterns = [
     # Report Payment
     path('report_payment/', views.report_payment, name="report_payment"),
     path('create-checkout-session/', views.report_checkout),
-    path('success/', views.payment_success),
+    path('success/', views.payment_success, name="payment_success"),
     path('cancelled/', views.payment_cancelled),
 
     #  Stripr Web
@@ -53,9 +53,11 @@ urlpatterns = [
     path('user/get/payment_history', views.get_user_payment_history, name='retrieve_user_payment_history'),
     path('user/get/data/', views.get_user_data, name='retrieve_user_data'),
     path('user/update', views.update_user_profile, name='update_user_profile'),
-    path('user/get/data/financial', views.get_user_financial_data, name='update_user_profile'),
-    path('user/update/data/financial', views.update_user_financial_data, name='update_user_profile'),
+    path('user/get/data/financial', views.get_user_financial_data),
+    path('user/update/data/financial', views.update_user_financial_data),
     path('user/get/purchased_report', views.get_purchased_report, name='get_purchased_report'),
+    path('user/get/data/questionaire', views.get_questionaire_data),
+    path('user/update/data/questionaire', views.update_user_questionaire_data),
 
     # Four pillars
     # Profit

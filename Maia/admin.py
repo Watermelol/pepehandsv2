@@ -23,7 +23,7 @@ class commentAdmin(admin.ModelAdmin):
     list_display = ('Text', 'profit_tag', 'asset_tag', 'cash_tag', 'liquidity_tag')
 
 class suggestionAdmin(admin.ModelAdmin):
-    list_display = ('Text', 'profit_tag', 'asset_tag', 'cash_tag', 'liquidity_tag')
+    list_display = ('Text', 'profit_tag', 'asset_tag', 'cash_tag', 'liquidity_tag', 'qualitative_tag')
 
 class profitTagAdmin(admin.ModelAdmin):
     list_display = ('name', 'min_result', 'max_result', 'desc')
@@ -37,16 +37,21 @@ class cashTagAdmin(admin.ModelAdmin):
 class liquidityTagAdmin(admin.ModelAdmin):
     list_display = ('name', 'min_result', 'max_result', 'desc')
 
+class qualitativeResultAdmin(admin.ModelAdmin):
+    list_display = ('user', 'internalisation', 'investment', 'innovation', 'integration', 'internationalisation')
+
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(user_profile)
 admin.site.register(industries)
 admin.site.register(user_financial_data_v2)
+admin.site.register(qualitative_result, qualitativeResultAdmin)
 admin.site.register(tag_profit, profitTagAdmin)
 admin.site.register(tag_asset, assetTagAdmin)
 admin.site.register(tag_cash, cashTagAdmin)
 admin.site.register(tag_liquidity, liquidityTagAdmin)
+admin.site.register(qualitative_tag, liquidityTagAdmin)
 admin.site.register(Advices, suggestionAdmin)
 admin.site.register(Comment, commentAdmin)
 admin.site.register(Network_Suggestions)
@@ -55,4 +60,5 @@ admin.site.register(Recommandation_Articles)
 admin.site.register(user_payment)
 admin.site.register(purchased_report)
 admin.site.register(user_financial_data_analysis)
+admin.site.register(qualitative_answer)
 

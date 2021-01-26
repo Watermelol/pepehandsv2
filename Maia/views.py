@@ -9,7 +9,7 @@ from .forms import UserProfile
 from djstripe.models import Charge
 import json
 import stripe
-from datetime import datetime
+from datetime import date
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
 from news_processor import *
@@ -90,7 +90,74 @@ def qualitative_questionaire(request):
     if (request.method != 'POST'):
         return render(request, 'qualitative_questionaire.html')
     else:
+        jsn = json.loads(request.body)
         current_user = user_profile.objects.get(user_id=request.user.id)
+        result = {
+            'internalisation': jsn['internalisation'],
+            'investment': jsn['investment'],
+            'innovation': jsn['innovation'],
+            'integration': jsn['integration'],
+            'internationalisation': jsn['internationalisation'],
+        }
+        
+        qualitative_questionaire_result = qualitative_result(
+            user = current_user,
+            internalisation= jsn['internalisation'],
+            investment= jsn['investment'],
+            innovation= jsn['innovation'],
+            integration= jsn['integration'],
+            internationalisation= jsn['internationalisation'],
+        )
+
+        qualitative_questionaire_answer = qualitative_answer(
+            user = current_user,
+            set1q1 = jsn['set1'][0],
+            set1q2 = jsn['set1'][1],
+            set1q3 = jsn['set1'][2],
+            set1q4 = jsn['set1'][3],
+            set1q5 = jsn['set1'][4],
+            set2q1 = jsn['set2'][0],
+            set2q2 = jsn['set2'][1],
+            set2q3 = jsn['set2'][2],
+            set2q4 = jsn['set2'][3],
+            set2q5 = jsn['set2'][4],
+            set3q1 = jsn['set3'][0],
+            set3q2 = jsn['set3'][1],
+            set3q3 = jsn['set3'][2],
+            set3q4 = jsn['set3'][3],
+            set3q5 = jsn['set3'][4],
+            set4q1 = jsn['set4'][0],
+            set4q2 = jsn['set4'][1],
+            set4q3 = jsn['set4'][2],
+            set4q4 = jsn['set4'][3],
+            set4q5 = jsn['set4'][4],
+            set5q1 = jsn['set5'][0],
+            set5q2 = jsn['set5'][1],
+            set5q3 = jsn['set5'][2],
+            set5q4 = jsn['set5'][3],
+            set5q5 = jsn['set5'][4],
+        )
+        
+        highest_number = max(result, key=jsn.get)
+        
+        if (highest_number == 'internalisation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internalisation')
+
+        elif (highest_number == 'investment'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Investment')
+
+        elif (highest_number == 'innovation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Innovation')
+
+        elif (highest_number == 'integration'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Integration')
+
+        elif (highest_number == 'internationalisation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internationalisation')
+
+
+        qualitative_questionaire_result.save()
+        qualitative_questionaire_answer.save()
         current_user.qualitative_data_provided = True
         current_user.save()
         return HttpResponse("data saved", status=200)
@@ -445,12 +512,102 @@ def report_checkout(request):
 
 def payment_success(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
-    now = datetime.now()
-    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    now = date.today()
+    dt_string = now.strftime("%d-%m-%Y")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
     fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'
-    createReport(fileName)
+
+    data = {
+        'profit': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'profit': [financial_data.q1_net_profit, financial_data.q2_net_profit, financial_data.q3_net_profit, financial_data.q4_net_profit],
+                'revenue': [financial_data.q1_revenue, financial_data.q2_revenue, financial_data.q3_revenue, financial_data.q4_revenue],
+            }
+        },
+
+        'asset': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'return_of_asset': financial_data.return_on_asset,
+                'asset_turnover_ratio': financial_data.asset_turn_over_ratio,
+                'debt_to_asset_ratio': financial_data.debt_to_asset_ratio,
+            }
+        },
+
+        'cash': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'q1_net_cash_flow': financial_data.q1_net_cash_flow,
+                'q2_net_cash_flow': financial_data.q2_net_cash_flow,
+                'q3_net_cash_flow': financial_data.q3_net_cash_flow,
+                'q4_net_cash_flow': financial_data.q4_net_cash_flow,
+            }
+        },
+
+        'liquidity': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'quick_ratio': financial_data.quick_ratio,
+                'current_ratio': financial_data.current_ratio,
+                'cash_ratio': financial_data.cash_ratio,
+            }
+        } 
+    }
+
+    current_user_tag_profit = user_profile.objects.get(user_id=request.user.id).profit_tag.all()
+    for tag in current_user_tag_profit:
+        profit_comment = Comment.objects.filter(profit_tag = tag)
+        for comment in profit_comment:
+            data['profit']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_profit:
+        profit_suggestion = Advices.objects.filter(profit_tag = tag)
+    
+        for suggestion in profit_suggestion:
+            data['profit']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_asset = user_profile.objects.get(user_id=request.user.id).asset_tag.all()
+    for tag in current_user_tag_asset:
+        asset_comment = Comment.objects.filter(asset_tag = tag)
+        for comment in asset_comment:
+            data['asset']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_asset:
+        asset_suggestion = Advices.objects.filter(asset_tag = tag)
+        for suggestion in asset_suggestion:
+            data['asset']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_cash = user_profile.objects.get(user_id=request.user.id).cash_tag.all()
+    for tag in current_user_tag_cash:
+        cash_comment = Comment.objects.filter(cash_tag = tag)
+        for comment in cash_comment:
+            data['cash']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_cash:
+        cash_suggestion = Advices.objects.filter(cash_tag = tag)
+        for suggestion in cash_suggestion:
+            data['cash']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_liquidity = user_profile.objects.get(user_id=request.user.id).liquidity_tag.all()
+    for tag in current_user_tag_liquidity:
+        liquidity_comment = Comment.objects.filter(liquidity_tag = tag)
+        for comment in liquidity_comment:
+            data['liquidity']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_liquidity:
+        profit_suggestion = Advices.objects.filter(liquidity_tag = tag)
+        for suggestion in profit_suggestion:
+            data['liquidity']['suggestions'].append(suggestion.Text)
+
+
+    createReport(fileName, data)
     report_purchased = purchased_report(
         user = current_user,
         file_name = fileName
@@ -781,8 +938,9 @@ def get_profit_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(profit_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
-
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
+            
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -857,7 +1015,8 @@ def get_asset_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(asset_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -929,7 +1088,8 @@ def get_cash_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(cash_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -1001,7 +1161,8 @@ def get_liquidity_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(liquidity_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -1205,3 +1366,106 @@ def get_liquidity_chart_data(request):
     }
 
     return JsonResponse(response, safe=False)
+
+def get_questionaire_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    user_questionaire_answer = qualitative_answer.objects.get(user = current_user)
+    response = {
+        'set1q1': user_questionaire_answer.set1q1,
+        'set1q2': user_questionaire_answer.set1q2,
+        'set1q3': user_questionaire_answer.set1q3,
+        'set1q4': user_questionaire_answer.set1q4,
+        'set1q5': user_questionaire_answer.set1q5,
+        'set2q1': user_questionaire_answer.set2q1,
+        'set2q2': user_questionaire_answer.set2q2,
+        'set2q3': user_questionaire_answer.set2q3,
+        'set2q4': user_questionaire_answer.set2q4,
+        'set2q5': user_questionaire_answer.set2q5,
+        'set3q1': user_questionaire_answer.set3q1,
+        'set3q2': user_questionaire_answer.set3q2,
+        'set3q3': user_questionaire_answer.set3q3,
+        'set3q4': user_questionaire_answer.set3q4,
+        'set3q5': user_questionaire_answer.set3q5,
+        'set4q1': user_questionaire_answer.set4q1,
+        'set4q2': user_questionaire_answer.set4q2,
+        'set4q3': user_questionaire_answer.set4q3,
+        'set4q4': user_questionaire_answer.set4q4,
+        'set4q5': user_questionaire_answer.set4q5,
+        'set5q1': user_questionaire_answer.set5q1,
+        'set5q2': user_questionaire_answer.set5q2,
+        'set5q3': user_questionaire_answer.set5q3,
+        'set5q4': user_questionaire_answer.set5q4,
+        'set5q5': user_questionaire_answer.set5q5,
+    }
+
+    return JsonResponse(response, safe=False)
+
+def update_user_questionaire_data(request):
+    jsn = json.loads(request.body)
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    user_questionaire_answer = qualitative_answer.objects.get(user = current_user)
+    user_questionaire_result = qualitative_result.objects.get(user = current_user)
+
+    user_questionaire_answer.set1q1 = jsn['set1'][0]
+    user_questionaire_answer.set1q2 = jsn['set1'][1]
+    user_questionaire_answer.set1q3 = jsn['set1'][2]
+    user_questionaire_answer.set1q4 = jsn['set1'][3]
+    user_questionaire_answer.set1q5 = jsn['set1'][4]
+    user_questionaire_answer.set2q1 = jsn['set2'][0]
+    user_questionaire_answer.set2q2 = jsn['set2'][1]
+    user_questionaire_answer.set2q3 = jsn['set2'][2]
+    user_questionaire_answer.set2q4 = jsn['set2'][3]
+    user_questionaire_answer.set2q5 = jsn['set2'][4]
+    user_questionaire_answer.set3q1 = jsn['set3'][0]
+    user_questionaire_answer.set3q2 = jsn['set3'][1]
+    user_questionaire_answer.set3q3 = jsn['set3'][2]
+    user_questionaire_answer.set3q4 = jsn['set3'][3]
+    user_questionaire_answer.set3q5 = jsn['set3'][4]
+    user_questionaire_answer.set4q1 = jsn['set4'][0]
+    user_questionaire_answer.set4q2 = jsn['set4'][1]
+    user_questionaire_answer.set4q3 = jsn['set4'][2]
+    user_questionaire_answer.set4q4 = jsn['set4'][3]
+    user_questionaire_answer.set4q5 = jsn['set4'][4]
+    user_questionaire_answer.set5q1 = jsn['set5'][0]
+    user_questionaire_answer.set5q2 = jsn['set5'][1]
+    user_questionaire_answer.set5q3 = jsn['set5'][2]
+    user_questionaire_answer.set5q4 = jsn['set5'][3]
+    user_questionaire_answer.set5q5 = jsn['set5'][4]
+
+    user_questionaire_result.internalisation = jsn['internalisation']
+    user_questionaire_result.investment = jsn['investment']
+    user_questionaire_result.innovation = jsn['innovation']
+    user_questionaire_result.integration = jsn['integration']
+    user_questionaire_result.internationalisation = jsn['internationalisation']
+
+    result = {
+            'internalisation': jsn['internalisation'],
+            'investment': jsn['investment'],
+            'innovation': jsn['innovation'],
+            'integration': jsn['integration'],
+            'internationalisation': jsn['internationalisation'],
+    }
+
+    highest_number = max(result, key=jsn.get)
+        
+    if (highest_number == 'internalisation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internalisation')
+
+    elif (highest_number == 'investment'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Investment')
+
+    elif (highest_number == 'innovation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Innovation')
+
+    elif (highest_number == 'integration'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Integration')
+
+    elif (highest_number == 'internationalisation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internationalisation')
+
+    user_questionaire_answer.save()
+    user_questionaire_result.save()
+    current_user.save()
+
+    return HttpResponse("data saved", status=200)
+

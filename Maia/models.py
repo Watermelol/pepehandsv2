@@ -51,6 +51,14 @@ class tag_liquidity (models.Model):
     def __str__(self):
         return self.name
 
+class qualitative_tag(models.Model):
+    name = models.CharField('Name', max_length=255, default='')
+    min_result = models.FloatField(default=0.00)
+    max_result = models.FloatField(default=0.00)
+    desc = models.CharField('Description', max_length=255, default='', blank=True)
+    def __str__(self):
+        return self.name
+
 class user_profile(models.Model):
     COMPANY_SIZE = [
     ('MC', 'Micro'),
@@ -77,6 +85,7 @@ class user_profile(models.Model):
     asset_tag = models.ManyToManyField(tag_asset, default=1, verbose_name='Asset Tag')
     cash_tag = models.ManyToManyField(tag_cash, default=1, verbose_name='Cash Tag')
     liquidity_tag = models.ManyToManyField(tag_liquidity, default=1, verbose_name='Liquidity Tag')
+    qualitative_tag = models.ForeignKey(qualitative_tag, default=2, on_delete=models.RESTRICT, verbose_name='Qualitative Tag')
 
     def __str__(self):
         return self.user.username
@@ -177,6 +186,8 @@ class Advices(models.Model):
     asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
     cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
     liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    qualitative_tag = models.ForeignKey(qualitative_tag, default=2, on_delete=models.RESTRICT, verbose_name='Qualitative Tag')
+
     def __str__(self):
         return (self.Text)
 
@@ -186,6 +197,7 @@ class Comment(models.Model):
     asset_tag = models.ForeignKey(tag_asset, default=1, on_delete=models.RESTRICT, verbose_name='Asset Tag')
     cash_tag = models.ForeignKey(tag_cash, default=1, on_delete=models.RESTRICT, verbose_name='Cash Tag')
     liquidity_tag = models.ForeignKey(tag_liquidity, default=1, on_delete=models.RESTRICT, verbose_name='Liquidity Tag')
+    
     def __str__(self):
         return (self.Text)
 
@@ -198,6 +210,8 @@ class Network_Suggestions(models.Model):
     asset_tag = models.ManyToManyField(tag_asset, default=[0], verbose_name='Asset Tag')
     cash_tag = models.ManyToManyField(tag_cash, default=[0], verbose_name='Cash Tag')
     liquidity_tag = models.ManyToManyField(tag_liquidity, default=[0], verbose_name='Liquidity Tag')
+    qualitative_tag = models.ManyToManyField(qualitative_tag, default=[0], verbose_name='Qualitative Tag')
+
     def __str__(self):
         return (self.Name)
 
@@ -208,6 +222,7 @@ class Recommandation_Video(models.Model):
     asset_tag = models.ManyToManyField(tag_asset, default=[0], verbose_name='Asset Tag')
     cash_tag = models.ManyToManyField(tag_cash, default=[0], verbose_name='Cash Tag')
     liquidity_tag = models.ManyToManyField(tag_liquidity, default=[0], verbose_name='Liquidity Tag')
+    qualitative_tag = models.ManyToManyField(qualitative_tag, default=[0], verbose_name='Qualitative Tag')
 
     def __str__(self):
         return (self.Name)
@@ -221,6 +236,7 @@ class Recommandation_Articles(models.Model):
     asset_tag = models.ManyToManyField(tag_asset, default=[0], verbose_name='Asset Tag')
     cash_tag = models.ManyToManyField(tag_cash, default=[0], verbose_name='Cash Tag')
     liquidity_tag = models.ManyToManyField(tag_liquidity, default=[0], verbose_name='Liquidity Tag')
+    qualitative_tag = models.ManyToManyField(qualitative_tag, default=[0], verbose_name='Qualitative Tag')
 
     def __str__(self):
         return (self.Title)
@@ -232,4 +248,48 @@ class purchased_report(models.Model):
 
     def __str__(self):
         return (self.file_name)
+
+class qualitative_result(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    internalisation = models.FloatField('Internalisation')
+    investment = models.FloatField('Investment')
+    innovation = models.FloatField('Innovation')
+    integration = models.FloatField('Integration')
+    internationalisation = models.FloatField('Internationalisation')
+
+class qualitative_answer(models.Model):
+    user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    set1q1 = models.FloatField()
+    set1q2 = models.FloatField()
+    set1q3 = models.FloatField()
+    set1q4 = models.FloatField()
+    set1q5 = models.FloatField()
+    set2q1 = models.FloatField()
+    set2q2 = models.FloatField()
+    set2q3 = models.FloatField()
+    set2q4 = models.FloatField()
+    set2q5 = models.FloatField()
+    set3q1 = models.FloatField()
+    set3q2 = models.FloatField()
+    set3q3 = models.FloatField()
+    set3q4 = models.FloatField()
+    set3q5 = models.FloatField()
+    set4q1 = models.FloatField()
+    set4q2 = models.FloatField()
+    set4q3 = models.FloatField()
+    set4q4 = models.FloatField()
+    set4q5 = models.FloatField()
+    set5q1 = models.FloatField()
+    set5q2 = models.FloatField()
+    set5q3 = models.FloatField()
+    set5q4 = models.FloatField()
+    set5q5 = models.FloatField()
+
+    def __str__(self):
+        return self.user.first_name + ' ' + self.user.last_name
+    
+
+
+
+    
 
