@@ -90,7 +90,74 @@ def qualitative_questionaire(request):
     if (request.method != 'POST'):
         return render(request, 'qualitative_questionaire.html')
     else:
+        jsn = json.loads(request.body)
         current_user = user_profile.objects.get(user_id=request.user.id)
+        result = {
+            'internalisation': jsn['internalisation'],
+            'investment': jsn['investment'],
+            'innovation': jsn['innovation'],
+            'integration': jsn['integration'],
+            'internationalisation': jsn['internationalisation'],
+        }
+        
+        qualitative_questionaire_result = qualitative_result(
+            user = current_user,
+            internalisation= jsn['internalisation'],
+            investment= jsn['investment'],
+            innovation= jsn['innovation'],
+            integration= jsn['integration'],
+            internationalisation= jsn['internationalisation'],
+        )
+
+        qualitative_questionaire_answer = qualitative_answer(
+            user = current_user,
+            set1q1 = jsn['set1'][0],
+            set1q2 = jsn['set1'][1],
+            set1q3 = jsn['set1'][2],
+            set1q4 = jsn['set1'][3],
+            set1q5 = jsn['set1'][4],
+            set2q1 = jsn['set2'][0],
+            set2q2 = jsn['set2'][1],
+            set2q3 = jsn['set2'][2],
+            set2q4 = jsn['set2'][3],
+            set2q5 = jsn['set2'][4],
+            set3q1 = jsn['set3'][0],
+            set3q2 = jsn['set3'][1],
+            set3q3 = jsn['set3'][2],
+            set3q4 = jsn['set3'][3],
+            set3q5 = jsn['set3'][4],
+            set4q1 = jsn['set4'][0],
+            set4q2 = jsn['set4'][1],
+            set4q3 = jsn['set4'][2],
+            set4q4 = jsn['set4'][3],
+            set4q5 = jsn['set4'][4],
+            set5q1 = jsn['set5'][0],
+            set5q2 = jsn['set5'][1],
+            set5q3 = jsn['set5'][2],
+            set5q4 = jsn['set5'][3],
+            set5q5 = jsn['set5'][4],
+        )
+        
+        highest_number = max(result, key=jsn.get)
+        
+        if (highest_number == 'internalisation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internalisation')
+
+        elif (highest_number == 'investment'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Investment')
+
+        elif (highest_number == 'innovation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Innovation')
+
+        elif (highest_number == 'integration'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Integration')
+
+        elif (highest_number == 'internationalisation'):
+            current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internationalisation')
+
+
+        qualitative_questionaire_result.save()
+        qualitative_questionaire_answer.save()
         current_user.qualitative_data_provided = True
         current_user.save()
         return HttpResponse("data saved", status=200)
@@ -872,8 +939,9 @@ def get_profit_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(profit_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
-
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
+            
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -948,7 +1016,8 @@ def get_asset_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(asset_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -1020,7 +1089,8 @@ def get_cash_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(cash_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -1092,7 +1162,8 @@ def get_liquidity_video(request):
     for tag in current_user_tag:
         recommand_videos = Recommandation_Video.objects.filter(liquidity_tag = tag)
         for video in recommand_videos:
-            videos_id.append(video.Video_ID)
+            if video.Video_ID not in videos_id:
+                videos_id.append(video.Video_ID)
     response = retrive_youtube_videos(videos_id)
     return JsonResponse(response, safe=False)
 
@@ -1296,3 +1367,106 @@ def get_liquidity_chart_data(request):
     }
 
     return JsonResponse(response, safe=False)
+
+def get_questionaire_data(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    user_questionaire_answer = qualitative_answer.objects.get(user = current_user)
+    response = {
+        'set1q1': user_questionaire_answer.set1q1,
+        'set1q2': user_questionaire_answer.set1q2,
+        'set1q3': user_questionaire_answer.set1q3,
+        'set1q4': user_questionaire_answer.set1q4,
+        'set1q5': user_questionaire_answer.set1q5,
+        'set2q1': user_questionaire_answer.set2q1,
+        'set2q2': user_questionaire_answer.set2q2,
+        'set2q3': user_questionaire_answer.set2q3,
+        'set2q4': user_questionaire_answer.set2q4,
+        'set2q5': user_questionaire_answer.set2q5,
+        'set3q1': user_questionaire_answer.set3q1,
+        'set3q2': user_questionaire_answer.set3q2,
+        'set3q3': user_questionaire_answer.set3q3,
+        'set3q4': user_questionaire_answer.set3q4,
+        'set3q5': user_questionaire_answer.set3q5,
+        'set4q1': user_questionaire_answer.set4q1,
+        'set4q2': user_questionaire_answer.set4q2,
+        'set4q3': user_questionaire_answer.set4q3,
+        'set4q4': user_questionaire_answer.set4q4,
+        'set4q5': user_questionaire_answer.set4q5,
+        'set5q1': user_questionaire_answer.set5q1,
+        'set5q2': user_questionaire_answer.set5q2,
+        'set5q3': user_questionaire_answer.set5q3,
+        'set5q4': user_questionaire_answer.set5q4,
+        'set5q5': user_questionaire_answer.set5q5,
+    }
+
+    return JsonResponse(response, safe=False)
+
+def update_user_questionaire_data(request):
+    jsn = json.loads(request.body)
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    user_questionaire_answer = qualitative_answer.objects.get(user = current_user)
+    user_questionaire_result = qualitative_result.objects.get(user = current_user)
+
+    user_questionaire_answer.set1q1 = jsn['set1'][0]
+    user_questionaire_answer.set1q2 = jsn['set1'][1]
+    user_questionaire_answer.set1q3 = jsn['set1'][2]
+    user_questionaire_answer.set1q4 = jsn['set1'][3]
+    user_questionaire_answer.set1q5 = jsn['set1'][4]
+    user_questionaire_answer.set2q1 = jsn['set2'][0]
+    user_questionaire_answer.set2q2 = jsn['set2'][1]
+    user_questionaire_answer.set2q3 = jsn['set2'][2]
+    user_questionaire_answer.set2q4 = jsn['set2'][3]
+    user_questionaire_answer.set2q5 = jsn['set2'][4]
+    user_questionaire_answer.set3q1 = jsn['set3'][0]
+    user_questionaire_answer.set3q2 = jsn['set3'][1]
+    user_questionaire_answer.set3q3 = jsn['set3'][2]
+    user_questionaire_answer.set3q4 = jsn['set3'][3]
+    user_questionaire_answer.set3q5 = jsn['set3'][4]
+    user_questionaire_answer.set4q1 = jsn['set4'][0]
+    user_questionaire_answer.set4q2 = jsn['set4'][1]
+    user_questionaire_answer.set4q3 = jsn['set4'][2]
+    user_questionaire_answer.set4q4 = jsn['set4'][3]
+    user_questionaire_answer.set4q5 = jsn['set4'][4]
+    user_questionaire_answer.set5q1 = jsn['set5'][0]
+    user_questionaire_answer.set5q2 = jsn['set5'][1]
+    user_questionaire_answer.set5q3 = jsn['set5'][2]
+    user_questionaire_answer.set5q4 = jsn['set5'][3]
+    user_questionaire_answer.set5q5 = jsn['set5'][4]
+
+    user_questionaire_result.internalisation = jsn['internalisation']
+    user_questionaire_result.investment = jsn['investment']
+    user_questionaire_result.innovation = jsn['innovation']
+    user_questionaire_result.integration = jsn['integration']
+    user_questionaire_result.internationalisation = jsn['internationalisation']
+
+    result = {
+            'internalisation': jsn['internalisation'],
+            'investment': jsn['investment'],
+            'innovation': jsn['innovation'],
+            'integration': jsn['integration'],
+            'internationalisation': jsn['internationalisation'],
+    }
+
+    highest_number = max(result, key=jsn.get)
+        
+    if (highest_number == 'internalisation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internalisation')
+
+    elif (highest_number == 'investment'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Investment')
+
+    elif (highest_number == 'innovation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Innovation')
+
+    elif (highest_number == 'integration'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Integration')
+
+    elif (highest_number == 'internationalisation'):
+        current_user.qualitative_tag = qualitative_tag.objects.get(name = 'Internationalisation')
+
+    user_questionaire_answer.save()
+    user_questionaire_result.save()
+    current_user.save()
+
+    return HttpResponse("data saved", status=200)
+

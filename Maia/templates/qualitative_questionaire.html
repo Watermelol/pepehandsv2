@@ -48,176 +48,145 @@
 
                             </div>
                             <div class="card-body">
-                                <table style="width: 100%;" v-if="pageNumber == 1">
+                                <table style="width: 100%;  color:#fff;" v-if="pageNumber == 1">
                                     <tr>
                                         <th style="width: 80%;">Questions</th>
                                         <th style="width: 20%;">Rating</th>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr class="pb-3">
+                                        <td>1)	I have a diversified portfolio of products and services.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q1"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr class="pb-3">
+                                        <td>2)	I have plans that I cannot put into action because I am short of resources.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q2"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr class="pb-3">
+                                        <td>3)	My products yield high volume but low margins.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q3"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr class="pb-3">
+                                        <td>4)	I prefer to focus my effort on a niche market – by location or customer.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q4"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr class="pb-3">
+                                        <td>5)	At least 80% of my sales come from a few customers.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q5"></td>
                                     </tr>
                                 </table>
-                                <table style="width: 100%;" v-if="pageNumber == 2">
+                                <table style="width: 100%;  color:#fff;" v-if="pageNumber == 2">
                                     <tr>
                                         <th style="width: 80%;">Questions</th>
                                         <th style="width: 20%;">Rating</th>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>1)	I need a bank loan to finance my ongoing business operations.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set2Q1"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>2)	I need funding to help innovate my business process.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set2Q2"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>3)	I am looking for external funding to create a new business.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set2Q3"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>4)	I require funding to expand my business overseas.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set2Q4"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and brandingaaaaaaa</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
-                                    </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>5)	A bank loan or subsidy would help my business greatly in its current stage.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set2Q5"></td>
                                     </tr>
                                 </table>
-                                <table style="width: 100%;" v-if="pageNumber == 3">
+                                <table style="width: 100%; color:#fff;" v-if="pageNumber == 3">
                                     <tr>
                                         <th style="width: 80%;">Questions</th>
                                         <th style="width: 20%;">Rating</th>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>1)	I need ideas and advice on how to develop new products.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set3Q1"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>2)	I will explore new ways of doing business within the next 2 months.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set3Q2"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>3)	I tend to use IT to innovate process.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set3Q3"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>4)	New conditions and factors are encouraging me to innovate my business.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set3Q4
+                                            "></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>5)	I am open to trying new processes, services or products for my business.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set3Q5"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                </table>
+                                <table style="width: 100%;  color:#fff;" v-if="pageNumber == 4">
+                                    <tr>
+                                        <th style="width: 80%;">Questions</th>
+                                        <th style="width: 20%;">Rating</th>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>1)	I would like to take part in more networking sessions to increase my market knowledge.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set4Q1"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and bbbbbbbbbb</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>2)	I use online networks and portals to promote my business.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set4Q2"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>3)	I need help to access new markets or customers via the internet.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set4Q3"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>4)	I rely heavily on agents, distributors or resellers.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set4Q4"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                    <tr>
+                                        <td>5)	I would like to develop new channels to promote and distribute my products/services.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set4Q5"></td>
                                     </tr>
-                                    <tr class="mb-3">
-                                        <td>I intended to focus on marketing and branding</td>
-                                        <td><input type="number" class="form-control" max=5 min=1></td>
+                                </table>
+                                <table style="width: 100%;  color:#fff;" v-if="pageNumber == 5">
+                                    <tr>
+                                        <th style="width: 80%;">Questions</th>
+                                        <th style="width: 20%;">Rating</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1)	I need professional market research on the countries I intend to enter.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set5Q1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2)	I require legal advice on setting up business overseas.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set5Q2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3)	I want to expand my business overseas.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set5Q3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4)	I am finding the local market unprofitable.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set5Q4"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5)	I need suitable partners to go overseas with, and share profits with them.</td>
+                                        <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set5Q5"></td>
                                     </tr>
                                 </table>
                                 <div>
-                                    <button class="btn btn-light pull-left" style="width: 119px;" v-if="pageNumber == 2 || pageNumber == 3" @click="previousPage()">
+                                    <button class="btn btn-light pull-left" style="width: 119px;" v-if="pageNumber == 2 || pageNumber == 3 || pageNumber == 4 || pageNumber == 5" @click="previousPage()">
                                         <i class="fas fa-arrow-left"></i>
                                     </button>
-                                    <button class="btn btn-light pull-right" style="width: 119px;" v-if="pageNumber == 1 || pageNumber == 2" @click="nextPage()">
+                                    <button class="btn btn-light pull-right" style="width: 119px;" v-if="pageNumber == 1 || pageNumber == 2 || pageNumber == 3 || pageNumber == 4" @click="nextPage()">
                                         <i class="fas fa-arrow-right"></i>
                                     </button>
-                                    <button class="btn btn-light pull-right" v-if="pageNumber == 3" @click="submitAnswer()">
+                                    <button class="btn btn-light pull-right" v-if="pageNumber == 5" @click="submitAnswer()">
                                         Submit
                                     </button>
                                 </div>
