@@ -37,7 +37,7 @@ urlpatterns = [
     # Report Payment
     path('report_payment/', views.report_payment, name="report_payment"),
     path('create-checkout-session/', views.report_checkout),
-    path('success/', views.payment_success),
+    path('success/', views.payment_success, name="payment_success"),
     path('cancelled/', views.payment_cancelled),
 
     #  Stripr Web

@@ -9,7 +9,7 @@ from .forms import UserProfile
 from djstripe.models import Charge
 import json
 import stripe
-from datetime import datetime
+from datetime import date
 from .create_report import createReport
 from .youtubeAPI import retrive_youtube_videos
 from news_processor import *
@@ -440,12 +440,102 @@ def report_checkout(request):
 
 def payment_success(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
-    now = datetime.now()
-    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
+    financial_data = user_financial_data_v2.objects.get(user=current_user)
+    now = date.today()
+    dt_string = now.strftime("%d-%m-%Y")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
     fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'
-    createReport(fileName)
+
+    data = {
+        'profit': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'profit': [financial_data.q1_net_profit, financial_data.q2_net_profit, financial_data.q3_net_profit, financial_data.q4_net_profit],
+                'revenue': [financial_data.q1_revenue, financial_data.q2_revenue, financial_data.q3_revenue, financial_data.q4_revenue],
+            }
+        },
+
+        'asset': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'return_of_asset': financial_data.return_on_asset,
+                'asset_turnover_ratio': financial_data.asset_turn_over_ratio,
+                'debt_to_asset_ratio': financial_data.debt_to_asset_ratio,
+            }
+        },
+
+        'cash': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'q1_net_cash_flow': financial_data.q1_net_cash_flow,
+                'q2_net_cash_flow': financial_data.q2_net_cash_flow,
+                'q3_net_cash_flow': financial_data.q3_net_cash_flow,
+                'q4_net_cash_flow': financial_data.q4_net_cash_flow,
+            }
+        },
+
+        'liquidity': {
+            'comments': [],
+            'suggestions': [],
+            'chartsData': {
+                'quick_ratio': financial_data.quick_ratio,
+                'current_ratio': financial_data.current_ratio,
+                'cash_ratio': financial_data.cash_ratio,
+            }
+        } 
+    }
+
+    current_user_tag_profit = user_profile.objects.get(user_id=request.user.id).profit_tag.all()
+    for tag in current_user_tag_profit:
+        profit_comment = Comment.objects.filter(profit_tag = tag)
+        for comment in profit_comment:
+            data['profit']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_profit:
+        profit_suggestion = Advices.objects.filter(profit_tag = tag)
+    
+        for suggestion in profit_suggestion:
+            data['profit']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_asset = user_profile.objects.get(user_id=request.user.id).asset_tag.all()
+    for tag in current_user_tag_asset:
+        asset_comment = Comment.objects.filter(asset_tag = tag)
+        for comment in asset_comment:
+            data['asset']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_asset:
+        asset_suggestion = Advices.objects.filter(asset_tag = tag)
+        for suggestion in asset_suggestion:
+            data['asset']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_cash = user_profile.objects.get(user_id=request.user.id).cash_tag.all()
+    for tag in current_user_tag_cash:
+        cash_comment = Comment.objects.filter(cash_tag = tag)
+        for comment in cash_comment:
+            data['cash']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_cash:
+        cash_suggestion = Advices.objects.filter(cash_tag = tag)
+        for suggestion in cash_suggestion:
+            data['cash']['suggestions'].append(suggestion.Text)
+
+    current_user_tag_liquidity = user_profile.objects.get(user_id=request.user.id).liquidity_tag.all()
+    for tag in current_user_tag_liquidity:
+        liquidity_comment = Comment.objects.filter(liquidity_tag = tag)
+        for comment in liquidity_comment:
+            data['liquidity']['comments'].append(comment.Text)
+
+    for tag in current_user_tag_liquidity:
+        profit_suggestion = Advices.objects.filter(liquidity_tag = tag)
+        for suggestion in profit_suggestion:
+            data['liquidity']['suggestions'].append(suggestion.Text)
+
+
+    createReport(fileName, data)
     report_purchased = purchased_report(
         user = current_user,
         file_name = fileName
