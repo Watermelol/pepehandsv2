@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
+import datetime
 from .models import *
 from .forms import UserProfile
 from djstripe.models import Charge
@@ -497,7 +498,7 @@ def report_checkout(request):
                         'name': 'Detailed Report',
                         'quantity': 1,
                         'currency': 'myr',
-                        'amount': '10000',
+                        'amount': '2000',
                     }
                 ]
             )
@@ -508,8 +509,8 @@ def report_checkout(request):
 def payment_success(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     financial_data = user_financial_data_v2.objects.get(user=current_user)
-    now = date.today()
-    dt_string = now.strftime("%d-%m-%Y")
+    now = datetime.datetime.now()
+    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
     fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'

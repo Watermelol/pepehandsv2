@@ -9,6 +9,7 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.lib.colors import pink, black, red, blue, green
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
+from reportlab.platypus.tableofcontents import TableOfContents
 from .report_storage import uploadReport
 
 def createReport(fileName, dataChart):
@@ -21,6 +22,15 @@ def createReport(fileName, dataChart):
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
     styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+
+    PS = ParagraphStyle
+
+    h1 = PS(name = 'Heading1',
+            fontSize = 22,
+            leading = 16)
+    h2 = PS(name = 'Heading2',
+            fontSize = 16,
+            leading = 14)
 
     # Cover Page
     Story.append(Spacer(1, 48))
@@ -38,8 +48,8 @@ def createReport(fileName, dataChart):
     # Cover Page End
 
     # profit Page
-    ptext = '<font size="22">Profit Pillar</font>'
-    Story.append(Paragraph(ptext))
+    ptext = '<font>Profit Pillar</font>'
+    Story.append(Paragraph(ptext, h1))
     Story.append(Spacer(1, 30))
     chart_title = '<font size="8">Quaterly Profit and Revenue Comparison Chart</font>'
     Story.append(Paragraph(chart_title, styles['Center']))
@@ -93,9 +103,9 @@ def createReport(fileName, dataChart):
         Story.append(Paragraph(ptext))
         Story.append(Spacer(1, 8))
 
-    ptext = '<font size="16">Suggestion<br/></font>'
+    ptext = '<font>Suggestion<br/></font>'
     Story.append(PageBreak())
-    Story.append(Paragraph(ptext))
+    Story.append(Paragraph(ptext, h2))
     Story.append(Spacer(1, 15))
 
     profit_suggestion = dataChart['profit']['suggestions']
@@ -109,8 +119,8 @@ def createReport(fileName, dataChart):
     # Profit Page End
 
     # Asset Page
-    ptext = '<font size="22">Asset Pillar</font>'
-    Story.append(Paragraph(ptext))
+    ptext = '<font>Asset Pillar</font>'
+    Story.append(Paragraph(ptext, h1))
     Story.append(Spacer(1, 30))
     chart_title = '<font size="8">Return of Asset vs Asset Turnover Ratio vs Debt to Asset Ratio Chart</font>'
     Story.append(Paragraph(chart_title, styles['Center']))
@@ -150,9 +160,9 @@ def createReport(fileName, dataChart):
         Story.append(Paragraph(ptext))
         Story.append(Spacer(1, 8))
 
-    ptext = '<font size="16">Suggestion<br/></font>'
+    ptext = '<font>Suggestion<br/></font>'
     Story.append(PageBreak())
-    Story.append(Paragraph(ptext))
+    Story.append(Paragraph(ptext, h2))
     Story.append(Spacer(1, 15))
 
     asset_suggestion = dataChart['asset']['suggestions']
@@ -166,8 +176,8 @@ def createReport(fileName, dataChart):
     # Asset Page End
 
     # Cash Page
-    ptext = '<font size="22">Cash Pillar</font>'
-    Story.append(Paragraph(ptext))
+    ptext = '<font>Cash Pillar</font>'
+    Story.append(Paragraph(ptext, h1))
     Story.append(Spacer(1, 30))
     chart_title = '<font size="8">Quarterly Cash Net Flow Chart</font>'
     Story.append(Paragraph(chart_title, styles['Center']))
@@ -216,9 +226,9 @@ def createReport(fileName, dataChart):
         Story.append(Paragraph(ptext))
         Story.append(Spacer(1, 8))
 
-    ptext = '<font size="16">Suggestion<br/></font>'
+    ptext = '<font>Suggestion<br/></font>'
     Story.append(PageBreak())
-    Story.append(Paragraph(ptext))
+    Story.append(Paragraph(ptext, h2))
     Story.append(Spacer(1, 15))
 
     cash_suggestion = dataChart['cash']['suggestions']
@@ -232,8 +242,8 @@ def createReport(fileName, dataChart):
     # Cash Page End
 
     # Liquidity Page
-    ptext = '<font size="22">Liquidity Pillar</font>'
-    Story.append(Paragraph(ptext))
+    ptext = '<font>Liquidity Pillar</font>'
+    Story.append(Paragraph(ptext, h1))
     Story.append(Spacer(1, 30))
     chart_title = '<font size="8">Quick Ratio vs Current Ratio vs Cash Ratio Chart</font>'
     Story.append(Paragraph(chart_title, styles['Center']))
@@ -272,9 +282,9 @@ def createReport(fileName, dataChart):
         Story.append(Paragraph(ptext))
         Story.append(Spacer(1, 8))
 
-    ptext = '<font size="16">Suggestion<br/></font>'
+    ptext = '<font>Suggestion<br/></font>'
     Story.append(PageBreak())
-    Story.append(Paragraph(ptext))
+    Story.append(Paragraph(ptext, h2))
     Story.append(Spacer(1, 15))
 
     liquidity_suggestion = dataChart['liquidity']['suggestions']
@@ -285,6 +295,7 @@ def createReport(fileName, dataChart):
         Story.append(Spacer(1, 8))
 
     Story.append(PageBreak())
+
     doc.build(Story)
 
     uploadReport('pdf/' + fileName)
