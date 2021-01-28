@@ -161,7 +161,7 @@ def qualitative_questionaire(request):
         current_user.qualitative_data_provided = True
         current_user.save()
         return HttpResponse("data saved", status=200)
-
+zz
 def news_setiment_page(request):
     return render (request, 'news_sentiment.html')
 
