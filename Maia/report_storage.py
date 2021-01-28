@@ -8,6 +8,8 @@ bucket = client.get_bucket('maia_report_1')
 def uploadReport(fileName):
     file_name = bucket.blob(fileName)
     file_name.upload_from_filename(fileName)
+
+    deleteReportFromLocal(fileName)
     return "File Uploaded"
 
 def deleteReportFromLocal(fileName):

@@ -98,5 +98,13 @@ urlpatterns = [
 
     # News Sentiment
     path('news-sentiment/', views.news_setiment_page, name='news_sentiment'),
-    path('news-sentiment/get', views.get_news_sentiment, name='get_news_sentiment')
+    path('news-sentiment/get', views.get_news_sentiment, name='get_news_sentiment'),
+
+    # Qualitative
+    path('qualitative', views.qualitative_page, name='get_qualitative_page'),
+    path('qualitative/get', views.qualitative_get, name='qualitative_data'),
+    path('qualitative/suggestion', views.get_qualitative_suggestion, name='qualitative_suggestion'),
+    path('qualitative/networking', views.get_qualitative_networking , name='qualitative_networking'),
+    path('qualitative/videos', views.get_qualitative_video , name='qualitative_videos'),
+    path('qualitative/article', views.get_qualitative_article , name='qualitative_article'),
 ]

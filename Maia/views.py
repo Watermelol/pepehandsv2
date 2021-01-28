@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.conf import settings
+import datetime
 from .models import *
 from .forms import UserProfile
 from djstripe.models import Charge
@@ -502,7 +503,7 @@ def report_checkout(request):
                         'name': 'Detailed Report',
                         'quantity': 1,
                         'currency': 'myr',
-                        'amount': '10000',
+                        'amount': '2000',
                     }
                 ]
             )
@@ -513,8 +514,8 @@ def report_checkout(request):
 def payment_success(request):
     current_user = user_profile.objects.get(user_id=request.user.id)
     financial_data = user_financial_data_v2.objects.get(user=current_user)
-    now = date.today()
-    dt_string = now.strftime("%d-%m-%Y")
+    now = datetime.datetime.now()
+    dt_string = now.strftime("%d-%m-%Y-%H-%M-%S")
     for charges in Charge.api_list():
         Charge.sync_from_stripe_data(charges)
     fileName = current_user.first_name + current_user.last_name + dt_string + '.pdf'
@@ -956,7 +957,9 @@ def get_profit_article(request):
                 'siteName': article.Site_Name,
                 'url': article.URL,
             }
-            articles.append(jsn)
+            if jsn not in articles:
+                articles.append(jsn)
+            
     response = {
         'data': articles
     }
@@ -975,7 +978,8 @@ def get_profit_networking(request):
                 'url': people.URL,
                 'thumbnails': people.thumbnails
             }
-            peoples.append(jsn)
+            if jsn not in peoples:
+                peoples.append(jsn)
     response = {
         'data': peoples
     }
@@ -1032,7 +1036,9 @@ def get_asset_article(request):
                 'siteName': article.Site_Name,
                 'url': article.URL,
             }
-            articles.append(jsn)
+            if jsn not in articles:
+                articles.append(jsn)
+
     response = {
         'data': articles
     }
@@ -1050,7 +1056,9 @@ def get_asset_networking(request):
                 'url': people.URL,
                 'thumbnails': people.thumbnails
             }
-            peoples.append(jsn)
+            if jsn not in peoples :
+                peoples.append(jsn)
+
     response = {
         'data': peoples
     }
@@ -1105,7 +1113,9 @@ def get_cash_article(request):
                 'siteName': article.Site_Name,
                 'url': article.URL,
             }
-            articles.append(jsn)
+            if jsn not in articles:
+                articles.append(jsn)
+            
     response = {
         'data': articles
     }
@@ -1123,7 +1133,8 @@ def get_cash_networking(request):
                 'url': people.URL,
                 'thumbnails': people.thumbnails
             }
-            peoples.append(jsn)
+            if jsn not in peoples:
+                peoples.append(jsn)
     response = {
         'data': peoples
     }
@@ -1178,7 +1189,8 @@ def get_liquidity_article(request):
                 'siteName': article.Site_Name,
                 'url': article.URL,
             }
-            articles.append(jsn)
+            if jsn not in articles:
+                articles.append(jsn)
     response = {
         'data': articles
     }
@@ -1196,7 +1208,8 @@ def get_liquidity_networking(request):
                 'url': people.URL,
                 'thumbnails': people.thumbnails
             }
-            peoples.append(jsn)
+            if jsn not in peoples:
+                peoples.append(jsn)
     response = {
         'data': peoples
     }
@@ -1469,3 +1482,68 @@ def update_user_questionaire_data(request):
 
     return HttpResponse("data saved", status=200)
 
+def qualitative_page(request):
+    return render (request, 'qualitative_page.html')
+
+def qualitative_get(request):
+    current_user = user_profile.objects.get(user_id=request.user.id)
+    fields = current_user.qualitative_tag.name
+
+    return HttpResponse(fields, status=200)
+
+def get_qualitative_suggestion(request):
+    current_user_tag = user_profile.objects.get(user_id=request.user.id).qualitative_tag
+    suggestions = []
+    profit_suggestion = Advices.objects.filter(qualitative_tag = current_user_tag)
+    for suggestion in profit_suggestion:
+        suggestions.append(suggestion.Text)
+    response = {
+        'data': suggestions
+    }
+    return JsonResponse(response, safe=False)
+
+def get_qualitative_video(request):
+    current_user_tag = user_profile.objects.get(user_id=request.user.id).qualitative_tag
+    videos_id = []
+    recommand_videos = Recommandation_Video.objects.filter(qualitative_tag = current_user_tag)
+    for video in recommand_videos:
+        if video.Video_ID not in videos_id:
+            videos_id.append(video.Video_ID)
+    response = retrive_youtube_videos(videos_id)
+    return JsonResponse(response, safe=False)
+
+def get_qualitative_article(request):
+    current_user_tag = user_profile.objects.get(user_id=request.user.id).qualitative_tag
+    articles = []
+    recommand_article = Recommandation_Articles.objects.filter(qualitative_tag = current_user_tag)
+    for article in recommand_article:
+        jsn = {
+            'title': article.Title,
+            'description': article.Description,
+            'siteName': article.Site_Name,
+            'url': article.URL,
+        }
+        if jsn not in articles:
+            articles.append(jsn)
+    response = {
+        'data': articles
+    }
+    return JsonResponse(response, safe=False)
+
+def get_qualitative_networking(request):
+    current_user_tag = user_profile.objects.get(user_id=request.user.id).qualitative_tag
+    peoples = []
+    networking_peoples = Network_Suggestions.objects.filter(qualitative_tag = current_user_tag)
+    for people in networking_peoples:
+        jsn = {
+            'name': people.Name,
+            'skills': people.Skills,
+            'url': people.URL,
+            'thumbnails': people.thumbnails
+        }
+        if jsn not in peoples :
+            peoples.append(jsn)
+    response = {
+        'data': peoples
+    }
+    return JsonResponse(response, safe=False)

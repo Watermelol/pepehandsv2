@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row" id="qualitativePage">
+    <h1>5I</h1>
+    <div class="col-md-12">
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+                <div class="card-deck h-100">
+                    <div class="card card-chart w-100">
+                        <div class="card-body" style="overflow: auto;">
+                           <div id="qualitative_data"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card-deck h-100">
+                    <div class="card card-chart w-100">
+                        <div class="card-header">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a :class="[{'nav-link':true}, {'active':info}]" @click="showInfo" href="#">Info</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
+                                  </li>
+                            </ul>
+                        </div>
+                        <div class="card-body" style="overflow: auto; max-height: 40vh;">
+                            <table class="table" v-if='info'>
+                                <tbody v-if='fields == "Internalisation"'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Internalisation is when a transaction is kept within a company rather than going out to the open market. Internalisation can also include a parent of a multinational company moving its assets to a subsidiary company across the world.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">While internalisation is retaining or acquiring one or more value chain activities rather than licensing them. It ensures greater control over operations.one way of doing this is to transfer firm's superior knowledge to a foreign subsidiary rather than selling it in open market.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Inhouse production</td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-if='fields == "Investment"'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">An investment always concerns the outlay of some asset today—time, money, or effort—in hopes of a greater payoff in the future than what was originally put in.</td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-if='fields == "Innovation"'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Business innovation is when an organisation introduces new processes, services, or products to affect positive change in their business. This can include improving existing methods or practices, or starting from scratch. Ultimately the goal is to reinvigorate a business, creating new value and boosting growth and/or productivity.</td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-if='fields == "Integration"'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Business integration is a strategy whose goal is to synchronize information technology (IT) and business cultures and objectives and align technology with business strategy and goals. Business integration is a reflection of how IT is being absorbed as a function of business.</td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-if='fields == "Internationalisation"'>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Internationalisation refers to the process of how firms become international.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 1rem;">Internationalisation is the process where involvement of enterprises in the international markets increases</td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                            
+                            <table class="table" v-if="suggestion">
+                                <tr v-for="suggestion in liquidity_suggestion">
+                                    <!-- <td style="font-size: 1rem;">asdasdasd</td> -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card-deck h-100">
+                    <div class="card card-chart w-100">
+                        <div class="card-header">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a :class="[{'nav-link':true}, {'active':articles}]" @click="showArticles" href="#">Articles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a :class="[{'nav-link':true}, {'active':videos}]" @click="showVideos" href="#">Videos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a :class="[{'nav-link':true}, {'active':networking}]" @click="showNetworking" href="#">Networking</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <table class="w-100 table" v-if='articles' >
+                                <tr>
+                                    <th class="text-white" style="width: 20%;">Title</th>
+                                    <th class="text-white" style="width: 60%;">Description</th>
+                                    <th class="text-white text-center" style="width: 20%;">Site</th>
+                                </tr>
+                                <!-- <tr v-for="article in recommanded_articles" @click="goToArticle(article.url)">
+                                    <td class="text-light">[$ article.title $]</td>
+                                    <td class="text-light text-justify">[$ article.description $]</td>
+                                    <td class="text-light text-center">[$ article.siteName $]</td>
+                                </tr> -->
+                            </table>
+                            <table class="w-100 table table-hover" v-if='videos'>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-white">Title</th>
+                                    <th class="text-white">Channel</th>
+                                </tr>
+                                <!-- <tr v-for="video in youtube_videos" @click="goToVideo(video.id)">
+                                    <td><img class="img-thumbnail" :src="video.snippet.thumbnails.default.url" alt=""></td>
+                                    <td class="text-light">[$ video.snippet.title $]</td>
+                                    <td class="text-light">[$ video.snippet.channelTitle $]</td>
+                                </tr> -->
+                            </table>
+                            <table class="w-100 table" v-if='networking'>
+                                <tr>
+                                    <th style="width: 20%"></th>
+                                    <th style="width: 40%" class="text-white text-center">Name</th>
+                                    <th style="width: 40%" class="text-white">Skills</th>
+                                </tr>
+                                <!-- <tr v-for ="people in people_networking" @click="goToLinkedin(people.url)">
+                                    <td class="text-center">
+                                        <img class="img-thumbnail" :src="people.thumbnails" v-if="people.thumbnails != ''">
+                                        <i class="fas fa-user-tie" v-else></i>
+                                    </td>
+                                    <td class="text-light text-center">[$ people.name $]</td>
+                                    <td class="text-light">
+                                        <ul>
+                                            <li v-for="skills in people.skills">[$ skills $]</li>
+                                        </ul>
+                                    </td>
+                                </tr> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
