@@ -1335,7 +1335,6 @@ def get_news_sentiment(request):
                 'news_title': tempNews.title,
                 'url': tempNews.url,
                 'date': tempNews.date_published,
-                'epoch': datetime.datetime.strptime(tempNews.date_published, '%Y-%m-%dT%H:%M:%S').timestamp(),
                 'emotion_score': tempNews.emotion_score,
                 'emotion_score_word': score_word,
                 'emotion_strength': tempNews.emotion_strength,
