@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'vq2eu+uifnl8395y^d(dm_x0tv0vzql-o@x@nn4#=9sg02k&1d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.2', 'pepehands.net', 'www.pepehands.net', '127.0.0.1', 'localhost']
 
@@ -168,6 +168,7 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = 'end_user_agreement'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '760189331511410'      # Facebook App ID
