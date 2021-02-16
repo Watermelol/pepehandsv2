@@ -27,9 +27,9 @@
                                     <li class="nav-item">
                                       <a :class="[{'nav-link':true}, {'active':comments}]" @click="showComment" href="#" >Comments</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                       <a :class="[{'nav-link':true}, {'active':suggestion}]" @click="showSuggestion" href="#">Suggestion</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="card-body" style="overflow: auto; max-height: 40vh;">
@@ -52,11 +52,11 @@
                                         <td style="font-size: 1rem;">[$ comment $]</td>
                                     </tr>
                                 </table>
-                                <table class="table" v-if="suggestion">
+                                <!-- <table class="table" v-if="suggestion">
                                     <tr v-for="suggestion in asset_suggestion">
                                         <td style="font-size: 1rem;">[$ suggestion $]</td>
                                     </tr>
-                                </table>
+                                </table> -->
                             </div>
                         </div>
                     </div>

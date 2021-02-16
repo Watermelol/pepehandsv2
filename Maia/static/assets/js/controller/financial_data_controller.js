@@ -90,6 +90,14 @@ const financial_data_questionaire_controller = Vue.createApp({
                         if (result == 'data saved'){
                             window.location = '/dashboard/'
                         }
+                        else if (result == 'divde zero'){
+                            console.log('nice')
+                            setTimeout(() => {
+                                data.hideGlobalLoader()
+                                toastr.error('The minimum for the value is 1 !')
+                            }, 500);
+                            
+                        }
                     }
                 })
             }
