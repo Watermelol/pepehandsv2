@@ -91,7 +91,7 @@ var news_sentiment = Vue.createApp({
                       }
                       
                     },
-                    color: '#c8cbcf',
+                    color: '#000',
                     fontSize: '36px',
                     show: true,
                   }

@@ -107,4 +107,6 @@ urlpatterns = [
     path('qualitative/networking', views.get_qualitative_networking , name='qualitative_networking'),
     path('qualitative/videos', views.get_qualitative_video , name='qualitative_videos'),
     path('qualitative/article', views.get_qualitative_article , name='qualitative_article'),
+
+    path('teams', views.the_teams, name='teams')
 ]

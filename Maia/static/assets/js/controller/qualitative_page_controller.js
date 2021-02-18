@@ -109,7 +109,7 @@ const qualitative_page = Vue.createApp({
                       formatter: function(val) {
                         return fields
                       },
-                      color: '#c8cbcf',
+                      color: '#000',
                       fontSize: '36px',
                       show: true,
                     }

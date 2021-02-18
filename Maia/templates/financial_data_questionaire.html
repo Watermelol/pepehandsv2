@@ -18,12 +18,16 @@
         <link href="{%static 'assets/css/black-dashboard.css'%}" rel="stylesheet" />
         <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-color: azure;">
         <style>
-            option { 
-                /* Whatever color  you want */
-                background-color: #525f7f;
-}
+            label {
+                color: black !important;
+            }
+
+            .btn:hover {
+                color: #344675 !important;
+                text-decoration: none;
+            }
         </style>
         {% csrf_token %}
         <a href="{% url 'logout' %}" class="btn btn-warning pull-right btn-sm" id="logoutbutton" style="margin-right: 2vh; z-index: 999;">
@@ -34,7 +38,7 @@
                 <div class="container col-md-5">
                     <div style="margin-top: 20vh;">
                         <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_lO12qW.json"  background="transparent"  speed="1"  style="height: 300px;"  loop  autoplay></lottie-player>
-                        <p style="font-size: 1.0rem; text-align: center;">
+                        <p style="font-size: 1.0rem; text-align: center;" class="text-dark">
                             Please Provide Us With Some Financial Data
                             <br>So That We Can Help You Analyse On Your Company
                             <br>Performance, Business Value, Productivity, And Risk
@@ -58,19 +62,19 @@
                                         <form>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q1_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
+                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q1_revenue === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q1_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q1_profit_before_tax === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q1_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
+                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q1_net_profit === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q1_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_cash_flow'>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q1_net_cash_flow === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q1_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -90,19 +94,19 @@
                                         <form>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q2_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
+                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q2_revenue === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q2_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q2_profit_before_tax === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q2_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
+                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q2_net_profit === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q2_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_cash_flow'>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q2_net_cash_flow === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q2_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -122,19 +126,19 @@
                                         <form>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q3_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
+                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q3_revenue === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q3_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q3_profit_before_tax === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q3_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
+                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q3_net_profit === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q3_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_cash_flow'>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q3_net_cash_flow === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q3_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -154,19 +158,19 @@
                                         <form>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q4_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
+                                                <input type="number" onClick="this.select();" name="revenue" :class=" [{ 'border-danger': user_financial_data.q4_revenue === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q4_profit_before_tax === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
+                                                <input type="number" onClick="this.select();" name="profit_b4_tax" :class=" [{ 'border-danger': user_financial_data.q4_profit_before_tax === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q4_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
+                                                <input type="number" onClick="this.select();" name="net_profit" :class=" [{ 'border-danger': user_financial_data.q4_net_profit === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
                                                 <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q4_net_cash_flow === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_cash_flow'>
+                                                <input type="number" onClick="this.select();" name="net_cash_flow" :class=" [{ 'border-danger': user_financial_data.q4_net_cash_flow === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.q4_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -187,32 +191,32 @@
                                             <fieldset>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="yearly_revenue">Yearly Revenue (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="yearly_revenue" :class=" [{ 'border-danger': user_financial_data.yearly_revenue === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.yearly_revenue'>
+                                                    <input type="number" onClick="this.select();" name="yearly_revenue" :class=" [{ 'border-danger': user_financial_data.yearly_revenue === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.yearly_revenue'>
 
                                                     <label for="yearly_net_profit">Yearly Net Profit (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="yearly_net_profit" :class=" [{ 'border-danger': user_financial_data.yearly_net_profit === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.yearly_net_profit'>
+                                                    <input type="number" onClick="this.select();" name="yearly_net_profit" :class=" [{ 'border-danger': user_financial_data.yearly_net_profit === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.yearly_net_profit'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="cash">Cash (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="cash" :class=" [{ 'border-danger': user_financial_data.cash === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.cash'>
+                                                    <input type="number" onClick="this.select();" name="cash" :class=" [{ 'border-danger': user_financial_data.cash === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.cash'>
 
                                                     <label for="net_assets">Net Asset (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="net_assets" :class=" [{ 'border-danger': user_financial_data.net_assets === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.net_assets'>
+                                                    <input type="number" onClick="this.select();" name="net_assets" :class=" [{ 'border-danger': user_financial_data.net_assets === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.net_assets'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="debt">Debt (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="debt" :class=" [{ 'border-danger': user_financial_data.debt === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.debt'>
+                                                    <input type="number" onClick="this.select();" name="debt" :class=" [{ 'border-danger': user_financial_data.debt === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.debt'>
 
                                                     <label for="total_debt">Total Debt (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="total_debt" :class=" [{ 'border-danger': user_financial_data.total_debt === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;"  v-model='user_financial_data.total_debt'>
+                                                    <input type="number" onClick="this.select();" name="total_debt" :class=" [{ 'border-danger': user_financial_data.total_debt === '' }, {'form-control': true}]" style="width: 100% !important;"  v-model='user_financial_data.total_debt'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="total_liability">Total Liability (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="debt" :class=" [{ 'border-danger': user_financial_data.total_liability === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.total_liability'>
+                                                    <input type="number" onClick="this.select();" name="debt" :class=" [{ 'border-danger': user_financial_data.total_liability === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.total_liability'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="shareholder_equity">Shareholder Equity (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="shareholder_equity" :class=" [{ 'border-danger': user_financial_data.shareholder_equity === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.shareholder_equity'>
+                                                    <input type="number" onClick="this.select();" name="shareholder_equity" :class=" [{ 'border-danger': user_financial_data.shareholder_equity === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.shareholder_equity'>
                                                 </div>
                                             </fieldset>
 
@@ -221,32 +225,32 @@
                                             <fieldset>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="current_ratio">Current Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="current_ratio" :class=" [{ 'border-danger': user_financial_data.current_ratio === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;"  v-model='user_financial_data.current_ratio'>
+                                                    <input type="number" onClick="this.select();" name="current_ratio" :class=" [{ 'border-danger': user_financial_data.current_ratio === '' }, {'form-control': true}]" style="width: 100% !important;"  v-model='user_financial_data.current_ratio'>
 
                                                     <label for="return_on_asset">Return On Asset</label>
-                                                    <input type="number" onClick="this.select();" name="return_on_asset" :class=" [{ 'border-danger': user_financial_data.return_on_asset === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.return_on_asset'>
+                                                    <input type="number" onClick="this.select();" name="return_on_asset" :class=" [{ 'border-danger': user_financial_data.return_on_asset === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.return_on_asset'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="quick_ratio">Quick Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="quick_ratio" :class=" [{ 'border-danger': user_financial_data.quick_ratio === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.quick_ratio'>
+                                                    <input type="number" onClick="this.select();" name="quick_ratio" :class=" [{ 'border-danger': user_financial_data.quick_ratio === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.quick_ratio'>
 
                                                     <label for="asset_turn_over_ratio">Asset Turn Over Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="asset_turn_over_ratio" :class=" [{ 'border-danger': user_financial_data.asset_turn_over_ratio === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.asset_turn_over_ratio'>
+                                                    <input type="number" onClick="this.select();" name="asset_turn_over_ratio" :class=" [{ 'border-danger': user_financial_data.asset_turn_over_ratio === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.asset_turn_over_ratio'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="cash_ratio">Cash Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="cash_ratio" :class=" [{ 'border-danger': user_financial_data.cash_ratio === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.cash_ratio'>
+                                                    <input type="number" onClick="this.select();" name="cash_ratio" :class=" [{ 'border-danger': user_financial_data.cash_ratio === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.cash_ratio'>
 
                                                     <label for="debt_to_asset_ratio">Debt To Asset Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="debt_to_asset_ratio" :class=" [{ 'border-danger': user_financial_data.debt_to_asset_ratio === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.debt_to_asset_ratio'>
+                                                    <input type="number" onClick="this.select();" name="debt_to_asset_ratio" :class=" [{ 'border-danger': user_financial_data.debt_to_asset_ratio === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.debt_to_asset_ratio'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="net_tangeble_asset">Net Tangable Asset</label>
-                                                    <input type="number" onClick="this.select();" name="net_tangeble_asset" :class=" [{ 'border-danger': user_financial_data.net_tangeble_asset === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.net_tangeble_asset'>
+                                                    <input type="number" onClick="this.select();" name="net_tangeble_asset" :class=" [{ 'border-danger': user_financial_data.net_tangeble_asset === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.net_tangeble_asset'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
                                                     <label for="return_on_equity">Return on Equity (Percentage)</label>
-                                                    <input type="number" onClick="this.select();" name="return_on_equity" :class=" [{ 'border-danger': user_financial_data.return_on_equity === '' }, {'border': true}, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.return_on_equity'>
+                                                    <input type="number" onClick="this.select();" name="return_on_equity" :class=" [{ 'border-danger': user_financial_data.return_on_equity === '' }, {'form-control': true}]" style="width: 100% !important;" v-model='user_financial_data.return_on_equity'>
                                                 </div>
                                             </fieldset>
                                         </form>
@@ -261,7 +265,7 @@
 
         <div class="modal fade" id="globalLoader" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog" role="document">
-              <div class="modal-content" style='background-color: rgba(0,0,0,0) !important;''>
+              <div class="modal-content" style='background-color: rgba(0,0,0,0) !important;'>
                 <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_ObshHL.json"  background="rgba(0, 0, 0, 0)"  speed="1"  loop  autoplay></lottie-player>
               </div>
             </div>

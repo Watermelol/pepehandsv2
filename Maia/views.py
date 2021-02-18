@@ -1548,3 +1548,6 @@ def get_qualitative_networking(request):
         'data': peoples
     }
     return JsonResponse(response, safe=False)
+
+def the_teams(request):
+    return render(request, 'the_teams.html')

@@ -86,7 +86,7 @@ body {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #525f7f;
+  color: #4a71d4;
   text-align: left;
   background-color: #1e1e2f;
 }
@@ -2080,7 +2080,7 @@ pre code {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.428571;
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
   background-color: transparent;
   background-clip: padding-box;
   border: 1px solid #cad1d7;
@@ -2101,7 +2101,7 @@ pre code {
 }
 
 .form-control:focus {
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
   background-color: #ffffff;
   border-color: rgba(50, 151, 211, 0.25);
   outline: 0;
@@ -12445,7 +12445,7 @@ a.text-secondary:focus {
 }
 
 .text-success {
-  color: #00f2c3 !important;
+  color: #05b390 !important;
 }
 
 a.text-success:hover,
@@ -12454,7 +12454,7 @@ a.text-success:focus {
 }
 
 .text-info {
-  color: #1d8cf8 !important;
+  color: #0c68c4 !important;
 }
 
 a.text-info:hover,
@@ -12472,7 +12472,7 @@ a.text-warning:focus {
 }
 
 .text-danger {
-  color: #fd5d93 !important;
+  color: #c0164f !important;
 }
 
 a.text-danger:hover,
@@ -12776,13 +12776,13 @@ a.text-darker:focus {
   border-radius: 0.4285rem;
   cursor: pointer;
   background: #344675;
-  background-image: -webkit-linear-gradient(to bottom left, #344675, #263148, #344675);
+  /* background-image: -webkit-linear-gradient(to bottom left, #344675, #263148, #344675);
   background-image: -o-linear-gradient(to bottom left, #344675, #263148, #344675);
   background-image: -moz-linear-gradient(to bottom left, #344675, #263148, #344675);
-  background-image: linear-gradient(to bottom left, #344675, #263148, #344675);
+  background-image: linear-gradient(to bottom left, #344675, #263148, #344675); */
   background-size: 210% 210%;
   background-position: top right;
-  background-color: #344675;
+  background-color: #5b7ccf;
   transition: all 0.15s ease;
   box-shadow: none;
   color: #ffffff;
@@ -13210,14 +13210,14 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-success {
-  background: #00f2c3;
-  background-image: -webkit-linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3);
+  background: #1088ce;
+  /* background-image: -webkit-linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3);
   background-image: -o-linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3);
   background-image: -moz-linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3);
-  background-image: linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3);
+  background-image: linear-gradient(to bottom left, #00f2c3, #0098f0, #00f2c3); */
   background-size: 210% 210%;
   background-position: top right;
-  background-color: #00f2c3;
+  background-color: #1088ce;
   transition: all 0.15s ease;
   box-shadow: none;
   color: #ffffff;
@@ -16658,7 +16658,7 @@ hr {
 }
 
 .table>tbody>tr>td {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: black !important;
 }
 
 .table>tbody>tr>td .photo {
@@ -17703,11 +17703,7 @@ table.tablesorter thead tr .headerSortDown {
 
 .sidebar[data="blue"],
 .off-canvas-sidebar[data="blue"] {
-  background: #3358f4;
-  background: -webkit-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
-  background: -o-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
-  background: -moz-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
-  background: linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+  background: #6981df;
 }
 
 .sidebar[data="green"],
@@ -17806,7 +17802,7 @@ table.tablesorter thead tr .headerSortDown {
   width: 100%;
   min-height: 100vh;
   border-top: 2px solid #5e72e4;
-  background: linear-gradient(#1e1e2f, #1e1e24);
+  background: azure;
   -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   -moz-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   -o-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
@@ -19056,7 +19052,7 @@ code {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #1d253b;
+  background-color: #8d9097;
   color: #344675;
   cursor: not-allowed;
 }
@@ -19932,7 +19928,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card {
-  background: #27293d;
+  background: #c2ecec;
   border: 0;
   position: relative;
   width: 100%;

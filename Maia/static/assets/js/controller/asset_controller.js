@@ -87,12 +87,12 @@ const value_pillars = Vue.createApp({
                         display: true,
                         ticks: {
                             beginAtZero: true,  // minimum value will be 0.
-                            fontColor: '#fff'
+                            fontColor: '#000'
                         }
                     }],
                     xAxes: [{
                         ticks: {
-                            fontColor: '#fff'
+                            fontColor: '#000'
                         },
                     }]
                 }

@@ -91,11 +91,11 @@ var dashboard = Vue.createApp({
                         name: {
                           offsetY: -10,
                           show: true,
-                          color: '#fff',
+                          color: 'black',
                           fontSize: '17px'
                         },
                         value: {
-                          color: '#c8cbcf',
+                          color: '#1792ad',
                           fontSize: '36px',
                           show: true,
                         }
@@ -171,11 +171,11 @@ var dashboard = Vue.createApp({
                     name: {
                       offsetY: -10,
                       show: true,
-                      color: '#fff',
+                      color: '#000',
                       fontSize: '17px'
                     },
                     value: {
-                      color: '#c8cbcf',
+                      color: '#1792ad',
                       fontSize: '36px',
                       show: true,
                     }
@@ -249,11 +249,11 @@ var dashboard = Vue.createApp({
                     name: {
                       offsetY: -10,
                       show: true,
-                      color: '#fff',
+                      color: '#000',
                       fontSize: '17px'
                     },
                     value: {
-                      color: '#c8cbcf',
+                      color: '#1792ad',
                       fontSize: '36px',
                       show: true,
                     }
@@ -327,11 +327,11 @@ var dashboard = Vue.createApp({
                     name: {
                       offsetY: -10,
                       show: true,
-                      color: '#fff',
+                      color: '#000',
                       fontSize: '17px'
                     },
                     value: {
-                      color: '#c8cbcf',
+                      color: '#1792ad',
                       fontSize: '36px',
                       show: true,
                     }
@@ -405,11 +405,11 @@ var dashboard = Vue.createApp({
                     name: {
                       offsetY: -10,
                       show: true,
-                      color: '#fff',
+                      color: '#000',
                       fontSize: '17px'
                     },
                     value: {
-                      color: '#c8cbcf',
+                      color: '#1792ad',
                       fontSize: '36px',
                       show: true,
                     }

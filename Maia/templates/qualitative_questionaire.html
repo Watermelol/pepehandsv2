@@ -18,12 +18,16 @@
         <link href="{%static 'assets/css/black-dashboard.css'%}" rel="stylesheet" />
         <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-color: azure;">
         <style>
             option { 
                 /* Whatever color  you want */
                 background-color: #525f7f;
-}
+            }
+
+            p, td, th{
+                color: black !important;
+            }
         </style>
         {% csrf_token %}
         <a href="{% url 'logout' %}" class="btn btn-warning pull-right btn-sm" id="logoutbutton" style="margin-right: 2vh; z-index: 999;">
@@ -34,7 +38,7 @@
                 <div class="container col-md-5">
                     <div style="margin-top: 20vh;">
                         <lottie-player src="https://assets2.lottiefiles.com/private_files/lf30_fvqxryww.json"  background="transparent"  speed="1"  style="height: 300px;"  loop  autoplay></lottie-player>
-                        <p style="font-size: 1.0rem; text-align: center;">
+                        <p style="font-size: 1.0rem; text-align: center;" class="text-dark">
                             Please Fill In The Following Questionaire
                             <br>So That We Can Better Analyse On What You Need
                         </p>

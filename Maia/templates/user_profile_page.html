@@ -22,30 +22,30 @@
         <div class="row">
             <form class="col-12">
                 <fieldset>
-                    <legend>User Infomation:</legend>
+                    <legend class="text-dark">User Infomation:</legend>
                     <div class="row">
                         <div class="col-6">
-                            <label for="fname">First Name:</label>
+                            <label class="text-dark" for="fname">First Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="fname" name="fname" v-model= "profile_data.firstName" readonly>
-                            <label for="lname">Email:</label>
+                            <label class="text-dark" for="lname">Email:</label>
                             <input class="form-control mb-2 text-white" type="text" id="lname" name="lname" v-model= "profile_data.email" readonly>
-                            <label for="companyName">Company Name:</label>
+                            <label class="text-dark" for="companyName">Company Name:</label>
                             <input class="form-control mb-2 text-white" type="email" id="companyName" name="companyName" v-model= "profile_data.companyName" readonly>
-                            <label for="address1">Address 1:</label>
+                            <label class="text-dark" for="address1">Address 1:</label>
                             <input class="form-control mb-2 text-white" type="text" id="address1" name="address1" v-model= "profile_data.address1" readonly>
-                            <label for="city">City:</label>
+                            <label class="text-dark" for="city">City:</label>
                             <input class="form-control mb-2 text-white" type="text" id="city" name="city" v-model= "profile_data.city" readonly>
                         </div>
                         <div class="col-6">
-                            <label for="lname">Last Name:</label>
+                            <label class="text-dark" for="lname">Last Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="lname" name="lname" v-model= "profile_data.lastName" readonly>
-                            <label for="company_size">Company Size:</label>
+                            <label class="text-dark" for="company_size">Company Size:</label>
                             <input class="form-control mb-2 text-white" type="text" id="company_size" name="company_size" v-model= "profile_data.company_size_value" readonly>
-                            <label for="industryName">Industry Name:</label>
+                            <label class="text-dark" for="industryName">Industry Name:</label>
                             <input class="form-control mb-2 text-white" type="text" id="industryName" name="industryName" v-model= "profile_data.industryName" readonly>
-                            <label for="address2">Address 2:</label>
+                            <label class="text-dark" for="address2">Address 2:</label>
                             <input class="form-control mb-2 text-white" type="text" id="address2" name="address2" v-model= "profile_data.address2" readonly>
-                            <label for="zipCode">Zip Code:</label>
+                            <label class="text-dark" for="zipCode">Zip Code:</label>
                             <input class="form-control mb-2 text-white" type="text" id="zipCode" name="zipCode" v-model= "profile_data.zipCode" readonly>
                         </div>
                     </div>
@@ -87,22 +87,22 @@
         
         <div class="modal fade" id="paymentHistory" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog" role="document" style="width: 59vh; max-width: 100vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-header">
-                  <h2 class="modal-title text-white">Payment History</h5>
+                  <h2 class="modal-title text-dark">Payment History</h5>
                 </div>
                 <div class="modal-body" style="height: 35vh; max-height: 35vh;">
-                  <table class="table table-striped" style="width: 100%;">
+                  <table class="table" style="width: 100%;">
                     <tbody style="height: 31vh; padding-left: 5vh;">
                     <tr>
-                        <th class="text-white" style="width: 20%; text-align: center;">Amount</th>
-                        <th class="text-white" style="width: 20%; text-align: center;">Currency</th>
-                        <th class="text-white" style="width: 60%; text-align: center;">Data</th>
+                        <th class="text-dark" style="width: 20%; text-align: center;">Amount</th>
+                        <th class="text-dark" style="width: 20%; text-align: center;">Currency</th>
+                        <th class="text-dark" style="width: 60%; text-align: center;">Data</th>
                         </tr>
                         <tr v-for="history in payment_history">
-                        <td class="text-white" style="text-align: center;">[$ history.charges $]</td>
-                        <td class="text-white" style="text-transform: uppercase; text-align: center;">[$ history.currency $]</td>
-                        <td class="text-white" style="text-align: center;">[$ history.created $]</td>
+                        <td class="text-dark" style="text-align: center;">[$ history.charges $]</td>
+                        <td class="text-dark" style="text-transform: uppercase; text-align: center;">[$ history.currency $]</td>
+                        <td class="text-dark" style="text-align: center;">[$ history.created $]</td>
                         </tr>
                     </tbody>
                     
@@ -117,41 +117,41 @@
 
         <div class="modal fade" id="editUserProfile" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog" role="document" style="width: 80vh; max-width: 100vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-header">
-                  <h2 class="modal-title text-white">Edit Profile</h5>
+                  <h2 class="modal-title text-dark">Edit Profile</h5>
                 </div>
                 <div class="modal-body mb-2">
                     <div class="row">
                         <form class="col-12">
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="text-white" for="fname">First Name: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.firstName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.firstName">
-                                    <label class="text-white" for="fname">Email: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.email == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.email" required>
-                                    <label class="text-white" for="companyName">Company Name: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.companyName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="companyName" name="companyName" v-model= "profile_edit.companyName" required>
-                                    <label class="text-white" for="address1">Address 1: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.address1 == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="address1" name="address1" v-model= "profile_edit.address1" required>
-                                    <label class="text-white" for="city">City: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.city == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="city" name="city" v-model= "profile_edit.city" required>
+                                    <label class="text-dark" for="fname">First Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.firstName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.firstName">
+                                    <label class="text-dark" for="fname">Email: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.email == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="fname" name="fname" v-model= "profile_edit.email" required>
+                                    <label class="text-dark" for="companyName">Company Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.companyName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="companyName" name="companyName" v-model= "profile_edit.companyName" required>
+                                    <label class="text-dark" for="address1">Address 1: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.address1 == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="address1" name="address1" v-model= "profile_edit.address1" required>
+                                    <label class="text-dark" for="city">City: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.city == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="city" name="city" v-model= "profile_edit.city" required>
                                 </div>
                                 <div class="col-6">
-                                    <label class="text-white" for="lname">Last Name: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.lastName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="lname" name="lname" v-model= "profile_edit.lastName">
-                                    <label class="text-white" for="industryName">Industry Name: <span class="text-danger">*</span></label>
+                                    <label class="text-dark" for="lname">Last Name: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.lastName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="lname" name="lname" v-model= "profile_edit.lastName">
+                                    <label class="text-dark" for="industryName">Industry Name: <span class="text-danger">*</span></label>
                                     <input :class=" [{ 'border-danger': profile_edit.industryName == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="industryName" name="industryName" v-model= "profile_edit.industryName" readonly required>
-                                    <label class="text-white" for="company_size">Company Size:</label>
-                                    <select :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" name="company_size" id="company_size" v-model="profile_edit.company_size" required>
+                                    <label class="text-dark" for="company_size">Company Size:</label>
+                                    <select :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" name="company_size" id="company_size" v-model="profile_edit.company_size" required>
                                         <option value="MC">Micro</option>
                                         <option value="SM">Small</option>
                                         <option value="MD">Medium</option>
                                     </select>
-                                    <label class="text-white" for="address2">Address 2:</label>
-                                    <input :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="address2" name="address2" v-model= "profile_edit.address2">
-                                    <label class="text-white" for="zipCode">Zip Code: <span class="text-danger">*</span></label>
-                                    <input :class=" [{ 'border-danger': profile_edit.zipCode == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-white': true}]" type="text" id="zipCode" name="zipCode" v-model= "profile_edit.zipCode" required>
+                                    <label class="text-dark" for="address2">Address 2:</label>
+                                    <input :class=" [{'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="address2" name="address2" v-model= "profile_edit.address2">
+                                    <label class="text-dark" for="zipCode">Zip Code: <span class="text-danger">*</span></label>
+                                    <input :class=" [{ 'border-danger': profile_edit.zipCode == '' }, {'border': true}, {'form-control': true}, {'mb-2': true}, {'text-dark': true}]" type="text" id="zipCode" name="zipCode" v-model= "profile_edit.zipCode" required>
                                 </div>
                             </div>
                         </form>
@@ -167,18 +167,18 @@
 
         <div class="modal fade" id="questionaireSelect" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document" style="max-width: 100vh; margin-top: 15vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-body mb-2">
                     <div class="row">
                         <div class="card-deck col-12" style="margin: auto;">
                             <div class="card col-6">
-                                <i class="fas fa-money-bill-wave align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                                <i class="fas fa-money-bill-wave align-self-center pt-3 pb-3 fa-10x" style="color: #526597;" aria-hidden="true"></i>
                                 <div class="card-body align-self-center">
                                     <button @click='getFinancialData()' class="btn btn-lg btn-dark">Edit Financial Data</button> 
                                 </div>
                             </div>
                             <div class="card col-6">
-                                <i class="fas fa-sort-amount-down align-self-center pt-3 pb-3 fa-10x" aria-hidden="true"></i>
+                                <i class="fas fa-sort-amount-down align-self-center pt-3 pb-3 fa-10x" style="color: #526597;" aria-hidden="true"></i>
                                 <div class="card-body align-self-center">  
                                     <button @click='getQuestionaireData()' class="btn btn-lg btn-dark">Edit Qualitative Data</button>  
                                 </div>
@@ -192,9 +192,9 @@
 
         <div class="modal fade" id="editFinancialData" tabindex="-1" role="dialog" style="overflow: auto;" data-backdrop="static">
             <div class="modal-dialog" role="document" style="max-width: 100vh; max-height: 0vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-header">
-                  <h2 class="modal-title text-white">Edit Financial Data</h5>
+                  <h2 class="modal-title text-dark">Edit Financial Data</h5>
                 </div>
                 <div class="modal-body mb-2">
                     <div id="accordion">
@@ -210,20 +210,20 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
+                                                <label class="text-dark" for="revenue">Revenue (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_revenue'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
+                                                <label class="text-dark" for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_profit_before_tax'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
+                                                <label class="text-dark" for="net_profit">Net Profit (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
-                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_net_cash_flow'>
+                                                <label class="text-dark" for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q1_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -242,20 +242,20 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
+                                                <label class="text-dark" for="revenue">Revenue (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_revenue'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
+                                                <label class="text-dark" for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_profit_before_tax'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
+                                                <label class="text-dark" for="net_profit">Net Profit (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
-                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_net_cash_flow'>
+                                                <label class="text-dark" for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q2_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -274,20 +274,20 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
+                                                <label class="text-dark" for="revenue">Revenue (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_revenue'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
+                                                <label class="text-dark" for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_profit_before_tax'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
+                                                <label class="text-dark" for="net_profit">Net Profit (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
-                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_net_cash_flow'>
+                                                <label class="text-dark" for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q3_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -306,20 +306,20 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="revenue">Revenue (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
+                                                <label class="text-dark" for="revenue">Revenue (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_revenue'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="profit_b4_tax">Profit Before Tax (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
+                                                <label class="text-dark" for="profit_b4_tax">Profit Before Tax (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="profit_b4_tax" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_profit_before_tax'>
                                             </div>
                                             <div class="col-4 d-inline-block input-group">
-                                                <label for="net_profit">Net Profit (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
+                                                <label class="text-dark" for="net_profit">Net Profit (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_net_profit'>
                                             </div>
                                             <div class="col-3 d-inline-block input-group">
-                                                <label for="net_cash_flow">Net Cash Flow (Thousand)</label>
-                                                <input type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_net_cash_flow'>
+                                                <label class="text-dark" for="net_cash_flow">Net Cash Flow (Thousand)</label>
+                                                <input class="text-dark" type="number" onClick="this.select();" name="net_cash_flow" class="form-control" style="width: 100% !important;" v-model='user_financial_data.q4_net_cash_flow'>
                                             </div>
                                         </form>
                                     </div>
@@ -339,33 +339,33 @@
                                         <form>
                                             <fieldset>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="yearly_revenue">Yearly Revenue (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="yearly_revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_revenue'>
+                                                    <label class="text-dark" for="yearly_revenue">Yearly Revenue (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="yearly_revenue" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_revenue'>
 
-                                                    <label for="yearly_net_profit">Yearly Net Profit (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="yearly_net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_net_profit'>
+                                                    <label class="text-dark" for="yearly_net_profit">Yearly Net Profit (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="yearly_net_profit" class="form-control" style="width: 100% !important;" v-model='user_financial_data.yearly_net_profit'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="cash">Cash (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="cash" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash'>
+                                                    <label class="text-dark" for="cash">Cash (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="cash" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash'>
 
-                                                    <label for="net_assets">Net Asset (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="net_assets" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_assets'>
+                                                    <label class="text-dark" for="net_assets">Net Asset (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="net_assets" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_assets'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="debt">Debt (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt'>
+                                                    <label class="text-dark" for="debt">Debt (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt'>
 
-                                                    <label for="total_debt">Total Debt (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="total_debt" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.total_debt'>
+                                                    <label class="text-dark" for="total_debt">Total Debt (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="total_debt" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.total_debt'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="total_liability">Total Liability (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='user_financial_data.total_liability'>
+                                                    <label class="text-dark" for="total_liability">Total Liability (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="debt" class="form-control" style="width: 100% !important;" v-model='user_financial_data.total_liability'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="shareholder_equity">Shareholder Equity (Thousand)</label>
-                                                    <input type="number" onClick="this.select();" name="shareholder_equity" class="form-control" style="width: 100% !important;" v-model='user_financial_data.shareholder_equity'>
+                                                    <label class="text-dark" for="shareholder_equity">Shareholder Equity (Thousand)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="shareholder_equity" class="form-control" style="width: 100% !important;" v-model='user_financial_data.shareholder_equity'>
                                                 </div>
                                             </fieldset>
 
@@ -373,33 +373,33 @@
 
                                             <fieldset>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="current_ratio">Current Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.current_ratio'>
+                                                    <label class="text-dark" for="current_ratio">Current Ratio</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="current_ratio" class="form-control" style="width: 100% !important;"  v-model='user_financial_data.current_ratio'>
 
-                                                    <label for="return_on_asset">Return On Asset</label>
-                                                    <input type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.return_on_asset'>
+                                                    <label class="text-dark" for="return_on_asset">Return On Asset</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="return_on_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.return_on_asset'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="quick_ratio">Quick Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.quick_ratio'>
+                                                    <label class="text-dark" for="quick_ratio">Quick Ratio</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="quick_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.quick_ratio'>
 
-                                                    <label for="asset_turn_over_ratio">Asset Turn Over Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="asset_turn_over_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.asset_turn_over_ratio'>
+                                                    <label class="text-dark" for="asset_turn_over_ratio">Asset Turn Over Ratio</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="asset_turn_over_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.asset_turn_over_ratio'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="cash_ratio">Cash Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash_ratio'>
+                                                    <label class="text-dark" for="cash_ratio">Cash Ratio</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="cash_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.cash_ratio'>
 
-                                                    <label for="debt_to_asset_ratio">Debt To Asset Ratio</label>
-                                                    <input type="number" onClick="this.select();" name="debt_to_asset_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt_to_asset_ratio'>
+                                                    <label class="text-dark" for="debt_to_asset_ratio">Debt To Asset Ratio</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="debt_to_asset_ratio" class="form-control" style="width: 100% !important;" v-model='user_financial_data.debt_to_asset_ratio'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="net_tangeble_asset">Net Tangable Asset</label>
-                                                    <input type="number" onClick="this.select();" name="net_tangeble_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_tangeble_asset'>
+                                                    <label class="text-dark" for="net_tangeble_asset">Net Tangable Asset</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="net_tangeble_asset" class="form-control" style="width: 100% !important;" v-model='user_financial_data.net_tangeble_asset'>
                                                 </div>
                                                 <div class="col-4 d-inline-block input-group">
-                                                    <label for="return_on_equity">Return on Equity (Percentage)</label>
-                                                    <input type="number" onClick="this.select();" name="return_on_equity" class="form-control" style="width: 100% !important;" v-model='user_financial_data.return_on_equity'>
+                                                    <label class="text-dark" for="return_on_equity">Return on Equity (Percentage)</label>
+                                                    <input class="text-dark" type="number" onClick="this.select();" name="return_on_equity" class="form-control" style="width: 100% !important;" v-model='user_financial_data.return_on_equity'>
                                                 </div>
                                             </fieldset>
                                         </form>
@@ -419,20 +419,20 @@
 
         <div class="modal fade" id="purchasedReport" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog" role="document" style="width: 80vh; max-width: 100vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-header">
-                  <h2 class="modal-title text-white">Purchased Report</h5>
+                  <h2 class="modal-title text-dark">Purchased Report</h5>
                 </div>
                 <div class="modal-body" style="height: 35vh;">
-                  <table class="table table-striped" style="width: 100%;">
+                  <table class="table" style="width: 100%;">
                     <tbody style="height: 31vh;">
                         <tr>
-                            <th class="text-white" style="width: 70%; text-align: center;">Putchased Date</th>
-                            <th class="text-white" style="width: 30%; text-align: center;">URL</th>
+                            <th class="text-dark" style="width: 70%; text-align: center;">Putchased Date</th>
+                            <th class="text-dark" style="width: 30%; text-align: center;">URL</th>
                           </tr>
                           <tr v-for="report in user_purchased_report">
-                            <td class="text-white" style="text-align: center;">[$ report.purchaseDate $]</td>
-                            <td class="text-white" style="text-transform: uppercase; text-align: center;"><button class="btn btn-info btn-md" @click="openReport(report.url)"><i class="fas fa-file-download mr-2"></i>DOWNLOAD</button></td>
+                            <td class="text-dark" style="text-align: center;">[$ report.purchaseDate $]</td>
+                            <td class="text-dark" style="text-transform: uppercase; text-align: center;"><button class="btn btn-info btn-md" @click="openReport(report.url)"><i class="fas fa-file-download mr-2"></i>DOWNLOAD</button></td>
                           </tr>
                     </tbody>
                   </table>
@@ -446,41 +446,41 @@
 
         <div class="modal fade" id="editQuestionaireData" tabindex="-1" role="dialog" data-backdrop="static">
             <div class="modal-dialog" role="document" style="width: 80vh; max-width: 100vh;">
-              <div class="modal-content bg-dark">
+              <div class="modal-content" style="color: azure;">
                 <div class="modal-header">
-                  <h2 class="modal-title text-white">Edit Questionaire Data</h5>
+                  <h2 class="modal-title text-dark">Edit Questionaire Data</h5>
                 </div>
                 <div class="modal-body">
-                    <p align=center class="text-white">1-Strongly Disagree 2-Disagree 3-Neutral 4-Agree 5-Strongly Agree</p>
-                    <table style="width: 100%;  color:#fff;" v-if="pageNumber == 1">
+                    <p align=center class="text-dark">1-Strongly Disagree 2-Disagree 3-Neutral 4-Agree 5-Strongly Agree</p>
+                    <table style="width: 100%;  color:#000;" v-if="pageNumber == 1">
                         <tbody style="height: 100%;">
                             <tr>
-                                <th style="width: 80%;">Questions</th>
-                                <th style="width: 20%;">Rating</th>
+                                <th class="text-dark" style="width: 80%;">Questions</th>
+                                <th class="text-dark" style="width: 20%;">Rating</th>
                             </tr>
                             <tr class="pb-3">
-                                <td>1)	I have a diversified portfolio of products and services.</td>
+                                <td class="text-dark">1)	I have a diversified portfolio of products and services.</td>
                                 <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q1"></td>
                             </tr>
                             <tr class="pb-3">
-                                <td>2)	I have plans that I cannot put into action because I am short of resources.</td>
+                                <td class="text-dark">2)	I have plans that I cannot put into action because I am short of resources.</td>
                                 <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q2"></td>
                             </tr>
                             <tr class="pb-3">
-                                <td>3)	My products yield high volume but low margins.</td>
+                                <td class="text-dark">3)	My products yield high volume but low margins.</td>
                                 <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q3"></td>
                             </tr>
                             <tr class="pb-3">
-                                <td>4)	I prefer to focus my effort on a niche market – by location or customer.</td>
+                                <td class="text-dark">4)	I prefer to focus my effort on a niche market – by location or customer.</td>
                                 <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q4"></td>
                             </tr>
                             <tr class="pb-3">
-                                <td>5)	At least 80% of my sales come from a few customers.</td>
+                                <td class="text-dark">5)	At least 80% of my sales come from a few customers.</td>
                                 <td><input type="number" onClick="this.select();" class="form-control mb-3" max=5 min=1 v-model="Set1Q5"></td>
                             </tr>
                         </tbody>
                     </table>
-                    <table style="width: 100%;  color:#fff;" v-if="pageNumber == 2">
+                    <table style="width: 100%;  color:#000;" v-if="pageNumber == 2">
                         <tbody style="height: 100%;">
                             <tr>
                                 <th style="width: 80%;">Questions</th>
@@ -508,7 +508,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table style="width: 100%; color:#fff;" v-if="pageNumber == 3">
+                    <table style="width: 100%; color:#000;" v-if="pageNumber == 3">
                         <tbody style="height: 100%;">
                             <tr>
                                 <th style="width: 80%;">Questions</th>
@@ -537,7 +537,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table style="width: 100%;  color:#fff;" v-if="pageNumber == 4">
+                    <table style="width: 100%;  color:#000;" v-if="pageNumber == 4">
                         <tbody style="height: 100%;">
                             <tr>
                                 <th style="width: 80%;">Questions</th>
@@ -565,7 +565,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table style="width: 100%;  color:#fff;" v-if="pageNumber == 5">
+                    <table style="width: 100%;  color:#000;" v-if="pageNumber == 5">
                         <tbody style="height: 100%;">
                             <tr>
                                 <th style="width: 80%;">Questions</th>

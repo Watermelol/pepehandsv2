@@ -19,13 +19,13 @@
         <link href="{%static 'assets/css/black-dashboard.css'%}" rel="stylesheet" />
         <link href="{%static '/assets/demo/charts.css'%}" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-color: azure;">
         <div class="container" id="after_payment_page">
             {% csrf_token %}
             <div class="row" style="margin-top: 20vh;">
                 <div class="col-12">
                     <lottie-player src="https://assets10.lottiefiles.com/temp/lf20_yYJhpG.json"  background="transparent"  speed="1"  style="height: 300px;"    autoplay></lottie-player>
-                    <h1 align=center>You Have Cancelled The Payment</h1>
+                    <h1 class="text-dark" align=center>You Have Cancelled The Payment</h1>
                     <p align=center class="text-muted">You Will Be Redirect Back To Dashboard in [$ seconds $] Second</p>
                 </div>
             </div>

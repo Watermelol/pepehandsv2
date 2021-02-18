@@ -72,7 +72,7 @@ const productivity_pillars = Vue.createApp({
                 legend: {
                       display: true,
                       labels: {
-                          fontColor: '#fff'
+                          fontColor: '#000'
                       }
                  },
               
@@ -90,12 +90,12 @@ const productivity_pillars = Vue.createApp({
                  scales: {
                     yAxes: [{
                         ticks: {
-                            fontColor: '#fff'
+                            fontColor: '#000'
                         },
                     }],
                   xAxes: [{
                         ticks: {
-                            fontColor: '#fff'
+                            fontColor: '#000'
                         },
                     }]
                 } 
@@ -122,13 +122,13 @@ const productivity_pillars = Vue.createApp({
                   datasets: [{
                     label: "Net Cash Flow",
                     fill: true,
-                    borderColor: '#73CD73',
+                    borderColor: '#04b01d',
                     borderWidth: 2,
                     borderDash: [],
                     borderDashOffset: 0.0,
-                    pointBackgroundColor: '#73CD73',
+                    pointBackgroundColor: '#04b01d',
                     pointBorderColor:'rgba(255,255,255,0)',
-                    pointHoverBackgroundColor: '#73CD73',
+                    pointHoverBackgroundColor: '#04b01d',
                     pointBorderWidth: 20,
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
