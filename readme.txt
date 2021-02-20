@@ -16,7 +16,7 @@ Django:
 3) Download Google Cloud Proxy from "https://cloud.google.com/sql/docs/mysql/connect-admin-proxy#windows-64-bit"
 4) Open cmd
 5) Go to the folder where you save the proxy using cmd
-6) Run "cloud_sql_proxy -instances=w33bers:asia-southeast1:w33bers=tcp:3306"
+6) Run "cloud_sql_proxy -instances=poetic-abacus-279809:asia-southeast1:pepehands123=tcp:3306"
 7) run "venv\Scripts\activate" to activate virtual env
 8) run "python manage.py runsslserver 127.0.0.2:8000 --certificate cert.pem --key key.pem" to run ssl server
 9) go to "https//pepehands.net:8000" to access to the web
