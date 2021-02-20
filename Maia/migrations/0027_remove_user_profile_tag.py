@@ -10,6 +10,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.DeleteModel(
+            name='tags',
+        ),
+        
         migrations.RemoveField(
             model_name='user_profile',
             name='tag',
