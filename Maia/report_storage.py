@@ -5,8 +5,8 @@ import os
 client = storage.Client.from_service_account_json(json_credentials_path="Maia/GCScredential.json")
 bucket = client.get_bucket('maia_report_1')
 
-def uploadReport(fileName):
-    file_name = bucket.blob(fileName)
+def uploadReport(fileName, pdfName):
+    file_name = bucket.blob('pdf/' + pdfName)
     file_name.upload_from_filename(fileName)
 
     deleteReportFromLocal(fileName)

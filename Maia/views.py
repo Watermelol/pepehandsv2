@@ -491,7 +491,7 @@ def report_payment(request):
 
 def report_checkout(request):
     if (request.method == 'GET'):
-        domain_url = 'https://pepehands.net:8000/'
+        domain_url = 'https://poetic-abacus-279809.et.r.appspot.com/'
         stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
         try:
             checkout_session = stripe.checkout.Session.create(

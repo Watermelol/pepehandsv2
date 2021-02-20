@@ -13,7 +13,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 from .report_storage import uploadReport
 
 def createReport(fileName, dataChart):
-    doc = SimpleDocTemplate('pdf/' + fileName, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    doc = SimpleDocTemplate('/tmp/' + fileName, pagesize=letter, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
 
     Story=[]
     logo = "Maia/static/assets/img/PngItem_3675199.png"
@@ -298,5 +298,5 @@ def createReport(fileName, dataChart):
 
     doc.build(Story)
 
-    uploadReport('pdf/' + fileName)
+    uploadReport('/tmp/' + fileName, fileName)
 
