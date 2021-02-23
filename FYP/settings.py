@@ -28,7 +28,7 @@ SECRET_KEY = 'vq2eu+uifnl8395y^d(dm_x0tv0vzql-o@x@nn4#=9sg02k&1d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.2', 'https://pepehandsmaia.herokuapp.com/', '127.0.0.1', 'localhost', 'poetic-abacus-279809.et.r.appspot.com']
+ALLOWED_HOSTS = ['127.0.0.2', 'pepehandsmaia.herokuapp.com', '127.0.0.1', 'localhost', 'poetic-abacus-279809.et.r.appspot.com']
 
 
 # Application definition
