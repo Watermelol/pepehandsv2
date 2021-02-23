@@ -105,7 +105,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '/cloudsql/poetic-abacus-279809:asia-southeast1:pepehands123',
+        'HOST': '35.197.143.212',
         'USER': 'bobbytee123',
         'PASSWORD': 'bobbytee123',
         'NAME': 'maia',
