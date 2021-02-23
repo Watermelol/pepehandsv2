@@ -1,1 +1,1 @@
-web: gunicorn W33bers.wsgi --log-file -
+web: gunicorn FYP.wsgi --log-file -
